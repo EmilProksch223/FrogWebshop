@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <link rel="stylesheet" href="header.css">
+        <div class="Karte">
+        <a href="./index.html"><img src="./images/LOGO_Website.png" height="100px" alt="LOGO_Website"></a>
+        <a href="./Kundenregistrierung.html">Kundenregistrierung</a>
+        <a href="./hilfe.html">Hilfe</a>
+        <a href="./Impressum.html">Impressum</a>
+        </div>
+    </header>
+    <h1>Kundenregistrierung</h1>
+    <br>
+
+
+    <form action="/register" method="post">
+      <label for="email">E-Mail-Adresse:</label>
+      <input type="email" id="email" name="email" required>
+      <br>
+      <label for="anrede">Anrede:</label>
+      <select id="anrede" name="anrede" required>
+        <option value="Herr">Herr</option>
+        <option value="Frau">Frau</option>
+      </select>
+      <br>
+      <label for="vorname">Vorname:</label>
+      <input type="text" id="vorname" name="vorname" required>
+      <br>
+      <label for="nachname">Nachname:</label>
+      <input type="text" id="nachname" name="nachname" required>
+      <br>
+      <label for="strasse">Strasse:</label>
+      <input type="text" id="strasse" name="strasse" required>
+      <br>
+      <label for="hausnummer">Hausnummer:</label>
+      <input type="text" id="hausnummer" name="hausnummer" required>
+      <br>
+      <label for="plz">Postleitzahl:</label>
+      <input type="text" id="plz" name="plz" required>
+      <br>
+      <label for="ort">Ort:</label>
+      <input type="text" id="ort" name="ort" required>
+      <br><br>
+      <input type="submit" value="Registrieren">
+    </form>
+</body>
+</html>
