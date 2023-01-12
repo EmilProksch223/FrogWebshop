@@ -10,7 +10,7 @@
     color: black;
     text-decoration: none;
 }
-a:hover {
+.Karte a:hover {
     color: gray;
     text-decoration: none;
 }
