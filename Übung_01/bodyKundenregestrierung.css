@@ -1,0 +1,23 @@
+.Eingabe_Kontakt {
+    margin-top: -38px;
+    padding: 0px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 400px;
+    background-color: grey;
+    border: 5px solid black;
+
+}
+
+.Eingabe_Kontakt select {
+    display: flex;
+    margin-left: 150px;
+    margin-top: -19px;
+}
+
+.Eingabe_Kontakt input {
+    display: flex;
+    margin-left: 150px;
+    margin-top: -21px;
+}
