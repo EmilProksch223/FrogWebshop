@@ -10,8 +10,8 @@
    
 }
 
-
 .Karte {
+    position: relative;
     display: flex;
     padding: 10px;
     height: 100px;
@@ -20,8 +20,6 @@
     background-color: green;
     border: 5px solid black;
     flex-wrap: wrap;
-
-
 }
 
 .Karte a{
@@ -38,6 +36,14 @@
     border: 1px solid black;
     font-size: 20px;
     font-style: italic;
+}
+
+.frogTree {
+    position: absolute;
+    top: calc(65% - 100px);
+    left: calc(98% - 100px);
+    height: 200px;
+    transform: scaleX(-1);
 }
 
 

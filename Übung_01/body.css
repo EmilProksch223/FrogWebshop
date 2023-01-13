@@ -11,14 +11,4 @@ h1 {
     align-items: center;
 }
 
-.frogTree {
-    position: absolute;
-    top: calc(13% - 100px);
-    left: calc(90% - 100px);
-    transform: scaleX(-1);
-    height: 200px;
-    
-
-
-}
 
