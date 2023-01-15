@@ -6,64 +6,87 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
   <header>
-    <link rel="stylesheet" href="header.css">
-    <link rel="stylesheet" href="body.css">
-    <link rel="stylesheet" href="bodyKundenregestrierung.css">
+    <div class="wrapper-header">
+      <div class="inner-element-header">
+          <div class="Logo">
+              <a href="./index.html"><img src="./images/LOGO_Website.png" alt="LOGO_Website"></a>
+          </div>
+          <div class="Menue">
+              <a class="Menue-hover" href=""><strong>Placeholder</strong></a>
+              <a class="Menue-hover" href="./hilfe.html"><strong>Hilfe</strong></a>
+              <a class="Menue-hover" href="./Impressum.html"><strong>Impressum</strong></a>
 
-    <div class="Logo">
-      <a href="./index.html"><img src="./images/LOGO_Website.png" height="100px" alt="LOGO_Website"></a>
-    </div>
-    <div class="Karte">
-      <a class="box" href="./Kundenregistrierung.html"><strong>Kundenregistrierung</strong></a>
-      <a class="box" href="./hilfe.html"><strong>Hilfe</strong></a>
-      <a class="box" href="./Impressum.html"><strong>Impressum</strong></a>
+              <a class="Menue-hover" href=""><strong>Placeholder</strong></a>
+              <a class="Menue-hover" href=""><strong>Placeholder</strong></a>
+              <a class="Menue-hover" href=""><strong>Placeholder</strong></a>
 
-      <a class="box2" href=""><strong></strong></a>
-      <a class="box2" href=""><strong></strong></a>
-      <a class="box2" href=""><strong></strong></a>
+          
+          </div>
+          <div class="Settings">
 
-      <img class="frogTree" src="./images/frog_tree.png" alt="jumping_frog">
-    </div>
-  </header>
-  <h1>Kundenregistrierung</h1>
-  <br>
+              <a class="Menue-hover" href="Kundenregistrierung.html">Regestrierung</a>
+              <a class="Menue-hover" href="">Anmeldung</a>
+              <a class="Menue-hover" href="">Placeholder</a>
+              <a class="Menue-hover" href="">Placeholder</a>
+              
+          </div>
+      </div>
+      <div class="headline">
+          <h1>Startseite</h1>
+      </div>
+      <img class="Frog-Header" src="./images/frog_tree.png" alt="jumping_frog">
 
-  <div class="Eingabe_Kontakt">
-    <form action="/register" method="post">
-      <label for="anrede">Anrede:</label>
-      <select id="anrede" name="anrede" required>
-        <option value="Herr">Herr</option>
-        <option value="Frau">Frau</option>
-      </select>
-      <br>
-      <label for="vorname">Vorname:</label>
-      <input type="text" id="vorname" name="vorname" required>
-      <br>
-      <label for="nachname">Nachname:</label>
-      <input type="text" id="nachname" name="nachname" required>
-      <br>
-      <label for="email">E-Mail-Adresse:</label>
-      <input type="email" id="email" name="email" required>
-      <br>
-      <label for="strasse">Strasse:</label>
-      <input type="text" id="strasse" name="strasse" required>
-      <br>
-      <label for="hausnummer">Hausnummer:</label>
-      <input type="text" id="hausnummer" name="hausnummer" required>
-      <br>
-      <label for="plz">Postleitzahl:</label>
-      <input type="text" id="plz" name="plz" required>
-      <br>
-      <label for="ort">Ort:</label>
-      <input type="text" id="ort" name="ort" required>
-      <br><br>
-      <input type="submit" value="Registrieren">
-    </form>
   </div>
+
+  </header>
+<div class="Eingabe_Kontakt">
+  <form action="/register" method="post">
+    <div class="Eingabe-box">
+    <label class="label-Eingabe" for="anrede">Anrede:</label>
+    <select class="select-Eingabe" id="anrede" name="anrede" required>
+      <option value="Herr">Herr</option>
+      <option value="Frau">Frau</option>
+    </select>
+  </div>
+    
+    <div class="Eingabe-box">
+      <label class="label-Eingabe" for="vorname">Vorname:</label>
+      <input class="input-Eingabe" type="text" id="vorname" name="vorname" required>
+    </div>
+    <div class="Eingabe-box">
+      <label class="label-Eingabe" for="nachname">Nachname:</label>
+      <input class="input-Eingabe" type="text" id="nachname" name="nachname" required>
+    </div>
+    <div class="Eingabe-box">
+      <label class="label-Eingabe" for="email">E-Mail-Adresse:</label>
+      <input class="input-Eingabe" class="right" type="email" id="email" name="email" required>
+    </div>
+    <div class="Eingabe-box">
+      <label class="label-Eingabe" for="strasse">Strasse:</label>
+      <input class="input-Eingabe" type="text" id="strasse" name="strasse" required>
+    </div>
+    <div class="Eingabe-box">
+      <label class="label-Eingabe" for="hausnummer">Hausnummer:</label>
+      <input class="input-Eingabe" type="text" id="hausnummer" name="hausnummer" required>
+    </div>
+    <div class="Eingabe-box">
+      <label class="label-Eingabe" for="plz">Postleitzahl:</label>
+      <input class="input-Eingabe" type="text" id="plz" name="plz" required>
+    </div>
+    <div class="Eingabe-box">
+      <label class="label-Eingabe" for="ort">Ort:</label>
+      <input class="input-Eingabe" type="text" id="ort" name="ort" required>
+    </div>
+    <br>
+    <input class="submit" type="submit" value="Registrieren">
+  </form>
+</div>
 </body>
 
 </html>

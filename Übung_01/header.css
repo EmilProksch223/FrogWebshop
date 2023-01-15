@@ -1,3 +1,18 @@
+
+/*setzt alles mittig*/
+.wrapper-header {   
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+.inner-element-header {
+    display: inline-block;
+    text-align: left;
+}
+
+
+
+
 .Logo {
     margin-top: 14px;
     margin-bottom: 50px;
@@ -15,7 +30,7 @@
     display: flex;
     padding: 10px;
     height: 100px;
-    width: 750px;
+    width: auto;
     padding-left:110px;
     background-color: green;
     border: 5px solid black;
@@ -30,8 +45,8 @@
     justify-content: center;
     align-items: center;
     padding: 0px;
-    width: 200px;
-    height: 46px;
+    width: 12.5rem;
+    height: 45px;
     background-color: darkgreen;
     border: 1px solid black;
     font-size: 20px;
@@ -41,7 +56,7 @@
 .frogTree {
     position: absolute;
     top: calc(65% - 100px);
-    left: calc(98% - 100px);
+    left: calc(100% - 70px);
     height: 200px;
     transform: scaleX(-1);
 }
@@ -51,6 +66,17 @@
     background-color: grey;
 }
 
-a.box2 {
-    margin-top: 4px;
+
+
+h1 {
+    display: flex;
+    padding: 0px;
+    height: 50px;
+    width: auto;
+    margin-top: 2px;
+    background-color: green;
+    border: 5px solid black;
+
+    justify-content: center;
+    align-items: center;
 }
