@@ -10,16 +10,16 @@
 .wrapper-header {
     border: solid black;
 
+    width: 100%;
+
     position: relative;
 
     text-align: center;
 
+    overflow: hidden;
 
 
-
-
-
-
+    
 
 }
 
@@ -32,11 +32,6 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap; 
-
-    
-
-
-
 }
 
 .Logo {
@@ -44,23 +39,16 @@
 
     display: block;
     width: 15%;
+    max-height: 10vw;
+
     min-width: 6.25rem;
-
     
-
-    height: 100%;
-
-
-
-
 }
 
 .Logo img{
-    width: 10vw;
-    height: 10vw;
-
-
-
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
 .Menue {
@@ -71,7 +59,6 @@
     align-items: center;
     flex-wrap: wrap;
 
-
     position: relative;
 
     width: 70%;
@@ -80,22 +67,16 @@
     min-height: 70px;
 
     height: 10vw;
-
-
-    
-
 }
 
 .Menue a {
     border: 1px solid;
 
-    
     width: 30%;
     height: 25%;
 
     min-width: 2rem;
     min-height: 0.5rem;
-
 
     flex: 0 0 auto;         /* allow children to shrink or grow to fit their content */
     margin: 0 0.625rem;     /* add some margin between children */ 
@@ -129,25 +110,18 @@
     overflow: hidden;
 }
 
-
 .Settings a {
     border: 1px solid yellow;
 
-    margin: 1px;
+    margin: 0.5px;
 
     text-decoration: none;
+    font-size: 1.5  vw;
 
     color: black;
     width: 100%;
     height: 20%;
-
-    
-
 }
-
-
-
-
 
 .headline {
     border: solid;
@@ -173,12 +147,10 @@
     pointer-events: none; /* disables pointer events on the image */
 
     overflow: hidden;
-
-
-
-
 }
 
+
+/* ------------------------------------------------------------------------------------*/
 
 /* Body allgemein */
 
@@ -190,8 +162,6 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
-
-
 
 
 /* Body Startseite */
@@ -245,10 +215,13 @@ body {
 }
 
 .Eingabe_Kontakt {
-    border: 5px solid black;
+    border: solid black;
 
-    width: 35%;
+    width: 50%;
     margin-top: 10px;
+    padding-bottom: 3vw;
+
+    position: relative;
 }
 
 
@@ -257,7 +230,7 @@ body {
     margin-top: 1rem;
 
     height: 2rem;
-    font-size: 1.5rem;
+    font-size: 2rem;
 
     display: flex;
     justify-content: space-between;
@@ -265,62 +238,104 @@ body {
 
 .input-Eingabe {
     width: 50%;
-
     height: 2rem;
 }
 
 .submit {
-    margin-left: 82.5%;
+
+    height: 1.5rem;
+
+    position: absolute;
+    bottom: 0;
+    right:0;
 }
 
 
-
+/*---------------------------------------------------------------*/
 
 /* verschiedene Bildschirmauflösungen */
 
-@media only screen and (max-width: 376px) {  /*workearound +1, da sonst nciht angepasst bei 375px */ 
+@media only screen and (max-width: 376px) {  /*workaround +1, da sonst nciht angepasst bei 375px */ 
     .inner-element-header {
         border: solid grey;
         margin: 10px;
     
-    
-    
         display: flex;
         justify-content: center;
-    
     }
 
     .Settings {
         margin-left: auto;
     }
-
-    
-
 }
 
-@media only screen and (max-width: 425px) {
+@media only screen and (max-width: 426px) {
     body {
         background-size: 175%;
     }
-
 }
 
+
+
+
+
+
+
+@media only screen and (min-width: 411px) and (max-width: 426px) {
+    .inner-element-header {
+        position: relative;
+    }
+    
+    .Settings {
+        width: 26%;
+        height: 25%;
+
+        position: absolute;
+        bottom: 0;
+       
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    .Settings a {
+        width: 40%;
+        height: 30%;
+        text-align: center;
+        overflow: hidden;
+
+    }
+
+    
+}
 
 
 
 @media only screen and (max-width: 768px) {
+    .Eingabe_Kontakt{
+        width: 50%;
+    }
+
+    
+}
+
+@media only screen and (max-width: 767px) {
     .Eingabe_Kontakt {
-        border: 5px solid black;
+        border: solid black;
     
         width: 100%;
         margin-top: 10px;
+
+        
+    }
+
+    .Eingabe-box {
+        font-size: 1rem;
+    }
+
+    .input-Eingabe {
+        height: 6vw;
     }
 }
-
-
-
-
-
-
-
-
