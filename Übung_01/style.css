@@ -243,9 +243,9 @@ body {
 
 
 
+/* verschiedene Bildschirmauflösungen */
 
-
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 376px) {  /*workearound +1, da sonst nciht angepasst bei 375px */ 
     .inner-element-header {
         border: solid grey;
         margin: 10px;
@@ -261,9 +261,17 @@ body {
         margin-left: auto;
     }
 
-
+    
 
 }
+
+@media only screen and (max-width: 425px) {
+    body {
+        background-size: 175%;
+    }
+
+}
+
 
 
 
@@ -276,12 +284,6 @@ body {
     }
 }
 
-@media only screen and (max-width: 425px) {
-    body {
-        background-size: 175%;
-    }
-
-}
 
 
 
