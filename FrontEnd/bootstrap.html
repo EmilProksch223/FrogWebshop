@@ -1,75 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="style1.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="style.css">
 
 </head>
-    <body>
 
-      <style>
-        .custom {
-          margin-top: 70px;
-        }
-      </style>
+<body>
+  <header>
+    <!-- NAVBAR-Top-->
+    <nav class="navbar navbar-dark bg-dark sticky-top d-flex justify-content-between">
+      <a class="navbar-brand navbar-title" href="./index.html">FrogWebshop</a>
+      <div class="d-flex">
+        <a href=""><img class="navbar-img" src="image2.jpg " width="40" height="40"></a>
+        <a href=""><img class="navbar-img" src="./img/sale_48.png" width="40" height="40"></a>
+        <a href=""><img class="navbar-img" src="./img/customer_48.png" width="40" height="40"></a>
+        <button type="button" class="btn btn-outline-secondary navbar-button text-white" data-bs-toggle="modal"
+          data-bs-target="#exampleModal">
+          Anmelden
+        </button>
+        <button class="navbar-toggler navbar-button" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+        aria-labelledby="offcanvasDarkNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Dropdown
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex mt-3" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+      </div>
+    </nav>
 
-        <header>
+    <!--Anmeldung PopUp-->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">FrogWebshop</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <label for="E-Mail">E-Mail</label><br>
+              <input type="email" id="E-Mail" class="w-75"><br>
+              <label for="Passwort">Passwort</label><br>
+              <input type="password" id="Passwort" class="w-75"><br>
+            </form>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><a href="./Regestrieren.html"
+                class="text-decoration-none text-white">Regestrieren</a></button>
+            <button type="button" class="btn btn-primary">Anmelden</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
 
-            <nav class="navbar navbar-dark bg-dark fixed-top">
-                <div class="container-fluid">
-                  
-                  <div class="float-right">
-                    <img src="image1.jpg" width="40" height="40" style="margin-right:10px;">
-                    <img src="image2.jpg" style="margin-right:10px;">
-                    <img src="image3.jpg" style="margin-right:10px;">
-                  </div>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-                    <div class="offcanvas-header">
-                      <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
-                      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <li class="nav-item">
-                          <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                          </a>
-                          <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                              <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                      <form class="d-flex mt-3" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-success" type="submit">Search</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </nav>
+<!--NAVBAR-Bottom-->
+  <footer>
+    <nav class="navbar bg-dark fixed-bottom">
+      <div class="container-fluid d-flex justify-content-around">
+          <a class="text-white text-decoration-none" href="./Hilfe.html">Hilfe</a>
+          <a class="text-white text-decoration-none" href="">...</a>
+          <a class="text-white text-decoration-none" href="./Impressum.html">Impressum</a>
+      </div>
+  </footer>
+</body>
 
-</header>
-
-
-              <div class="container-flex justify-content-center text-center custom">Hallo</div>
-        
-    </body>
 </html>
+

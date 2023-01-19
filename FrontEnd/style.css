@@ -1,4 +1,23 @@
-img {
+.navbar-title{
+    margin-left: 10px;
+}
+
+.navbar-img {
     
-    background-color: #212529;
+    margin-right: 30px;
+}
+.navbar-button{
+    margin-right: 10px;
+}
+
+
+.navbar-margin{
+    margin-left: 5%;
+}
+button {
+    color: red;
+  }
+
+.rotate-45 {
+    transform: rotate(-7deg);
 }
