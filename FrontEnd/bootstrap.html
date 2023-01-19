@@ -16,17 +16,21 @@
     <nav class="navbar navbar-dark bg-dark sticky-top d-flex justify-content-between">
       <a class="navbar-brand navbar-title" href="./index.html">FrogWebshop</a>
       <div class="d-flex">
-        <a href=""><img class="navbar-img" src="image2.jpg " width="40" height="40"></a>
-        <a href=""><img class="navbar-img" src="./img/sale_48.png" width="40" height="40"></a>
-        <a href=""><img class="navbar-img" src="./img/customer_48.png" width="40" height="40"></a>
-        <button type="button" class="btn btn-outline-secondary navbar-button text-white" data-bs-toggle="modal"
-          data-bs-target="#exampleModal">
-          Anmelden
-        </button>
-        <button class="navbar-toggler navbar-button" type="button" data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <div>
+          <a href=""><img class="navbar-img" src="image2.jpg " width="40" height="40"></a>
+          <a href=""><img class="navbar-img" src="./img/sale_48.png" width="40" height="40"></a>
+          <a href=""><img class="navbar-img" src="./img/customer_48.png" width="40" height="40"></a>
+        </div>
+        <div>
+          <button type="button" class="btn btn-outline-secondary navbar-button text-white" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            Anmelden
+          </button>
+          <button class="navbar-toggler navbar-button" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
       </div>
       <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
         aria-labelledby="offcanvasDarkNavbarLabel">
@@ -71,12 +75,12 @@
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content bg-dark">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">FrogWebshop</h1>
+            <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">FrogWebshop</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body text-white">
             <form>
               <label for="E-Mail">E-Mail</label><br>
               <input type="email" id="E-Mail" class="w-75"><br>
@@ -85,9 +89,10 @@
             </form>
           </div>
           <div class="modal-footer d-flex justify-content-between">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><a href="./Regestrieren.html"
-                class="text-decoration-none text-white">Regestrieren</a></button>
-            <button type="button" class="btn btn-primary">Anmelden</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              <a href="./Regestrieren.html" class="text-decoration-none text-white text-sm">Regestrieren</a>
+            </button>
+            <button type="button" class="btn btn-light">Anmelden</button>
           </div>
         </div>
       </div>
@@ -95,16 +100,15 @@
   </header>
 
 
-<!--NAVBAR-Bottom-->
+  <!--NAVBAR-Bottom-->
   <footer>
     <nav class="navbar bg-dark fixed-bottom">
       <div class="container-fluid d-flex justify-content-around">
-          <a class="text-white text-decoration-none" href="./Hilfe.html">Hilfe</a>
-          <a class="text-white text-decoration-none" href="">...</a>
-          <a class="text-white text-decoration-none" href="./Impressum.html">Impressum</a>
+        <a class="text-white text-decoration-none" href="./Hilfe.html">Hilfe</a>
+        <a class="text-white text-decoration-none" href="">...</a>
+        <a class="text-white text-decoration-none" href="./Impressum.html">Impressum</a>
       </div>
   </footer>
 </body>
 
 </html>
-
