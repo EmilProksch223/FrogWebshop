@@ -1,5 +1,5 @@
 /*CSS von nico tutorium 20.jaenner*/
-body{background-color: darksalmon;}
+body{background-color: forestgreen;}
 
 
 .product{background-color: indianred;
@@ -11,34 +11,5 @@ padding-top:  5px;
 
 
 
-.navbar-title{
-    margin-left: 10px;
-}
 
-.navbar-img {
-    
-    margin-right: 30px;
-    margin-left: 10px;
-    margin-bottom: 3px;
-    margin-top: 2px;
-    
-}
-.navbar-button{
-    margin-right: 10px;
-    margin-bottom: 3px;
-    margin-top: 2px;
-}
-
-
-.navbar-margin{
-    margin-left: 5%;
-    
-}
-button {
-    color: red;
-  }
-
-.rotate-45 {
-    transform: rotate(-7deg);
-}
 
