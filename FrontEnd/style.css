@@ -1,5 +1,8 @@
 /*CSS von nico tutorium 20.jaenner*/
-body{background-color: forestgreen;}
+body{
+    background-color: forestgreen;
+    padding-top: 4rem;
+}
 
 
 .product{background-color: indianred;
@@ -9,7 +12,18 @@ padding-top:  5px;
 }
 /*hier endet der CSS Code von Nico Tutorium*/
 
+.custom-toggler .navbar-toggler-icon { 
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 128, 0, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+/*um die Farbe des nav-toggler zu ändern, auch in URL ändern*/
+.custom-toggler.navbar-toggler {
+    border-color: rgb(0, 128, 0, 0.8);
+} 
 
-
-
+@media only screen and (max-width: 425px){
+    body{
+        padding-top: 7rem;
+    }
+    
+}
 
