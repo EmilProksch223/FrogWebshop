@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <!--Bootstrap CSS-->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS-->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!--Overlay-Header-->
+    <script>
+        $(document).ready(function () {
+            $("header").load("header.html");
+        });
+    </script>
+    <!--Overlay-Footer-->
+    <script>
+        $(document).ready(function () {
+            $("footer").load("footer.html");
+        });
+    </script>
+
+
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <h1 class="p-3 text-center">Admin Seite</h1>
+    <div class="row justify-content-center">
+        <div class="col-10 col-lg-7 col-xxl-4 border border-dark rounded p-3">
+            <h2 class="text-center pb-3">Produkt erstellen</h2>
+            <div class="container">
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="input-Titel-Produkt" class="form-label">Titel</label>
+                        <input type="text" class="form-control" id="input-Titel-Produkt">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="input-Beschreibung-Produkt" class="form-label">Beschreibung</label>
+                        <input type="text" class="form-control" id="input-Beschreibung-Produkt">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="input-Preis-Produkt" class="form-label">Preis</label>
+                        <div class="input-group">
+                            <span class="input-group-text">€</span>
+                            <span class="input-group-text">0.00</span>
+                            <input type="text" class="form-control" id="input-Preis-Produkt"
+                                aria-label="Dollar amount (with dot and two decimal places)">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="input-Bild-Produkt" class="form-label">Bild hochladen</label>
+                        <input class="form-control" type="file" id="input-Bild-Produkt">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+
+
+    <footer>
+
+    </footer>
+
+</body>
+
+</html>
