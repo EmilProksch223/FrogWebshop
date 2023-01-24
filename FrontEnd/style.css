@@ -3,6 +3,26 @@ body{
     background-color: forestgreen;
     padding-top: 4rem;
 }
+/*EMIL SPIELEREIEN*/
+.carousel {
+    width: 50%; /* verkleinert die Breite auf 80% der ursprünglichen Größe */
+    height: 50%; /* verkleinert die Höhe auf 50% der ursprünglichen Größe */
+  }
+  .carousel-item img {
+    width: 250px; /* legt die Breite aller Bilder auf 100px fest */
+    height: 500px; /* legt die Höhe aller Bilder auf 100px fest */
+    object-fit: cover;
+  }
+  /* change transition duration to control the speed of fade effect */
+.carousel-item {
+    transition: transform 2.6s ease-in-out;
+  }
+  
+  .carousel-fade .active.carousel-item-start,
+  .carousel-fade .active.carousel-item-end {
+    transition: opacity 0s 2.6s;
+  }
+  /*EMIL SPIELEREIEN ENDE*/
 
 
 .product{background-color: indianred;
