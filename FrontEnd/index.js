@@ -64,4 +64,3 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("#product-container").appendChild(card[0]);
 });
 
-
