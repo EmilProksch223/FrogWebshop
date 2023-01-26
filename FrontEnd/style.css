@@ -1,51 +1,79 @@
 /*CSS von nico tutorium 20.jaenner*/
-body{
+body {
 
-    margin-top: 4rem;
-    font-family: 'Times New Roman', Times, serif;
+  margin-top: 4rem;
+  font-family: 'Times New Roman', Times, serif;
 }
+
 /*EMIL SPIELEREIEN*/
 .carousel {
-    width: 50%; /* verkleinert die Breite auf 80% der ursprünglichen Größe */
-    height: 50%; /* verkleinert die Höhe auf 50% der ursprünglichen Größe */
-  }
-  .carousel-item img {
-    width: 250px; /* legt die Breite aller Bilder auf 100px fest */
-    height: 500px; /* legt die Höhe aller Bilder auf 100px fest */
-    object-fit: cover;
-  }
-  /* change transition duration to control the speed of fade effect */
-.carousel-item {
-    transition: transform 2.6s ease-in-out;
-  }
-  
-  .carousel-fade .active.carousel-item-start,
-  .carousel-fade .active.carousel-item-end {
-    transition: opacity 0s 2.6s;
-  }
-  
-  /*EMIL SPIELEREIEN ENDE*/
-
-
-.product{background-color: indianred;
-font-family: Verdana, Geneva, Tahoma, sans-serif;
-margin-bottom: 10px ;
-padding-top:  5px;
+  width: 50%;
+  /* verkleinert die Breite auf 80% der ursprünglichen Größe */
+  height: 50%;
+  /* verkleinert die Höhe auf 50% der ursprünglichen Größe */
 }
+
+.carousel-item img {
+  width: 250px;
+  /* legt die Breite aller Bilder auf 100px fest */
+  height: 500px;
+  /* legt die Höhe aller Bilder auf 100px fest */
+  object-fit: cover;
+}
+
+/* change transition duration to control the speed of fade effect */
+.carousel-item {
+  transition: transform 2.6s ease-in-out;
+}
+
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+  transition: opacity 0s 2.6s;
+}
+
+/*EMIL SPIELEREIEN ENDE*/
+
+
+.product {
+  background-color: indianred;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-bottom: 10px;
+  padding-top: 5px;
+}
+
 /*hier endet der CSS Code von Nico Tutorium*/
 
-.custom-toggler .navbar-toggler-icon { 
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(122, 122, 122)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+/*Checkboxen für Mana in Admin*/
+.image-checkbox {
+  cursor: pointer;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border: 4px solid transparent;
+  outline: 0;
 }
+
+.image-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.image-checkbox-checked {
+  border-color: black;
+  border-radius: 50%;
+}
+
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(122, 122, 122)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
 /*um die Farbe des nav-toggler zu ändern, auch in URL ändern*/
 .custom-toggler.navbar-toggler {
-    border-color: rgb(122, 122, 122);
-} 
-
-@media only screen and (max-width: 426px){
-    body{
-        margin-top: 10rem;
-    }
-    
+  border-color: rgb(122, 122, 122);
 }
 
+@media only screen and (max-width: 426px) {
+  body {
+    margin-top: 10rem;
+  }
+
+}
