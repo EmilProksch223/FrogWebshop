@@ -66,12 +66,33 @@
                         <input class="form-control" type="file" id="input-Bild-Produkt">
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-3">
+                            <label class="image-checkbox">
+                                <img src="./Produkte_img/ManaSymbole/B.svg" width="50" height="50" class="img-fluid" />
+                                <input type="checkbox" name="image-checkbox" class="d-none" />
+                                <div class="image-checkbox-check">
+                                </div>
+                            </label>
+                        </div>
+
+                        <script>
+                            $(document).ready(function () {
+                                $('.image-checkbox').click(function () {
+                                    $(this).children('.image-checkbox-check').toggleClass('selected');
+                                });
+                            });
+                        </script>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
     
-
-
 
 
 
