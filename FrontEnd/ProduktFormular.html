@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-4">
+                    <div class="col-12 col-sm-4 mb-3">
                         <label for="input-Preis-Produkt" class="form-label">Preis</label>
                         <div class="input-group">
                             <span class="input-group-text">€</span>
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="col-2"></div>
-                    <div class="col-6">
+                    <div class="col-12 col-sm-6">
                         <label for="input-Bild-Produkt" class="form-label">Bild hochladen</label>
                         <input class="form-control" type="file" id="input-Bild-Produkt">
                     </div>
@@ -72,32 +72,32 @@
                 <!--Checkbox Mana-->
                 <div class="container">
                     <div class="row mb-2">Mana</div>
-                    <div class="row justify-content-between">
-                        <div class="col-md-2 text-center">
+                    <div class="row row-cols-4 justify-content-between">
+                        <div class="col-sm-2 text-center">
                             <label class="image-checkbox" title="England">
                                 <img src="./Produkte_img/ManaSymbole/B.svg" width="50" height="50" alt="ManaSymbole_b"/>
                                 <input type="checkbox" name="ManaSymbol" value="b"/>
                             </label>
                         </div>
-                        <div class="col-md-2 text-center">
+                        <div class="col-sm-2 text-center">
                             <label class="image-checkbox" title="Germany">
                                 <img src="./Produkte_img/ManaSymbole/G.svg" width="50" height="50" alt="ManaSymbole_g"/>
                                 <input type="checkbox" name="ManaSymbol" value="g" />
                             </label>
                         </div>
-                        <div class="col-md-2 text-center">
+                        <div class="col-sm-2 text-center">
                             <label class="image-checkbox" title="Italy">
                                 <img src="./Produkte_img/ManaSymbole/R.svg" width="50" height="50" alt="ManaSymbole_r"/>
                                 <input type="checkbox" name="ManaSymbol" value="r" />
                             </label>
                         </div>
-                        <div class="col-md-2 text-center">
+                        <div class="col-sm-2 text-center">
                             <label class="image-checkbox" title="Spain">
                                 <img src="./Produkte_img/ManaSymbole/U.svg" width="50" height="50" alt="ManaSymbole_u"/>
                                 <input type="checkbox" name="ManaSymbol" value="u" />
                             </label>
                         </div>
-                        <div class="col-md-2 text-center">
+                        <div class="col-sm-2 text-center">
                             <label class="image-checkbox" title="Spain">
                                 <img src="./Produkte_img/ManaSymbole/W.svg" width="50" height="50" alt="ManaSymbole_w"/>
                                 <input type="checkbox" name="ManaSymbol" value="u" />
@@ -106,32 +106,8 @@
                     </div>
                 </div>
 
-                <script>
-                    jQuery(function ($) {
-                        // init the state from the input
-                        $(".image-checkbox").each(function () {
-                            if ($(this).find('input[type="checkbox"]').first().attr("checked")) {
-                                $(this).addClass('image-checkbox-checked');
-                            }
-                            else {
-                                $(this).removeClass('image-checkbox-checked');
-                            }
-                        });
+                <script src="custom-checkbox.js">
 
-                        // sync the state to the input
-                        $(".image-checkbox").on("click", function (e) {
-                            if ($(this).hasClass('image-checkbox-checked')) {
-                                $(this).removeClass('image-checkbox-checked');
-                                $(this).find('input[type="checkbox"]').first().removeAttr("checked");
-                            }
-                            else {
-                                $(this).addClass('image-checkbox-checked');
-                                $(this).find('input[type="checkbox"]').first().attr("checked", "checked");
-                            }
-
-                            e.preventDefault();
-                        });
-                    });
                 </script>
 
             </div>
