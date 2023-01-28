@@ -2,88 +2,128 @@
 <html lang="en">
 
 <head>
+  <title>Index</title>
+
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://code.jquery.com/jquery-3.6.3.min.js"
-    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+
+  <!--Eigenen Files-->
   <script src="index.js" defer></script>
   <link rel="stylesheet" href="style.css">
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+  
   <!--Bootstrap CSS-->
-  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
   <!-- Bootstrap JS-->
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!--Overlay-Header-->
+
+  <!--Custom Checkbox-->
+  <script src="./JavaScript/custom-checkbox.js" defer></script>
+
+  <!--Overlay-Header-->
   <script>
-    $(document).ready(function () {
-      $("header").load("header.html");
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('overlay.html')
+        .then(response => response.text())
+        .then(data => {
+          document.querySelector('overlay').innerHTML = data;
+        });
     });
   </script>
-  <!--Overlay-Footer-->
-  <script>
-    $(document).ready(function () {
-      $("footer").load("footer.html");
-    });
-  </script>
 
 
-  <title>Index</title>
+
 </head>
 
 <body>
-  <HEADER>
+  <overlay></overlay>
 
-  </HEADER>
-  <div class="container mb-3">
-    <div class="row justify-content-center">
-      <div class="col-3 bg-dark d-flex align-items-center">
-        <h4 class="text-white text-center">Wähle Mana Kategorie:</h4>
+  <header></header>
+
+  <div class="container">
+    <div class="row border justify-content-center mb-2 border-dark ">
+      <div class="col-3 d-flex align-items-center">
+        <h4 class="m-0">Filter:</4>
       </div>
-      <div class="col-6">
-        <div class="row justify-content-center">
-          <div class="col-2 text-center">
-            <label class="image-checkbox" title="ManaSymbol_B">
-              <img src="./Produkte_img/ManaSymbole/B.svg" width="50" height="50" alt="ManaSymbole_b" />
-              <input type="checkbox" name="ManaSymbol" value="b" />
-            </label>
-          </div>
-          <div class="col-2 text-center">
-            <label class="image-checkbox" title="ManaSymbol_G">
-              <img src="./Produkte_img/ManaSymbole/G.svg" width="50" height="50" alt="ManaSymbole_g" />
-              <input type="checkbox" name="ManaSymbol" value="g" />
-            </label>
-          </div>
-          <div class="col-2 text-center">
-            <label class="image-checkbox" title="ManaSymbol_R">
-              <img src="./Produkte_img/ManaSymbole/R.svg" width="50" height="50" alt="ManaSymbole_r" />
-              <input type="checkbox" name="ManaSymbol" value="r" />
-            </label>
-          </div>
-          <div class="col-2 text-center">
-            <label class="image-checkbox" title="ManaSymbol_U">
-              <img src="./Produkte_img/ManaSymbole/U.svg" width="50" height="50" alt="ManaSymbole_u"/>
-              <input type="checkbox" name="ManaSymbol" value="u" />
-          </label>
-          </div>
-          <div class="col-2 text-center">
-            <label class="image-checkbox" title="Spain">
-              <img src="./Produkte_img/ManaSymbole/W.svg" width="50" height="50" alt="ManaSymbole_w"/>
-              <input type="checkbox" name="ManaSymbol" value="u" />
-          </label>
+      <div class="col-6 border">
+        <div class="manaBigScreen">
+          <div class="row justify-content-center">
+            <div class="col-lg-2 col-sm-3 col-4 text-center">
+              <label class="image-checkbox" title="ManaSymbol_B">
+                <img src="./Produkte_img/ManaSymbole/B.svg" width="40" height="40" alt="ManaSymbole_b" />
+                <input type="checkbox" name="ManaSymbol" value="b" />
+              </label>
+            </div>
+            <div class="col-lg-2 col-sm-3 col-4 text-center">
+              <label class="image-checkbox" title="ManaSymbol_G">
+                <img src="./Produkte_img/ManaSymbole/G.svg" width="40" height="40" alt="ManaSymbole_g" />
+                <input type="checkbox" name="ManaSymbol" value="g" />
+              </label>
+            </div>
+            <div class="col-lg-2 col-sm-3 col-4 text-center">
+              <label class="image-checkbox" title="ManaSymbol_R">
+                <img src="./Produkte_img/ManaSymbole/R.svg" width="40" height="40" alt="ManaSymbole_r" />
+                <input type="checkbox" name="ManaSymbol" value="r" />
+              </label>
+            </div>
+            <div class="col-lg-2 col-sm-3 col-4 text-center">
+              <label class="image-checkbox" title="ManaSymbol_U">
+                <img src="./Produkte_img/ManaSymbole/U.svg" width="40" height="40" alt="ManaSymbole_u" />
+                <input type="checkbox" name="ManaSymbol" value="u" />
+              </label>
+            </div>
+            <div class="col-lg-2 col-sm-3 col-4 text-center">
+              <label class="image-checkbox" title="Spain">
+                <img src="./Produkte_img/ManaSymbole/W.svg" width="40" height="40" alt="ManaSymbole_w" />
+                <input type="checkbox" name="ManaSymbol" value="u" />
+              </label>
+            </div>
           </div>
         </div>
+
+        <!--Small Screen-->
+        <div class="container dropdownSmallScreen" style="display: none;">
+          <div class="dropdown">
+            <button id="dropdownButton" class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Mana
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownButton">
+              <label class="image-checkbox" title="ManaSymbol_B">
+                <img src="./Produkte_img/ManaSymbole/B.svg" width="40" height="40" alt="ManaSymbole_b" />
+                <input type="checkbox" name="ManaSymbol" value="b" />
+              </label>
+              <label class="image-checkbox" title="ManaSymbol_G">
+                <img src="./Produkte_img/ManaSymbole/G.svg" width="40" height="40" alt="ManaSymbole_g" />
+                <input type="checkbox" name="ManaSymbol" value="g" />
+              </label>
+              <label class="image-checkbox" title="ManaSymbol_R">
+                <img src="./Produkte_img/ManaSymbole/R.svg" width="40" height="40" alt="ManaSymbole_r" />
+                <input type="checkbox" name="ManaSymbol" value="r" />
+              </label>
+              <label class="image-checkbox" title="ManaSymbol_U">
+                <img src="./Produkte_img/ManaSymbole/U.svg" width="40" height="40" alt="ManaSymbole_u" />
+                <input type="checkbox" name="ManaSymbol" value="u" />
+              </label>
+              <label class="image-checkbox" title="Spain">
+                <img src="./Produkte_img/ManaSymbole/W.svg" width="40" height="40" alt="ManaSymbole_w" />
+                <input type="checkbox" name="ManaSymbol" value="u" />
+              </label>
+            </div>
+          </div>
+          <!--Ende Small Screen-->
+
+        </div>
       </div>
-      <div class="col-3 bg-dark text-end">
-        <button class="btn btn-outline-dark me-1" type="submit">
-          <img src="./img/search_icon.png" width="50" height="50" alt="">
+      <div class="col-3 border d-flex justify-content-end align-items-center ">
+        <button class="btn me-1" type="submit">
+          <img src="./img/search_icon.png" width="35" height="35" alt="">
         </button>
       </div>
     </div>
   </div>
-
-  <script src="custom-checkbox.js"></script>
 
   <div class="container">
     <div class="row position-relative">
@@ -116,7 +156,7 @@
 
       <div class="col-2"></div>
 
-      <div class="col-5 d-flex justify-content-end ">
+      <div class="col-5 p-0 d-flex justify-content-end ">
         <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
@@ -134,19 +174,41 @@
     </div>
   </div>
 
+  <script>
+    var col = document.querySelector(".manaBigScreen");
+    var dropdown = document.querySelector(".dropdownSmallScreen");
 
-  </div>
+    // Hört auf größen änderungen des Bildschirms
+    window.addEventListener("resize", function () {
+      if (window.innerWidth < 500) {
+        col.style.display = "none";
+        dropdown.style.display = "block";
+      } else {
+        col.style.display = "block";
+        dropdown.style.display = "none";
+      }
+    });
+  </script>
 
 
-  <div class="m-5">
-    <button id="getProductsButton">Get all products</button>
-    <div id="productsContainer" class="row pt-3 d-flex justify-content-center"></div>
+  <!--Tauscht Mana Kategorie aus beim einem kleinen Screen -->
 
+  <script>
+    var dropdownButton = document.querySelector("#dropdownButton");
+    var dropdownMenu = document.querySelector(".dropdown-menu");
 
-    <script src="produkte-laden-index.js"> </script>
-  </div>
+    // Anzeigen/Schließen vom Dropdown
+    dropdownButton.addEventListener("click", function () {
+      dropdownMenu.classList.toggle("show");
+    });
 
-
+    //Schließen vom Dropdown beim außerhalb Klicken
+    document.addEventListener("click", function (event) {
+      if (!event.target.closest(".dropdown")) {
+        dropdownMenu.classList.remove("show");
+      }
+    });
+  </script>
   <footer>
 
   </footer>

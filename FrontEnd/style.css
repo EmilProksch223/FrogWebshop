@@ -2,6 +2,7 @@
 body {
 
   margin-top: 5rem;
+  margin-bottom: 3rem;
   font-family: 'Times New Roman', Times, serif;
 }
 
@@ -78,10 +79,21 @@ body {
   border-color: rgb(255,255,255);
 }
 
-@media only screen and (max-width: 426px) {
+@media only screen and (max-width: 1000px) {
+  body{
+    margin-top: 8rem;
+  }
+}
+
+@media only screen and (max-width: 470px) {
   body {
     margin-top: 10rem;
   }
+}
 
+@media only screen and (max-width: 500px) {
+  .dropdown-test {
+    display: block;
+  }
 }
 
