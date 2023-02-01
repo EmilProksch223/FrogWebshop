@@ -28,15 +28,7 @@ function createProduct(product) {
     return cardContainer;
 }
 
-$("#getProductsButton").on("click", function (e) {
-    $.ajax({
-        url: "http://localhost:8080/products",
-        type: "GET",
-        cors: true,
-        success: function (products) { addProductstoPage(products) },
-        error: function (error) { console.error(error) }
-    })
-});
+
 function addProductstoPage(products) {
     const productContainer = $("#productsContainer");
 
