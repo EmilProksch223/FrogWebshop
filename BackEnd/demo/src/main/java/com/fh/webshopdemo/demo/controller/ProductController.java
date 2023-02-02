@@ -3,12 +3,9 @@ package com.fh.webshopdemo.demo.controller;
 import java.util.List;
 
 import com.fh.webshopdemo.demo.model.Product;
-import com.fh.webshopdemo.demo.repository.ProductRepository;
 import com.fh.webshopdemo.demo.service.ProductService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

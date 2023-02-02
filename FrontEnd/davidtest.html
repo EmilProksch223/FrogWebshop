@@ -20,13 +20,19 @@
 
   <!--Overlay-Header-->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      fetch('overlay.html')
-        .then(response => response.text())
-        .then(data => {
-          document.querySelector('overlay').innerHTML = data;
-        });
+// Höre auf das Event "DOM Content Loaded"
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // Führe eine Fetch-Anfrage durch, um die Datei 'overlay.html' abzurufen
+  fetch('overlay.html')
+    // Wandle die Antwort in Text um
+    .then(response => response.text())
+    // Setze den Text der Antwort als innerHTML des Elements mit dem Selektor 'overlay'
+    .then(data => {
+      document.querySelector('overlay').innerHTML = data;
     });
+});
+
   </script>
 
 

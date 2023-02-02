@@ -28,5 +28,21 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
+    //Nico Tut 02022023
+
+    public List<Product> findByType(String type) {
+        return productRepository.findByType(type);
+    }
+
+    public Product save(Product product){
+        String name = product.getName();
+
+        if(name == null|| name.isBlank()){
+
+        }
+        return productRepository.save(product);
+    }
+
+    
 
 }
