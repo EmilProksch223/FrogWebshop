@@ -30,9 +30,4 @@ public class UserService {
 
     //Nico Tut 02022023
 
-    public List<User> findByType(String type) {
-        return userRepository.findByType(type);
-    }
-
-    
 }

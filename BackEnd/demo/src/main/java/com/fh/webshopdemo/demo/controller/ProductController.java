@@ -25,5 +25,10 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+    @GetMapping ("/blue")
+    public List<Product> getBlueProducts(){
+        return productService.getBlueProducts();
+    }
+
     
 }

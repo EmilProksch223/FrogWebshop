@@ -22,8 +22,8 @@ public class Product {
     private double price;
     @Column(name="quantity")
     private int quantity;
-    @Column(name="type")
-    private String type;
+    @Column(name="manaType")
+    private String manaType;
 
 
     public Product() {
@@ -33,19 +33,19 @@ public class Product {
         this.imageUrl = null;
         this.price = 0.0;
         this.quantity = 0;
-        this.type = null;
+        this.manaType = null;
     }
     
 
 
-    public Product(Long id, String name, String description, String imageUrl, double price, int quantity, String type) {
+    public Product(Long id, String name, String description, String imageUrl, double price, int quantity, String manaType) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
         this.price = price;
         this.quantity = quantity;
-        this.type = type;
+        this.manaType = manaType;
     }
 
 
@@ -74,8 +74,8 @@ public class Product {
         return quantity;
     }
 
-    public String getType() {
-        return type;
+    public String getManaType() {
+        return manaType;
     }
 
     public void setName(String name) {
@@ -98,8 +98,8 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setManaType(String manaType) {
+        this.manaType = manaType;
     }
     
 }

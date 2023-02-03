@@ -29,22 +29,26 @@ function createProduct(product) {
 }
 
 
+// Function to add products to the page
 function addProductstoPage(products) {
-    const productContainer = $("#productsContainer");
+    const productContainer = $("#productsContainer"); // Selects the product container element
 
     for (let product of products) {
-        productContainer.append(createProduct(product))
+        productContainer.append(createProduct(product)) // Appends the product element to the container
     }
 }
 
 $(document).ready(function(){
+    // Function to create a product element
     function createProduct(product) {
     }
+
+    // Makes a GET request to the server to retrieve the products
     $.ajax({
-        url:'http://localhost:8080/products',
-        method:'GET',
-        cors: true,
-        success: function (products) { addProductstoPage(products) },
-        error: function (error) { console.error(error) }
+        url:'http://localhost:8080/products', // URL of the endpoint
+        method:'GET', // HTTP method
+        cors: true, // CORS enabled
+        success: function (products) { addProductstoPage(products) }, // On success, add the products to the page
+        error: function (error) { console.error(error) } // On error, log the error to the console
     });
 });
