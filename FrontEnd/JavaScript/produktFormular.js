@@ -1,23 +1,34 @@
-const form = document.querySelector('form');
-
-form.addEventListener('submit', event => {
+document.querySelector("form").addEventListener("submit", function(event) {
   event.preventDefault();
-
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData);
-
-  fetch('http://localhost:8080/products', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-});
+  
+  const formData = new FormData();
+  formData.append("input-Titel-Produkt", document.querySelector("#input-Titel-Produkt").value);
+  formData.append("input-Beschreibung-Produkt", document.querySelector("#input-Beschreibung-Produkt").value);
+  formData.append("input-Preis-Produkt", document.querySelector("#input-Preis-Produkt").value);
+  formData.append("input-Bild-Produkt", document.querySelector("#input-Bild-Produkt").files[0]);
+  
+event.preventDefault();
+var manaSymbols = [];
+var checkboxes = document.querySelectorAll('input[name="ManaSymbol[]"]:checked');
+for (var i = 0; i < checkboxes.length; i++) {
+manaSymbols.push(checkboxes[i].value);
+}
+var manaSymbolsString = manaSymbols.join("");
+console.log(manaSymbolsString);
+  
+  $.ajax({
+  url:'http://localhost:8080/products',
+  method:'POST',
+  dataType: 'json',
+  contentType: 'application/json',
+  data: JSON.stringify({
+  name: document.querySelector("#input-Titel-Produkt").value,
+  description: document.querySelector("#input-Beschreibung-Produkt").value,
+  price: document.querySelector("#input-Preis-Produkt").value,
+  imageUrl: document.querySelector("#input-Bild-Produkt").files[0],
+  manaType: manaSymbolsString
+  }),
+  success: function (response) { console.log('Product added successfully') },
+  error: function (error) { console.error(error) }
+  });
+  });

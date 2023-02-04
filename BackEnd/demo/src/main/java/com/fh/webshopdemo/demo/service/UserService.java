@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fh.webshopdemo.demo.model.User;
 import com.fh.webshopdemo.demo.repository.UserRepository;
@@ -26,6 +28,12 @@ public class UserService {
 
     public Optional<User> getUserById(long id) {
         return userRepository.findById(id);
+    }
+
+
+    @PostMapping
+    public User createUser(@RequestBody User user){
+        return userRepository.save(user);
     }
 
     //Nico Tut 02022023
