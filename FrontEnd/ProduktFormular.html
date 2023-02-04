@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--Eigenen Files-->
-    <script src="index.js" defer></script>
+    <script src="./JavaScript/produktFormular.js" defer></script>
     <link rel="stylesheet" href="style.css">
 
     <!--Bootstrap CSS-->
@@ -20,7 +20,7 @@
     <!--Custom Checkbox-->
     <script src="./JavaScript/custom-checkbox.js" defer></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 
     <!--Overlay-Header-->
@@ -126,42 +126,8 @@
         </div>
     </div>
 
-    <script>
-        document.querySelector("form").addEventListener("submit", function (event) {
-            event.preventDefault();
 
-            const formData = new FormData(event.target);
-            const title = formData.get("input-Titel-Produkt");
-            const description = formData.get("input-Beschreibung-Produkt");
-            const price = formData.get("input-Preis-Produkt");
-            const image = formData.get("input-Bild-Produkt");
-            const manaSymbols = Array.from(formData.entries()).filter(([key, value]) => key.startsWith("ManaSymbol") && value === "on");
 
-            console.log(title, description, price, image, manaSymbols);
-
-            // Hier kannst du die Daten an den Server senden, z.B. mit einer AJAX-Anfrage
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/products",
-                data: JSON.stringify({
-                    title: title,
-                    description: description,
-                    price: price,
-                    image: image,
-                    manaSymbols: manaSymbols
-                }),
-                contentType: "application/json",
-                success: function (response) {
-                    console.log("Erfolgreich gesendet:", response);
-                },
-                error: function (error) {
-                    console.error("Fehler beim Senden:", error);
-                }
-            });
-
-        });
-
-    </script>
 
 
 
