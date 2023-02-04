@@ -20,6 +20,9 @@
     <!--Custom Checkbox-->
     <script src="./JavaScript/custom-checkbox.js" defer></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
     <!--Overlay-Header-->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -43,87 +46,122 @@
         <div class="col-10 col-lg-7 col-xxl-4 border border-dark rounded p-3 bg-secondary">
             <h2 class="text-center pb-3">Produkt erstellen</h2>
             <div class="container">
-                <div class="row mb-3">
-                    <div class="col">
-                        <label for="input-Titel-Produkt" class="form-label">Titel</label>
-                        <input type="text" class="form-control" id="input-Titel-Produkt">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col">
-                        <label for="input-Beschreibung-Produkt" class="form-label">Beschreibung</label>
-                        <input type="text" class="form-control" id="input-Beschreibung-Produkt">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-12 col-sm-4 mb-3">
-                        <label for="input-Preis-Produkt" class="form-label">Preis</label>
-                        <div class="input-group">
-                            <span class="input-group-text">€</span>
-                            <span class="input-group-text">0.00</span>
-                            <input type="text" class="form-control" id="input-Preis-Produkt"
-                                aria-label="Dollar amount (with dot and two decimal places)">
+                <form method="post">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="input-Titel-Produkt" class="form-label">Titel</label>
+                            <input type="text" class="form-control" id="input-Titel-Produkt" name="input-Titel-Produkt">
                         </div>
                     </div>
-                    <div class="col-2"></div>
-                    <div class="col-12 col-sm-6">
-                        <label for="input-Bild-Produkt" class="form-label">Bild hochladen</label>
-                        <input class="form-control" type="file" id="input-Bild-Produkt">
-                    </div>
-                </div>
-
-                <!--Checkbox Mana-->
-                <div class="container">
-                    <div class="row mb-2">Mana</div>
-                    <div class="row row-cols-4 justify-content-between mb-3">
-                        <div class="col-sm-2 text-center">
-                            <label class="image-checkbox" title="England">
-                                <img src="./Produkte_img/ManaSymbole/B.svg" width="50" height="50"
-                                    alt="ManaSymbole_b" />
-                                <input type="checkbox" name="ManaSymbol" value="b" />
-                            </label>
-                        </div>
-                        <div class="col-sm-2 text-center">
-                            <label class="image-checkbox" title="Germany">
-                                <img src="./Produkte_img/ManaSymbole/G.svg" width="50" height="50"
-                                    alt="ManaSymbole_g" />
-                                <input type="checkbox" name="ManaSymbol" value="g" />
-                            </label>
-                        </div>
-                        <div class="col-sm-2 text-center">
-                            <label class="image-checkbox" title="Italy">
-                                <img src="./Produkte_img/ManaSymbole/R.svg" width="50" height="50"
-                                    alt="ManaSymbole_r" />
-                                <input type="checkbox" name="ManaSymbol" value="r" />
-                            </label>
-                        </div>
-                        <div class="col-sm-2 text-center">
-                            <label class="image-checkbox" title="Spain">
-                                <img src="./Produkte_img/ManaSymbole/U.svg" width="50" height="50"
-                                    alt="ManaSymbole_u" />
-                                <input type="checkbox" name="ManaSymbol" value="u" />
-                            </label>
-                        </div>
-                        <div class="col-sm-2 text-center">
-                            <label class="image-checkbox" title="Spain">
-                                <img src="./Produkte_img/ManaSymbole/W.svg" width="50" height="50"
-                                    alt="ManaSymbole_w" />
-                                <input type="checkbox" name="ManaSymbol" value="u" />
-                            </label>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="input-Beschreibung-Produkt" class="form-label">Beschreibung</label>
+                            <input type="text" class="form-control" id="input-Beschreibung-Produkt"
+                                name="input-Beschreibung-Produkt">
                         </div>
                     </div>
-                </div>
-
-            </div>
-            <div class="row justify-content-center">
-                <div class="d-grid gap-2">
-                    <button class="btn btn-success" type="button">Produkt erstellen</button>
-                  </div>
+                    <div class="row mb-3">
+                        <div class="col-12 col-sm-4 mb-3">
+                            <label for="input-Preis-Produkt" class="form-label">Preis</label>
+                            <div class="input-group">
+                                <span class="input-group-text">€</span>
+                                <input type="text" class="form-control" id="input-Preis-Produkt"
+                                    name="input-Preis-Produkt" aria-label="Euro amount">
+                            </div>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="col-12 col-sm-6">
+                            <label for="input-Bild-Produkt" class="form-label">Bild hochladen</label>
+                            <input class="form-control" type="file" id="input-Bild-Produkt" name="input-Bild-Produkt">
+                        </div>
+                    </div>
+                    <!--Checkbox Mana-->
+                    <div class="container">
+                        <div class="row mb-2">Mana</div>
+                        <div class="row row-cols-4 justify-content-between mb-3">
+                            <div class="col-sm-2 text-center">
+                                <label class="image-checkbox" title="b">
+                                    <img src="./Produkte_img/ManaSymbole/B.svg" width="50" height="50"
+                                        alt="ManaSymbole_b" />
+                                    <input type="checkbox" name="ManaSymbol[]" value="b" />
+                                </label>
+                            </div>
+                            <div class="col-sm-2 text-center">
+                                <label class="image-checkbox" title="g">
+                                    <img src="./Produkte_img/ManaSymbole/G.svg" width="50" height="50"
+                                        alt="ManaSymbole_g" />
+                                    <input type="checkbox" name="ManaSymbol[]" value="g" />
+                                </label>
+                            </div>
+                            <div class="col-sm-2 text-center">
+                                <label class="image-checkbox" title="r">
+                                    <img src="./Produkte_img/ManaSymbole/R.svg" width="50" height="50"
+                                        alt="ManaSymbole_r" />
+                                    <input type="checkbox" name="ManaSymbol[]" value="r" />
+                                </label>
+                            </div>
+                            <div class="col-sm-2 text-center">
+                                <label class="image-checkbox" title="u">
+                                    <img src="./Produkte_img/ManaSymbole/U.svg" width="50" height="50"
+                                        alt="ManaSymbole_u" />
+                                    <input type="checkbox" name="ManaSymbol[]" value="u" />
+                                </label>
+                            </div>
+                            <div class="col-sm-2 text-center">
+                                <label class="image-checkbox" title="w">
+                                    <img src="./Produkte_img/ManaSymbole/W.svg" width="50" height="50"
+                                        alt="ManaSymbole_w" />
+                                    <input type="checkbox" name="ManaSymbol[]" value="w" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-success" type="submit">Produkt erstellen</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    </div>
-    </div>
+
+    <script>
+        document.querySelector("form").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const title = formData.get("input-Titel-Produkt");
+            const description = formData.get("input-Beschreibung-Produkt");
+            const price = formData.get("input-Preis-Produkt");
+            const image = formData.get("input-Bild-Produkt");
+            const manaSymbols = Array.from(formData.entries()).filter(([key, value]) => key.startsWith("ManaSymbol") && value === "on");
+
+            console.log(title, description, price, image, manaSymbols);
+
+            // Hier kannst du die Daten an den Server senden, z.B. mit einer AJAX-Anfrage
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/products",
+                data: JSON.stringify({
+                    title: title,
+                    description: description,
+                    price: price,
+                    image: image,
+                    manaSymbols: manaSymbols
+                }),
+                contentType: "application/json",
+                success: function (response) {
+                    console.log("Erfolgreich gesendet:", response);
+                },
+                error: function (error) {
+                    console.error("Fehler beim Senden:", error);
+                }
+            });
+
+        });
+
+    </script>
 
 
 

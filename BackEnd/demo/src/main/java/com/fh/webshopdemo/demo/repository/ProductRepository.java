@@ -8,7 +8,6 @@ import com.fh.webshopdemo.demo.model.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long>{
 
-    List<Product> findByType(String type);
 
     List<Product> findByManaType(String string);
 
