@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!--Eigenen Files-->
-  <script src="index.js" defer></script>
+  <script src="./JavaScript/davidtest.js" defer></script>
   <link rel="stylesheet" href="style.css">
   
   <!--Bootstrap CSS-->
@@ -17,6 +17,7 @@
   <!-- Bootstrap JS-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" defer></script>
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <!--Overlay-Header-->
   <script>
@@ -43,34 +44,10 @@ document.addEventListener('DOMContentLoaded', function() {
   <header></header>
 
 
-
-    <div class="dropdown">
-      <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Mana
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownButton">
-        <label class="image-checkbox" title="ManaSymbol_B">
-          <img src="./Produkte_img/ManaSymbole/B.svg" width="40" height="40" alt="ManaSymbole_b" />
-          <input type="checkbox" name="ManaSymbol" value="b" />
-        </label>
-        <label class="image-checkbox" title="ManaSymbol_G">
-          <img src="./Produkte_img/ManaSymbole/G.svg" width="40" height="40" alt="ManaSymbole_g" />
-          <input type="checkbox" name="ManaSymbol" value="g" />
-        </label>
-        <label class="image-checkbox" title="ManaSymbol_R">
-          <img src="./Produkte_img/ManaSymbole/R.svg" width="40" height="40" alt="ManaSymbole_r" />
-          <input type="checkbox" name="ManaSymbol" value="r" />
-        </label>
-        <label class="image-checkbox" title="ManaSymbol_U">
-          <img src="./Produkte_img/ManaSymbole/U.svg" width="40" height="40" alt="ManaSymbole_u" />
-          <input type="checkbox" name="ManaSymbol" value="u" />
-        </label>
-        <label class="image-checkbox" title="Spain">
-          <img src="./Produkte_img/ManaSymbole/W.svg" width="40" height="40" alt="ManaSymbole_w" />
-          <input type="checkbox" name="ManaSymbol" value="2" />
-        </label>
-      </div>
-    </div>
+  <form id="myForm">
+    <input type="file" id="input-Bild-Produkt">
+    <button type="submit">Upload</button>
+  </form>
 
   <footer></footer>
 
