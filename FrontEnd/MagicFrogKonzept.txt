@@ -1,0 +1,9 @@
+Konzept MagicFrog Webshop
+
+Produkt: Magic Karten
+Kategorien: 5 verschiedene "Farben" der Karten (es kommt eine sechste dazu)
+
+/*
+später noch zusätzlich nach Manakosten sortierbar und vielleich Erweiterung der Kategorien, 
+z.B Magic-Zubehör oder "sealed product" also sogenannte Booster Packs
+*/
