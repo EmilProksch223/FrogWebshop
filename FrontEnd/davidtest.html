@@ -2,55 +2,213 @@
 <html lang="en">
 
 <head>
-  <title>davidtest</title>
+  <title>Index</title>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
   <!--Eigenen Files-->
-  <script src="./JavaScript/davidtest.js" defer></script>
+  <script src="./JavaScript/index.js" defer></script>
+  <script src="./JavaScript/produkte-laden-index.js" defer></script>
   <link rel="stylesheet" href="style.css">
-  
+
   <!--Bootstrap CSS-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
   <!-- Bootstrap JS-->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  <!--Custom Checkbox-->
+  <script src="./JavaScript/custom-checkbox.js" defer></script>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+
   <!--Overlay-Header-->
   <script>
-// Höre auf das Event "DOM Content Loaded"
-document.addEventListener('DOMContentLoaded', function() {
-  
-  // Führe eine Fetch-Anfrage durch, um die Datei 'overlay.html' abzurufen
-  fetch('overlay.html')
-    // Wandle die Antwort in Text um
-    .then(response => response.text())
-    // Setze den Text der Antwort als innerHTML des Elements mit dem Selektor 'overlay'
-    .then(data => {
-      document.querySelector('overlay').innerHTML = data;
+    document.addEventListener('DOMContentLoaded', function () {
+      fetch('overlay.html')
+        .then(response => response.text())
+        .then(data => {
+          document.querySelector('overlay').innerHTML = data;
+        });
     });
-});
-
   </script>
+
 
 
 </head>
 
 <body>
-    <overlay></overlay>
+  <overlay></overlay>
+
   <header></header>
+  <form id="search-filter">
+    <div class="container bg-secondary">
+      <div class="row border justify-content-center mb-2 border-dark d-flex align-items-center">
+        <div class="col-3">
+          <h4 class="m-0">Filter:</h4>
+        </div>
+        <div class="col-6">
+          <div class="manaBigScreen d-none d-lg-block">
+            <div class="row justify-content-center">
+              <div class="col-lg-2 col-sm-3 col-4 text-center">
+                <label class="image-checkbox" title="b">
+                  <img src="./Produkte_img/ManaSymbole/B.svg" width="40" height="40" alt="ManaSymbole_b"
+                    alt="ManaSymbole_b" />
+                  <input type="checkbox" name="ManaSymbol[]" value="b" />
+                </label>
+              </div>
+              <div class="col-lg-2 col-sm-3 col-4 text-center">
+                <label class="image-checkbox" title="g">
+                  <img src="./Produkte_img/ManaSymbole/G.svg" width="40" height="40" alt="ManaSymbole_g" />
+                  <input type="checkbox" name="ManaSymbol[]" value="g" />
+                </label>
+              </div>
+              <div class="col-lg-2 col-sm-3 col-4 text-center">
+                <label class="image-checkbox" title="r">
+                  <img src="./Produkte_img/ManaSymbole/R.svg" width="40" height="40" alt="ManaSymbole_r" />
+                  <input type="checkbox" name="ManaSymbol[]" value="r" />
+                </label>
+              </div>
+              <div class="col-lg-2 col-sm-3 col-4 text-center">
+                <label class="image-checkbox" title="u">
+                  <img src="./Produkte_img/ManaSymbole/U.svg" width="40" height="40" alt="ManaSymbole_u" />
+                  <input type="checkbox" name="ManaSymbol[]" value="u" />
+                </label>
+              </div>
+              <div class="col-lg-2 col-sm-3 col-4 text-center">
+                <label class="image-checkbox" title="w">
+                  <img src="./Produkte_img/ManaSymbole/W.svg" width="40" height="40" alt="ManaSymbole_w" />
+                  <input type="checkbox" name="ManaSymbol[]" value="w" />
+                </label>
+              </div>
+            </div>
+          </div>
 
+          <!--Small Screen-->
+          <div class="container dropdownSmallScreen  d-block d-lg-none">
+            <div class="dropdown mt-1">
+              <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Mana
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownButton">
+                <label class="image-checkbox" title="b">
+                  <img src="./Produkte_img/ManaSymbole/B.svg" width="40" height="40" alt="ManaSymbole_b" />
+                  <input type="checkbox" name="ManaSymbol[]" value="b" />
+                </label>
+                <label class="image-checkbox" title="g">
+                  <img src="./Produkte_img/ManaSymbole/G.svg" width="40" height="40" alt="ManaSymbole_g" />
+                  <input type="checkbox" name="ManaSymbol[]" value="g" />
+                </label>
+                <label class="image-checkbox" title="r">
+                  <img src="./Produkte_img/ManaSymbole/R.svg" width="40" height="40" alt="ManaSymbole_r" />
+                  <input type="checkbox" name="ManaSymbol[]" value="r" />
+                </label>
+                <label class="image-checkbox" title="u">
+                  <img src="./Produkte_img/ManaSymbole/U.svg" width="40" height="40" alt="ManaSymbole_u" />
+                  <input type="checkbox" name="ManaSymbol" value="u" />
+                </label>
+                <label class="image-checkbox" title="w">
+                  <img src="./Produkte_img/ManaSymbole/W.svg" width="40" height="40" alt="ManaSymbole_w" />
+                  <input type="checkbox" name="ManaSymbol[]" value="w" />
+                </label>
+              </div>
+            </div>
 
-  <form id="myForm">
-    <input type="file" id="input-Bild-Produkt">
-    <button type="submit">Upload</button>
+            <!--Ende Small Screen-->
+
+          </div>
+        </div>
+        <div class="col-md-3 col-12 d-flex justify-content-center align-items-center justify-content-md-end my-1">
+          <div class="d-flex">
+            <input class="form-control me-1 border-dark" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-dark" onclick="filterButton" type="button" id="filter-button">
+              <img src="img/search_icon.svg" width="30" alt="">
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </form>
 
-  <footer></footer>
 
+  <div class="container">
+    <div class="row position-relative">
+      <div class="col-12 w-50 position-absolute top-5 start-50 translate-middle mt-4 border border-dark">
+        <div class="row">
+          <div id="productsContainr">
+            test
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-5 p-0">
+        <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="./Produkte_img/Artifact/2xm-308-wurmcoil-engine.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="./Produkte_img/Black/cst-120-dark-ritual.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="./Produkte_img/Blau/isd-78-snapcaster-mage.jpg" class="d-block w-100" alt="...">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2"></div>
+
+      <div class="col-5 p-0 d-flex justify-content-end ">
+        <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="./Produkte_img/Green/m10-189-llanowar-elves.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="./Produkte_img/Multicolor/cmr-279-hans-eriksson.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="./Produkte_img/Red/m10-146-lightning-bolt.jpg" class="d-block w-100" alt="...">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="row">
+
+    <div class="col-12 col-lg-4 col-xxl-3 d-flex justify-content-center mb-3">
+      <div class="card bg-dark border border-light text-white p-3" style="width: 22rem;">
+        <img class="card-img-top border border-light rounded" height="350" src="${product.imageUrl}">
+        <div class="card-body border rounded mt-1">
+          <h5 class="card-title text-center">${product.name}</h5>
+          <p class="card-text">${product.description}</p>
+        </div>
+        <div class="card-footer">
+          <p class="card-text">Preis: ${product.price} €</p>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+
+    <footer>
+
+    </footer>
 </body>
 
 </html>

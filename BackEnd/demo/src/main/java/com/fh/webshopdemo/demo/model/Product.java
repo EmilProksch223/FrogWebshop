@@ -12,18 +12,25 @@ public class Product {
     @GeneratedValue
     @Column(name="id")
     private final Long id;
+
     @Column(name="name")
     private String name;
-    @Column(name="description")
+
+    @Column(name="description", length = 350)
     private String description;
+
     @Column(name="image_url")
     private String imageUrl;
+
     @Column(name="price")
     private double price;
+
     @Column(name="quantity")
     private int quantity;
+
     @Column(name="manaType")
     private String manaType;
+    
 
 
     public Product() {

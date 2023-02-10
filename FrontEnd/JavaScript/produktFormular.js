@@ -1,4 +1,4 @@
-document.querySelector("form").addEventListener("submit", function (event) {
+document.getElementById("form-produkt").addEventListener("submit", function (event) {
   event.preventDefault();
 
   const formData = new FormData();

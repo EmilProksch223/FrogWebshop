@@ -30,17 +30,14 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
-
-
-
-    public List<Product> getBlueProducts() {
-        return productRepository.findByManaType("blue");
+    public List<Product> findByManaType(String manaSymbolString) {
+        return productRepository.findByManaType(manaSymbolString);
     }
 
+    
     @PostMapping
 public Product createProduct(@RequestBody Product product){
     return productRepository.save(product);
 }
-
 
 }
