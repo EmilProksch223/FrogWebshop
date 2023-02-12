@@ -1,7 +1,7 @@
 /*CSS von nico tutorium 20.jaenner*/
 body {
 
-  margin-top: 5rem;
+  margin-top: 6rem;
   margin-bottom: 3rem;
   font-family: 'Times New Roman', Times, serif;
 }
@@ -59,7 +59,7 @@ body {
 }
 
 .image-checkbox-checked {
-  border-color: black;
+  border-color: white;
   border-radius: 50%;
 }
 
