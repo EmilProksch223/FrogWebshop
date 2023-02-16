@@ -32,7 +32,7 @@ public class Product {
     @Column(name="quantity")
     private int quantity;
 
-    @NotBlank("Muss mindestens eine Farbe haben!")
+    @NotBlank(message = "Muss mindestens eine Farbe haben!")
     @Column(name="manaType")
     private String manaType;
     
