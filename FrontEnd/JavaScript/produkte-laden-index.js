@@ -60,4 +60,3 @@ const addProduct = $(`<button type="button" class="btn btn-light" style="width: 
 function removeProducts() {
     $("#productsContainer").empty();
 }
-

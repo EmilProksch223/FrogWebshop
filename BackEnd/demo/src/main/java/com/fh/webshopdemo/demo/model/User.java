@@ -1,9 +1,15 @@
 package com.fh.webshopdemo.demo.model;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+
 
 @Entity(name="user")
 public class User {
@@ -12,24 +18,48 @@ public class User {
     @GeneratedValue
     @Column(name="id")
     private final Long id;
+
+    @NotBlank(message = "Gender is mandatory")
     @Column(name="gender")
     private String gender;
+
+    @NotBlank(message = "First name is mandatory")
+    @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
     @Column(name="firstName")
     private String firstName;
+
+    @NotBlank(message = "Last name is mandatory")
+    @Size(min = 2, max = 50, message = "Last name must be between 2 and 50 characters")
     @Column(name="lastName")
     private String lastName;
+
+    @NotBlank(message = "Email is mandatory")
+    @Email(message = "Email should be valid")
     @Column(name="eMail")
     private String eMail;
+
+    @NotBlank(message = "Password is mandatory")
+    @Size(min = 8, message = "Password should have at least 8 characters")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).*$",
+             message = "Password should contain at least one uppercase letter, one lowercase letter, and one digit")
     @Column(name="password")
     private String password;
+
     @Column(name="address")
     private String address;
+
     @Column(name="address2")
     private String address2;
+
+    @NotBlank(message = "City is mandatory")
     @Column(name="city")
     private String city;
+
+    @NotBlank(message = "District is mandatory")
     @Column(name="district")
     private String district;
+
+    @NotBlank(message = "Country is mandatory")
     @Column(name="country")
     private String country;
 

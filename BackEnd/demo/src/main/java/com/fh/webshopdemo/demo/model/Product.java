@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity(name="product")
 public class Product {
@@ -13,6 +14,7 @@ public class Product {
     @Column(name="id")
     private final Long id;
 
+    @NotBlank
     @Column(name="name")
     private String name;
 

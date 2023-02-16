@@ -40,14 +40,9 @@ public class ProductController {
         }
         return matchingProducts;
     }
-/*
-        if (manaSymbolString == null) {
-            return productService.getAllProducts();
-        }
 
-        return productService.findByManaType(manaSymbolString);
-    }
-*/
+    //Produkt erstellen
+
     @PostMapping
     public Product createProduct(@RequestBody Product product) {
         return productService.createProduct(product);
