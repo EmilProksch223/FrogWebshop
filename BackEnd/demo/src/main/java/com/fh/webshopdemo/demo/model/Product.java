@@ -28,11 +28,11 @@ public class Product {
     @Column(name="price")
     private double price;
 
-    @PositiveOrZero
+    @PositiveOrZero(message = "Darf nicht negativ sein!")
     @Column(name="quantity")
     private int quantity;
 
-    @NotBlank
+    @NotBlank("Muss mindestens eine Farbe haben!")
     @Column(name="manaType")
     private String manaType;
     
