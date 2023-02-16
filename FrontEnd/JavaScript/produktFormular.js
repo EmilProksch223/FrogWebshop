@@ -48,13 +48,16 @@ $.get({
 function addUsersToPage(users) {
   const userContainer = $("#userContainer"); // Selects the product container element
   userContainer.empty();
+
+
+  createUser(users);
 }
 
 function createUser(user) {
 
   const userContainer = $(`<div class="row">`);
 
-  const id = $(`<div class="col">${product.id}</div>`);
+  const id = $(`<div class="col">${user.id}</div>`);
   const address = $(`<div class="col"></div>`);
   const address2 = $(`<div class="col"></div>`);
   const city = $(`<div class="col"></div>`);
