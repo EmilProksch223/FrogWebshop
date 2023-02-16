@@ -5,6 +5,9 @@ import java.util.List;
 
 import com.fh.webshopdemo.demo.model.Product;
 import com.fh.webshopdemo.demo.service.ProductService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,7 +47,7 @@ public class ProductController {
     //Produkt erstellen
 
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
+    public Product createProduct(@Valid @RequestBody Product product) {
         return productService.createProduct(product);
     }
 

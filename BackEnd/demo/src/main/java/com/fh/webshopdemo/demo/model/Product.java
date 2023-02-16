@@ -14,10 +14,10 @@ public class Product {
     @Column(name="id")
     private final Long id;
 
-    @NotBlank
     @Column(name="name")
     private String name;
 
+    
     @Column(name="description", length = 350)
     private String description;
 
