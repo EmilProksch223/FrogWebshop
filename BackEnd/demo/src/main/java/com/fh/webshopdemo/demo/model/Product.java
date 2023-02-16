@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity(name="product")
 public class Product {
@@ -17,8 +19,8 @@ public class Product {
     @Column(name="name")
     private String name;
 
-    
-    @Column(name="description", length = 350)
+    @NotBlank(message ="Beschreibung darf nicht leer sein!")
+    @Column(name = "description", length = 350)
     private String description;
 
     @Column(name="image_url")
@@ -27,9 +29,11 @@ public class Product {
     @Column(name="price")
     private double price;
 
+    @PositiveOrZero
     @Column(name="quantity")
     private int quantity;
 
+    @NotBlank
     @Column(name="manaType")
     private String manaType;
     
