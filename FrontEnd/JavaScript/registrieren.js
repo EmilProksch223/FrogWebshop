@@ -11,6 +11,7 @@ document.getElementById("signIn-form").addEventListener("submit", function(event
     formData.append("address2", document.querySelector('input[type="text"][id="inputAddress2"]').value);
     formData.append("city", document.querySelector('input[type="text"][id="inputCity"]').value);
     formData.append("country", document.querySelector('select[id="inputState"]').value);
+    formData.append("disctrict", document.querySelector('input[type="text"][id="inputDistrict"]').value);
     
     $.ajax({
     url: 'http://localhost:8080/user',
@@ -18,15 +19,16 @@ document.getElementById("signIn-form").addEventListener("submit", function(event
     dataType: 'json',
     contentType: 'application/json',
     data: JSON.stringify({
-    first_name: document.querySelector('input[type="text"][id="inputFirstName"]').value,
-    last_name: document.querySelector('input[type="text"][id="inputLastName"]').value,
+    firstName: document.querySelector('input[type="text"][id="inputFirstName"]').value,
+    lastName: document.querySelector('input[type="text"][id="inputLastName"]').value,
     gender: document.querySelector('select[aria-label=".form-select-sm example"]').value,
-    email: document.querySelector('input[type="email"][id="inputEmail4"]').value,
+    eMail: document.querySelector('input[type="email"][id="inputEmail4"]').value,
     password: document.querySelector('input[type="password"][id="inputPassword4"]').value,
-    address1: document.querySelector('input[type="text"][id="inputAddress"]').value,
+    address: document.querySelector('input[type="text"][id="inputAddress"]').value,
     address2: document.querySelector('input[type="text"][id="inputAddress2"]').value,
     city: document.querySelector('input[type="text"][id="inputCity"]').value,
-    country: document.querySelector('select[id="inputState"]').value
+    country: document.querySelector('select[id="inputState"]').value,
+    district: document.querySelector('input[type="text"][id="inputDistrict"]').value
     }),
     success: function (response) { console.log('Registration successful') },
     error: function (error) { console.error(error) }
