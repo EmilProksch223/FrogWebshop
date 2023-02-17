@@ -2,6 +2,7 @@ package com.fh.webshopdemo.demo.model;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
@@ -23,39 +24,42 @@ public class User {
     @Column(name="gender")
     private String gender;
 
-
+    @NotBlank(message = "Vorname darf nicht leer sein")
     @Column(name="firstName")
     private String firstName;
 
 
-
+    @NotBlank(message = "Nachname darf nicht leer sein")
     @Column(name="lastName")
     private String lastName;
 
-    @Email
+    @NotBlank(message = "E-Mail darf nicht leer sein")
+    @Email(message = "E-Mail muss existieren")
     @Column(name="eMail")
     private String eMail;
 
 
-
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$", 
+    message = "Das Passwort muss mindestens 8 Zeichen lang sein, mindestens eine Zahl, mindestens einen Großbuchstaben und mindestens einen Kleinbuchstaben enthalten")
     @Column(name="password")
     private String password;
 
+    @NotBlank(message = "Adresse darf nicht leer sein")
     @Column(name="address")
     private String address;
 
     @Column(name="address2")
     private String address2;
 
-
+    @NotBlank(message = "Stadt darf nicht leer sein")
     @Column(name="city")
     private String city;
 
-
+    @NotBlank(message = "Bezirk darf nicht leer sein")
     @Column(name="district")
     private String district;
 
-
+    @NotBlank(message = "Land darf nicht leer sein")
     @Column(name="country")
     private String country;
 
