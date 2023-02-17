@@ -15,6 +15,7 @@ public class Product {
     @Column(name="id")
     private final Long id;
 
+    @NotBlank(message ="Titel darf nicht leer sein!")
     @Column(name="name")
     private String name;
 
