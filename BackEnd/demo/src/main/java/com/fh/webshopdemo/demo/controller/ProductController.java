@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/products")
 public class ProductController {
 
     @Autowired
@@ -26,18 +26,24 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<Product> getAllProducts(@RequestParam(name = "search", required = false) String manaSymbolString) {
-
+    public List<Product> getAllProducts(
+            @RequestParam(name = "manasymbols", required = false) String manaSymbolsString, 
+            @RequestParam(name = "searchterm", required = false) String searchterm) {
+        
         List<Product> allProducts = productService.getAllProducts();
         List<Product> matchingProducts = new ArrayList<>();
-
-        if (manaSymbolString == null) {
+    
+        if (manaSymbolsString == null && searchterm == null) {
             return allProducts;
         }
         for (Product product : allProducts) {
-            if (product.getManaType().contains(manaSymbolString)) {
-                matchingProducts.add(product);
+            if (manaSymbolsString != null && !product.getManaType().toLowerCase().contains(manaSymbolsString.toLowerCase())) {
+                continue; // Skip this product
             }
+            if (searchterm != null && !product.getName().toLowerCase().contains(searchterm.toLowerCase())) {
+                continue; // Skip this product
+            }
+            matchingProducts.add(product);
         }
         return matchingProducts;
     }
@@ -48,8 +54,4 @@ public class ProductController {
     public Product createProduct(@Valid @RequestBody Product product) {
         return productService.createProduct(product);
     }
-
-
-
-
 }

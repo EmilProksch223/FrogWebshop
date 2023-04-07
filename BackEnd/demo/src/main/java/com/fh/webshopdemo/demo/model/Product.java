@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 
@@ -114,5 +116,24 @@ public class Product {
     public void setManaType(String manaType) {
         this.manaType = manaType;
     }
+
+
     
+    @ManyToOne
+    @JoinColumn(name="shopping_cart_id")
+    private ShoppingCart shoppingCart;
+
+
+
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
 }
