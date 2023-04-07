@@ -18,7 +18,7 @@ document.getElementById("form-produkt").addEventListener("submit", function (eve
   console.log(manaSymbolsString);
 
   $.ajax({
-    url: 'http://localhost:8080/products',
+    url: 'http://localhost:8080/api/products',
     method: 'POST',
     dataType: 'json',
     contentType: 'application/json',

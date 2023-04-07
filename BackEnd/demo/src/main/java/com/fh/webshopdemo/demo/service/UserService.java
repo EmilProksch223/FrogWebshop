@@ -35,7 +35,4 @@ public class UserService {
     public User createUser(@RequestBody User user){
         return userRepository.save(user);
     }
-
-    //Nico Tut 02022023
-
 }

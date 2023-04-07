@@ -1,5 +1,5 @@
 $.get({
-    url: 'http://localhost:8080/products',
+    url: 'http://localhost:8080/api/products',
     cors: true, // CORS enabled
     success: function (products) { addProductstoPage(products) }, // On success, add the products to the page
     error: console.error
@@ -42,7 +42,8 @@ function createProduct(product) {
 //Create the price element
 const price = $(`<p class="card-text mb-0">Preis: ${product.price.toFixed(2)} €</p>`);
 //Create add Product
-const addProduct = $(`<button type="button" class="btn btn-light" style="width: 1.5rem; height: 1.5rem; padding: 0;" role="button" data-toggle="tooltip" data-placement="top" title="Produkt zum Warenkorb hinzufügen"> <i class="fas fa-plus"></i> </button>`);
+const addProduct = $(`<button type="button" class="btn btn-light" id="add-to-cart-button" data-product-id="${product.id}" style="width: 1.5rem; height: 1.5rem; padding: 0;" role="button" data-toggle="tooltip" data-placement="top" title="Produkt zum Warenkorb hinzufügen"> <i class="fas fa-plus"></i> </button>
+`);
 
     //Append the elements to the card
     cardBody.append(name, drop, description);

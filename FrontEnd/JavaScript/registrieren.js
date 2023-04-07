@@ -14,7 +14,7 @@ document.getElementById("signIn-form").addEventListener("submit", function(event
     formData.append("disctrict", document.querySelector('input[type="text"][id="inputDistrict"]').value);
     
     $.ajax({
-    url: 'http://localhost:8080/user',
+    url: 'http://localhost:8080/api/users',
     method: 'POST',
     dataType: 'json',
     contentType: 'application/json',
