@@ -1,9 +1,9 @@
 package com.fh.webshopdemo.demo.model;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -11,29 +11,30 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
-@Entity(name="shoppingCart")
-public class ShoppingCart {
 
+@Entity(name = "shoppingCart")
+public class ShoppingCart {
+    
     @Id
     @GeneratedValue
-    @Column(name="id")
     private Long id;
 
     @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name="user_id", nullable = true)
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "shoppingCart")
-    private Set<Product> products;
-    
+    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products = new ArrayList<>();
 
-    public ShoppingCart(){
+    private int quantity;
+
+    public ShoppingCart() {
     }
 
-    public ShoppingCart(User user, Set<Product> products) {
+    public ShoppingCart(User user, Product product, int quantity) {
         this.user = user;
-        this.products = products;
+        this.products.add(product);
+        this.quantity = quantity;
     }
 
     public Long getId() {
@@ -52,13 +53,21 @@ public class ShoppingCart {
         this.user = user;
     }
 
-    public Set<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(Set<Product> products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
-}
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+}
 

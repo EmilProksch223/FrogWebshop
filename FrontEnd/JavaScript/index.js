@@ -30,50 +30,17 @@ document.getElementById("search").addEventListener("keydown", function(event) {
     }
 });
 
-
-/*
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("test1");
-    const addToCartButtons = document.querySelectorAll('.add-to-cart-button');
-    addToCartButtons.forEach(button => {
-      button.addEventListener('click', event => {
-        const productId = button.getAttribute('data-product-id');
-        // Hier kannst du dann die AJAX-Anfrage senden und die Produkt-ID übergeben
-        console.log("test2");
-        $.ajax({
-            url: 'http://localhost:8080/api/shoppingcarts',
-            method: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                productId: productId,
-                quantity: 1 // oder eine andere gewünschte Anzahl
-              }),
-            success: function(data) {
-                console.log(data);
-                alert('Produkt erfolgreich zum Warenkorb hinzugefügt!');
-              },
-            error: function() {
-                console.log(data);
-              // Fehlermeldung anzeigen oder andere Aktionen ausführen
-              alert('Fehler beim Hinzufügen des Produkts zum Warenkorb!');
-            }
-          });
-      });
-    });
+$(document).on('click', '#add-to-cart-button', function() {
+  const productId = $(this).data('product-id');
+  const cartId = 1; // replace with your user's cart ID
+  $.ajax({
+    type: "POST",
+    url: "http://localhost:8080/api/shoppingcarts/" + cartId + "/products/" + productId,
+    success: function(data) {
+      alert('Product added to cart!');
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      alert('Error adding product to cart: ' + textStatus);
+    }
   });
-  
-*/
-
-document.addEventListener('DOMContentLoaded', function() {
-    const addToCartButtons = document.querySelectorAll('#add-to-cart-button');
-    addToCartButtons.forEach(button => {
-      button.addEventListener('click', event => {
-        console.log('test');
-        // Füge hier deinen AJAX-Aufruf ein
-      });
-    });
-  });
-
-  
-  
+});

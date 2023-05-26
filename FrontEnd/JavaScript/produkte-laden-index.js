@@ -42,7 +42,7 @@ function createProduct(product) {
 //Create the price element
 const price = $(`<p class="card-text mb-0">Preis: ${product.price.toFixed(2)} €</p>`);
 //Create add Product
-const addProduct = $(`<button type="button" class="btn btn-light" id="add-to-cart-button" data-product-id="${product.id}" style="width: 1.5rem; height: 1.5rem; padding: 0;" role="button" data-toggle="tooltip" data-placement="top" title="Produkt zum Warenkorb hinzufügen"> <i class="fas fa-plus"></i> </button>
+const addProduct = $(`<button type="button" class="btn btn-light" id="add-to-cart-button" data-product-id="${product.id}" style="width: 1.5rem; height: 1.5rem; padding: 0;" role="button" data-toggle="tooltip" data-placement="top" title="Produkt zum Warenkorb hinzufügen"><i class="fas fa-plus" style="pointer-events: none;"></i></button>
 `);
 
     //Append the elements to the card

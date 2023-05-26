@@ -1,54 +1,54 @@
 package com.fh.webshopdemo.demo.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fh.webshopdemo.demo.model.ShoppingCart;
-import com.fh.webshopdemo.demo.repository.ShoppingCartRepository;
+import com.fh.webshopdemo.demo.model.Product;
 
-import jakarta.persistence.EntityNotFoundException;
+import com.fh.webshopdemo.demo.model.ShoppingCart;
+
+import com.fh.webshopdemo.demo.repository.ShoppingCartRepository;
 
 @Service
 public class ShoppingCartService {
 
     private final ShoppingCartRepository shoppingCartRepository;
+    private final ProductService productService;
 
     @Autowired
-    public ShoppingCartService(ShoppingCartRepository shoppingCartRepository) {
+    public ShoppingCartService(ShoppingCartRepository shoppingCartRepository, ProductService productService) {
         this.shoppingCartRepository = shoppingCartRepository;
+        this.productService = productService;
     }
 
-    public List<ShoppingCart> getAll() {
-        return shoppingCartRepository.findAll();
+    public List<Product> getProductsInCart(Long cartId) {
+        // get the ShoppingCart object from the database
+        ShoppingCart shoppingCart = shoppingCartRepository.findById(cartId)
+                .orElseThrow(() -> new NoSuchElementException("ShoppingCart not found with ID: " + cartId));
+
+        // get the List<Product> products attribute of the ShoppingCart object
+        return shoppingCart.getProducts();
     }
 
-    public ShoppingCart getById(Long id) {
-        Optional<ShoppingCart> shoppingCart = shoppingCartRepository.findById(id);
-        if (shoppingCart.isPresent()){
-            return shoppingCart.get();
-        }else {
-            throw new EntityNotFoundException("ShoppingCart not found with id: " + id);
-        }
-    }
+    public ShoppingCart addProductToCart(Long cartId, Long productId) {
+        // get the ShoppingCart object from the database
+        ShoppingCart shoppingCart = shoppingCartRepository.findById(cartId)
+                .orElseThrow(() -> new NoSuchElementException("ShoppingCart not found with ID: " + cartId));
 
-    public ShoppingCart save(ShoppingCart shoppingCart){
+        // get the Product object from the database
+        Optional<Product> productOptional = productService.getProductById(productId);
+        Product product = productOptional
+                .orElseThrow(() -> new NoSuchElementException("Product not found with ID: " + productId));
+
+        // add the Product object to the List<Product> products attribute of the
+        // ShoppingCart object
+        shoppingCart.getProducts().add(product);
+
+        // save the updated ShoppingCart object to the database
         return shoppingCartRepository.save(shoppingCart);
     }
-
-    public ShoppingCart update(Long id, ShoppingCart shoppingCart) {
-        ShoppingCart existingCart = getById(id);
-        existingCart.setUser(shoppingCart.getUser());
-        existingCart.setProducts(shoppingCart.getProducts());
-        return shoppingCartRepository.save(existingCart);
-    }
-
-    public void deleteById(Long id){
-        shoppingCartRepository.deleteById(id);
-    }
-    
-
-    
 }
