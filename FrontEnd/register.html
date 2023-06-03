@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Registrieren</title>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--Eigenen Files-->
+  <script src="./scripts/register.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+  
+  <!--Bootstrap CSS-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+  <!-- Bootstrap JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" defer></script>
+
+  <!--Jquery Datenbank-->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!--Overlay-Header-->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('overlay.html')
+        .then(response => response.text())
+        .then(data => {
+          document.querySelector('overlay').innerHTML = data;
+        });
+    });
+  </script>
+
+</head>
+<body>
+    <overlay></overlay>
+    <header></header>
+
+    <div class="row m-3 d-flex justify-content-xxl-center">
+        <div class="col-12 col-lg-7 col-xxl-4 border border-dark bg-secondary rounded p-3 mb-3 overflow-hidden">
+            <form method="post" id="signIn-form" class="row g-3">
+                <div class="col-12">
+                    <h2>Registrieren</h2>
+                </div>
+                <div class="col-4 col-sm-5">
+                    <label for="" class="form-label">Vorname</label>
+                    <input type="text" class="form-control border border-dark" id="inputFirstName">
+                </div>
+                <div class="col-4 col-sm-5">
+                    <label for="inputEmail4" class="form-label">Nachname</label>
+                    <input type="text" class="form-control border border-dark" id="inputLastName">
+                </div>
+                <div class="col-1 col-sm-2">
+                    <label for="" class="form-label">Gesch.</label>
+                    <select class="form-select form-select-sm border border-dark" aria-label=".form-select-sm example">
+                        <option selected>...</option>
+                        <option value="1">Herr</option>
+                        <option value="2">Frau</option>
+                        <option value="3">Divers</option>
+                      </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="inputEmail4" class="form-label">E-Mail</label>
+                  <input type="email" class="form-control border border-dark" id="inputEmail4">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputPassword4" class="form-label">Passwort</label>
+                  <input type="password" class="form-control border border-dark" id="inputPassword4">
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress" class="form-label">Adresse</label>
+                  <input type="text" class="form-control border border-dark" id="inputAddress" placeholder="...straße 12">
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress2" class="form-label">Adresse</label>
+                  <input type="text" class="form-control border border-dark" id="inputAddress2" placeholder="Stiege/Stock/Tür">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputCity" class="form-label">Ort</label>
+                  <input type="text" class="form-control border border-dark" id="inputCity">
+                </div>
+                <div class="col-md-4">
+                  <label for="inputState" class="form-label">Land</label>
+                  <select id="inputState" class="form-select border border-dark">
+                    <option selected>...</option>
+                    <option>Österreich</option>
+                    <option>Deutschland</option>
+                    <option>Schweiz</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label for="inputDistrict" class="form-label">Plz</label>
+                  <input type="text" class="form-control border border-dark" id="inputDistrict">
+                </div>
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input border border-dark" type="checkbox" id="gridCheck">
+                    <label class="form-check-label" for="gridCheck">
+                        <a class="text-dark" data-bs-toggle="modal" data-bs-target="#myModal">                      
+                        AGB
+                        </a> gelesen
+                    </label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-dark">Registrieren</button>
+                </div>
+              </form>
+        </div>
+        <div class="col-1"></div>     <!--leerer Col mitte-->
+        <div class="col-12 col-lg-7 col-xxl-4  border border-dark bg-secondary rounded p-3 mb-3 overflow-hidden h-50">
+          <form>
+            <div class="mb-1">
+              <div class="col-12">
+                <h2>Anmelden</h2>
+              </div>
+              <label for="exampleInputEmail1" class="form-label">E-Mail</label>
+              <input type="email" class="form-control border-dark" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Passwort</label>
+              <input type="password" class="form-control border-dark" id="exampleInputPassword1">
+            </div>
+            <div class="col-6 mb-3 form-check">
+              <input type="checkbox" class="form-check-input border-dark" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Anmeldung speichern</label>
+            </div>
+            <div class="col-6 mb-3">
+              <button type="submit" class="btn btn-dark">Anmelden</button>
+            </div>
+          </form>
+        </div>
+    </div>
+
+    <div class="modal-dialog modal-dialog-scrollable" id="modal-agb">
+                            
+    </div>
+
+    <footer>
+      
+    </footer>
+
+
+    
+</body>
+</html>
+
+
+<!--AGB Modal-->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+          <a class="modal-title text-white fs-5" id="myModall">AGB</a>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-white">
+          <ol>
+            <h4>Geltungsbereich</h4>
+            <li>Diese Allgemeinen Geschäftsbedingungen (nachfolgend "AGB") gelten für alle Verträge, die Sie als Kunde mit uns als Anbieter (nachfolgend "wir") über unsere Website abschließen. Diese AGB gelten ausschließlich. Entgegenstehende oder von diesen AGB abweichende Bedingungen des Kunden erkennen wir nicht an, es sei denn, wir hätten ausdrücklich schriftlich ihrer Geltung zugestimmt.
+            </li>
+            <h4 class="mt-3">Vertragsgegenstand</h4>
+            <li>Vertragsgegenstand ist der Verkauf von Waren über unsere Website.</li>
+            <h4 class="mt-3">Vertragsschluss</h4>
+            <li>Die Darstellung der Waren auf unserer Website stellt kein rechtlich bindendes Angebot, sondern einen unverbindlichen Online-Katalog dar. Durch Anklicken des Buttons "Kaufen" im abschließenden Schritt des Bestellprozesses geben Sie eine verbindliche Bestellung der im Warenkorb enthaltenen Waren ab. Die Bestätigung des Eingangs der Bestellung erfolgt unmittelbar nach dem Absenden der Bestellung. Der Kaufvertrag kommt mit unserer Auftragsbestätigung oder Lieferung der Ware zustande.</li>
+            <h4 class="mt-3">Widerrufsrecht</h4>
+            <li>Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen. Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die Waren in Besitz genommen haben bzw. hat. Um Ihr Widerrufsrecht auszuüben, müssen Sie uns (Name, Anschrift, Telefonnummer, E-Mail-Adresse) mittels einer eindeutigen Erklärung (z.B. ein mit der Post versandter Brief, Telefax oder E-Mail) über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren. Sie können dafür das beigefügte Muster-Widerrufsformular verwenden, das jedoch nicht vorgeschrieben ist.</li>
+            <h4 class="mt-3">Preise und Versandkosten</h4>
+            <li>Alle Preise verstehen sich einschließlich der gesetzlichen Mehrwertsteuer und sonstiger Preisbestandteile. Die Versandkosten sind nicht im Kaufpreis enthalten. Sie werden im Laufe des Bestellvorgangs gesondert ausgewiesen und sind von Ihnen zusätzlich zu tragen, soweit nicht anders vereinbart.</li>
+            <h4 class="mt-3">Lieferbedingungen</h4>
+            <li>Die Lieferung erfolgt innerhalb von 2-5 Werktagen nach Zahlungseingang auf unserem Konto. Die Lieferung erfolgt an die von Ihnen angegebene Lieferadresse.</li>
+            <h4 class="mt-3">Zahlungsbedingungen</h4>
+            <li>Die Zahlung erfolgt per Vorkasse, PayPal oder per Nachnahme. Im Falle einer Zahlung per Vorkasse erfolgt die Lieferung erst nach Zahlungseingang auf unserem Konto.</li>
+            <h4 class="mt-3">Eigentumsvorbehalt</h4>
+            <li>Die gelieferte Ware bleibt bis zur vollständigen Bezahlung unser Eigentum.</li>
+            <h4 class="mt-3">Gewährleistung und Haftung</h4>
+            <li>Die Gewährleistung erfolgt nach den gesetzlichen Bestimmungen. Wir haften nicht für leicht fahrlässige Pflichtverletzungen, es sei denn, es handelt sich um Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit oder um Schäden, die auf einer vorsätzlichen oder grob fahrlässigen Pflichtverletzung unsererseits, unserer gesetzlichen Vertreter oder Erfüllungsgehilfen beruhen.</li>
+            <h4 class="mt-3">Datenschutz</h4>
+            <li>Ihre personenbezogenen Daten werden ausschließlich zur Abwicklung Ihrer Bestellung verwendet und nicht an Dritte weitergegeben. Weitere Informationen zum Datenschutz entnehmen Sie bitte unserer Datenschutzerklärung auf unserer Website.</li>
+            <h4 class="mt-3">Schlussbestimmungen</h4>
+            <li>Es gilt ausschließlich das Recht der Bundesrepublik Deutschland. Ist der Kunde Kaufmann, juristische Person des öffentlichen Rechts oder öffentlich-rechtliches Sondervermögen, ist der Gerichtsstand der Sitz unseres Unternehmens.</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
