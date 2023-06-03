@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-WebshopBackendApplication<webshop>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "at.technikumwien.webshop.WebshopBackendApplication",
+            "projectName": "webshop",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

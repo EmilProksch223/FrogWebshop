@@ -10,8 +10,8 @@
 
 
   <!--Eigenen Files-->
-  <script src="./JavaScript/index.js" defer></script>
-  <script src="./JavaScript/produkte-laden-index.js" defer></script>
+  <script src="./scripts/index.js" defer></script>
+  <script src="./scripts/products.js" defer></script>
   <link rel="stylesheet" href="style.css">
 
   <!--Bootstrap CSS-->
@@ -25,7 +25,7 @@
 
 
   <!--Custom Checkbox-->
-  <script src="./JavaScript/custom-checkbox.js" defer></script>
+  <script src="scripts/customCheckbox.js" defer></script>
 
   <!--Jquery Datenbank-->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -60,32 +60,32 @@
             <div class="row justify-content-center">
               <div class="col-lg-2 col-sm-3 col-4 text-center">
                 <label class="image-checkbox" title="w">
-                  <img src="./Produkte_img/ManaSymbole/W.svg" width="40" height="40" alt="manaSymbole_white" />
+                  <img src="./img/Produkte_img/ManaSymbole/W.svg" width="40" height="40" alt="manaSymbole_white" />
                   <input type="checkbox" name="ManaSymbol[]" value="w" />
                 </label>
               </div>
               <div class="col-lg-2 col-sm-3 col-4 text-center">
                 <label class="image-checkbox" title="u">
-                  <img src="./Produkte_img/ManaSymbole/U.svg" width="40" height="40" alt="ManaSymbole_u" />
+                  <img src="./img/Produkte_img/ManaSymbole/U.svg" width="40" height="40" alt="ManaSymbole_u" />
                   <input type="checkbox" name="ManaSymbol[]" value="u" />
                 </label>
               </div>
               <div class="col-lg-2 col-sm-3 col-4 text-center">
                 <label class="image-checkbox" title="b">
-                  <img src="./Produkte_img/ManaSymbole/B.svg" width="40" height="40" alt="ManaSymbole_b"
+                  <img src="./img/Produkte_img/ManaSymbole/B.svg" width="40" height="40" alt="ManaSymbole_b"
                     alt="ManaSymbole_b" />
                   <input type="checkbox" name="ManaSymbol[]" value="b" />
                 </label>
               </div>
               <div class="col-lg-2 col-sm-3 col-4 text-center">
                 <label class="image-checkbox" title="r">
-                  <img src="./Produkte_img/ManaSymbole/R.svg" width="40" height="40" alt="ManaSymbole_r" />
+                  <img src="./img/Produkte_img/ManaSymbole/R.svg" width="40" height="40" alt="ManaSymbole_r" />
                   <input type="checkbox" name="ManaSymbol[]" value="r" />
                 </label>
               </div>
               <div class="col-lg-2 col-sm-3 col-4 text-center">
                 <label class="image-checkbox" title="g">
-                  <img src="./Produkte_img/ManaSymbole/G.svg" width="40" height="40" alt="ManaSymbole_g" />
+                  <img src="./img/Produkte_img/ManaSymbole/G.svg" width="40" height="40" alt="ManaSymbole_g" />
                   <input type="checkbox" name="ManaSymbol[]" value="g" />
                 </label>
               </div>
@@ -105,23 +105,23 @@
               </button>
               <div class="dropdown-menu bg-dark" aria-labelledby="dropdownButton">
                 <label class="image-checkbox" title="w">
-                  <img src="./Produkte_img/ManaSymbole/W.svg" width="40" height="40" alt="manaSymbole_white" />
+                  <img src="./img/Produkte_img/ManaSymbole/W.svg" width="40" height="40" alt="manaSymbole_white" />
                   <input type="checkbox" name="ManaSymbol[]" value="w" />
                 </label>
                 <label class="image-checkbox" title="u">
-                  <img src="./Produkte_img/ManaSymbole/U.svg" width="40" height="40" alt="manaSymbole_blau" />
+                  <img src="./img/Produkte_img/ManaSymbole/U.svg" width="40" height="40" alt="manaSymbole_blau" />
                   <input type="checkbox" name="ManaSymbol[]" value="u" />
                 </label>
                 <label class="image-checkbox" title="b">
-                  <img src="./Produkte_img/ManaSymbole/B.svg" width="40" height="40" alt="manaSymbole_schwarz" />
+                  <img src="./img/Produkte_img/ManaSymbole/B.svg" width="40" height="40" alt="manaSymbole_schwarz" />
                   <input type="checkbox" name="ManaSymbol[]" value="b" />
                 </label>
                 <label class="image-checkbox" title="r">
-                  <img src="./Produkte_img/ManaSymbole/R.svg" width="40" height="40" alt="manaSymbole_rot" />
+                  <img src="./img/Produkte_img/ManaSymbole/R.svg" width="40" height="40" alt="manaSymbole_rot" />
                   <input type="checkbox" name="ManaSymbol[]" value="r" />
                 </label>
                 <label class="image-checkbox" title="g">
-                  <img src="./Produkte_img/ManaSymbole/G.svg" width="40" height="40" alt="manaSymbole_grün" />
+                  <img src="./img/Produkte_img/ManaSymbole/G.svg" width="40" height="40" alt="manaSymbole_grün" />
                   <input type="checkbox" name="ManaSymbol[]" value="g" />
                 </label>
 
@@ -150,7 +150,16 @@
   </div>
 
 
+  <div>
+    <button type="button" class="btn btn-light" id="add-to-cart-button" data-product-id="1" style="width: 1.5rem; height: 1.5rem; padding: 0;" role="button" data-toggle="tooltip" data-placement="top" title="Produkt zum Warenkorb hinzufügen"></i> </button>
+    <button type="button" class="btn btn-light" id="add-to-cart-button" data-product-id="2" style="width: 1.5rem; height: 1.5rem; padding: 0;" role="button" data-toggle="tooltip" data-placement="top" title="Produkt zum Warenkorb hinzufügen"> <i class="fas fa-plus"></i> </button>
+    <button type="button" class="btn btn-light" id="add-to-cart-button" data-product-id="2" style="width: 1.5rem; height: 1.5rem; padding: 0; position: relative;" role="button" data-toggle="tooltip" data-placement="top" title="Produkt zum Warenkorb hinzufügen">
+      <i class="fas fa-plus" style="pointer-events: none;"></i>
+    </button>
+    
+    
 
+  </div>
   </div>
   <footer>
 
