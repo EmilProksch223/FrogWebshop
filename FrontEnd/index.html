@@ -24,131 +24,45 @@
     integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 
 
-  <!--Custom Checkbox-->
-  <script src="scripts/customCheckbox.js" defer></script>
-
   <!--Jquery Datenbank-->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <!--Overlay-Header-->
   <script src="/frontend/components/navbar/loadOverlay.js" defer></script>
+  <script src="/frontend/components/manaSymbols/manaSymbols.js" defer></script>
+
+  
 
 </head>
 
 <body class="bg-dark">
   <overlay></overlay>
-
-  <header></header>
   <form id="search-filter">
-    <div class="container bg-dark">
-      <div class="row border justify-content-center mb-4 border-dark d-flex align-items-center">
-        <div class="col-3">
 
-        </div>
-        <div class="col-6">
-          <div class="manaBigScreen d-none d-lg-block">
-            <div class="row justify-content-center">
-              <div class="col-lg-2 col-sm-3 col-4 text-center">
-                <label class="image-checkbox" title="w">
-                  <img src="./img/Produkte_img/ManaSymbole/W.svg" width="40" height="40" alt="manaSymbole_white" />
-                  <input type="checkbox" name="ManaSymbol[]" value="w" />
-                </label>
-              </div>
-              <div class="col-lg-2 col-sm-3 col-4 text-center">
-                <label class="image-checkbox" title="u">
-                  <img src="./img/Produkte_img/ManaSymbole/U.svg" width="40" height="40" alt="ManaSymbole_u" />
-                  <input type="checkbox" name="ManaSymbol[]" value="u" />
-                </label>
-              </div>
-              <div class="col-lg-2 col-sm-3 col-4 text-center">
-                <label class="image-checkbox" title="b">
-                  <img src="./img/Produkte_img/ManaSymbole/B.svg" width="40" height="40" alt="ManaSymbole_b"
-                    alt="ManaSymbole_b" />
-                  <input type="checkbox" name="ManaSymbol[]" value="b" />
-                </label>
-              </div>
-              <div class="col-lg-2 col-sm-3 col-4 text-center">
-                <label class="image-checkbox" title="r">
-                  <img src="./img/Produkte_img/ManaSymbole/R.svg" width="40" height="40" alt="ManaSymbole_r" />
-                  <input type="checkbox" name="ManaSymbol[]" value="r" />
-                </label>
-              </div>
-              <div class="col-lg-2 col-sm-3 col-4 text-center">
-                <label class="image-checkbox" title="g">
-                  <img src="./img/Produkte_img/ManaSymbole/G.svg" width="40" height="40" alt="ManaSymbole_g" />
-                  <input type="checkbox" name="ManaSymbol[]" value="g" />
-                </label>
-              </div>
-              
+      <div class="container bg-dark">
+        <div class="row border justify-content-center mb-4 border-dark d-flex align-items-center">
+          <div class="col-3">
 
-
-
-            </div>
           </div>
-
-          <!--Small Screen-->
-          <div class="container dropdownSmallScreen d-block d-lg-none">
-            <div class="dropdown mt-1">
-              <button id="dropdownButton" class="btn btn-dark dropdown-toggle border border-light" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false" data-bs-auto-close="false">
-                Mana
+          <div class="col-6">
+            <manaSymbols></manaSymbols>
+          </div>
+          <div class="col-md-3 col-12 d-flex justify-content-end align-items-center my-1">
+            <div class="d-flex">
+              <input class="form-control me-1 border-dark" type="search" placeholder="Search" aria-label="Search" id="search">
+              <button class="btn btn-outline-dark bg-light" onclick="filterButton" type="button" id="filter-button">
+                <img src="img/search_icon.svg" width="30" alt="">
               </button>
-              <div class="dropdown-menu bg-dark" aria-labelledby="dropdownButton">
-                <label class="image-checkbox" title="w">
-                  <img src="./img/Produkte_img/ManaSymbole/W.svg" width="40" height="40" alt="manaSymbole_white" />
-                  <input type="checkbox" name="ManaSymbol[]" value="w" />
-                </label>
-                <label class="image-checkbox" title="u">
-                  <img src="./img/Produkte_img/ManaSymbole/U.svg" width="40" height="40" alt="manaSymbole_blau" />
-                  <input type="checkbox" name="ManaSymbol[]" value="u" />
-                </label>
-                <label class="image-checkbox" title="b">
-                  <img src="./img/Produkte_img/ManaSymbole/B.svg" width="40" height="40" alt="manaSymbole_schwarz" />
-                  <input type="checkbox" name="ManaSymbol[]" value="b" />
-                </label>
-                <label class="image-checkbox" title="r">
-                  <img src="./img/Produkte_img/ManaSymbole/R.svg" width="40" height="40" alt="manaSymbole_rot" />
-                  <input type="checkbox" name="ManaSymbol[]" value="r" />
-                </label>
-                <label class="image-checkbox" title="g">
-                  <img src="./img/Produkte_img/ManaSymbole/G.svg" width="40" height="40" alt="manaSymbole_grün" />
-                  <input type="checkbox" name="ManaSymbol[]" value="g" />
-                </label>
-
-              </div>
             </div>
-
-            <!--Ende Small Screen-->
-
-          </div>
-        </div>
-        <div class="col-md-3 col-12 d-flex justify-content-center align-items-center justify-content-md-end my-1">
-          <div class="d-flex">
-            <input class="form-control me-1 border-dark" type="search" placeholder="Search" aria-label="Search" id="search">
-            <button class="btn btn-outline-dark bg-light" onclick="filterButton" type="button" id="filter-button">
-              <img src="img/search_icon.svg" width="30" alt="">
-            </button>
           </div>
         </div>
       </div>
-    </div>
   </form>
+  
 
   <div class="container">
     <div id="productsContainer">
     </div>
-  </div>
-
-
-  <div>
-    <button type="button" class="btn btn-light" id="add-to-cart-button" data-product-id="1" style="width: 1.5rem; height: 1.5rem; padding: 0;" role="button" data-toggle="tooltip" data-placement="top" title="Produkt zum Warenkorb hinzufügen"></i> </button>
-    <button type="button" class="btn btn-light" id="add-to-cart-button" data-product-id="2" style="width: 1.5rem; height: 1.5rem; padding: 0;" role="button" data-toggle="tooltip" data-placement="top" title="Produkt zum Warenkorb hinzufügen"> <i class="fas fa-plus"></i> </button>
-    <button type="button" class="btn btn-light" id="add-to-cart-button" data-product-id="2" style="width: 1.5rem; height: 1.5rem; padding: 0; position: relative;" role="button" data-toggle="tooltip" data-placement="top" title="Produkt zum Warenkorb hinzufügen">
-      <i class="fas fa-plus" style="pointer-events: none;"></i>
-    </button>
-    
-    
-
   </div>
   </div>
   <footer>

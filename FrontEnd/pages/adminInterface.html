@@ -26,6 +26,7 @@
 
   <!--Overlay-Header-->
   <script src="/frontend/components/navbar/loadOverlay.js" defer></script>
+  <script src="/frontend/components/manaSymbols/manaSymbols.js" defer></script>
 
 
 </head>
@@ -76,45 +77,8 @@
                     <!--Checkbox Mana-->
                     <div class="container">
                         <div class="row mb-2">Mana</div>
-                        <div class="row row-cols-4 justify-content-between mb-3">
-                            <div class="col-sm-2 text-center">
-                                <label class="image-checkbox" title="w">
-                                    <img src="./Produkte_img/ManaSymbole/W.svg" width="50" height="50"
-                                        alt="ManaSymbole_w" />
-                                    <input type="checkbox" name="ManaSymbol[]" value="w" />
-                                </label>
-                            </div>
-                            <div class="col-sm-2 text-center">
-                                <label class="image-checkbox" title="u">
-                                    <img src="./Produkte_img/ManaSymbole/U.svg" width="50" height="50"
-                                        alt="ManaSymbole_u" />
-                                    <input type="checkbox" name="ManaSymbol[]" value="u" />
-                                </label>
-                            </div>
-                            <div class="col-sm-2 text-center">
-                                <label class="image-checkbox" title="b">
-                                    <img src="./Produkte_img/ManaSymbole/B.svg" width="50" height="50"
-                                        alt="ManaSymbole_b" />
-                                    <input type="checkbox" name="ManaSymbol[]" value="b" />
-                                </label>
-                            </div>
-                            <div class="col-sm-2 text-center">
-                                <label class="image-checkbox" title="r">
-                                    <img src="./Produkte_img/ManaSymbole/R.svg" width="50" height="50"
-                                        alt="ManaSymbole_r" />
-                                    <input type="checkbox" name="ManaSymbol[]" value="r" />
-                                </label>
-                            </div>
-                            <div class="col-sm-2 text-center">
-                                <label class="image-checkbox" title="g">
-                                    <img src="./Produkte_img/ManaSymbole/G.svg" width="50" height="50"
-                                        alt="ManaSymbole_g" />
-                                    <input type="checkbox" name="ManaSymbol[]" value="g" />
-                                </label>
-                            </div>
-                            
-                            
-                        </div>
+                        <div class="row justify-content-between mb-3">
+                            <manaSymbols></manaSymbols>
                     </div>
                     <div class="row justify-content-center">
                         <div class="d-grid gap-2">
