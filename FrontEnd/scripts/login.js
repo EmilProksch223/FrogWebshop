@@ -1,3 +1,5 @@
+/* Login */
+
 $(document).on('shown.bs.modal', '#navbarModal', function() {
   document.getElementById("loginButton").addEventListener("click", function() {
     $.post({
@@ -20,3 +22,54 @@ $(document).on('shown.bs.modal', '#navbarModal', function() {
 });
 
 
+/*TokenTimeStampCheck*/ 
+
+function checkTokenValidity() {
+  var loginTimestamp = sessionStorage.getItem("loginTimestamp");
+  if (loginTimestamp) {
+    var currentTime = new Date().getTime();
+    var loginTime = new Date(loginTimestamp).getTime();
+    var validityDuration = 3600 * 1000; // Gültigkeitsdauer des Tokens in Millisekunden (hier 1 Stunde)
+
+    if (currentTime - loginTime >= validityDuration) {
+      // Token ist abgelaufen
+      sessionStorage.removeItem("token");
+      sessionStorage.removeItem("loginTimestamp");
+      console.log("Token ist abgelaufen");
+
+      // Benutzer abmelden und zur Indexseite zurückleiten
+      location.href = "index.html";
+
+      // Benachrichtigung anzeigen
+      alert("Ihre Sitzung ist abgelaufen. Sie wurden abgemeldet.");
+
+      // Hier kannst du ggf. weitere Aktionen ausführen, die nach dem Abmelden erforderlich sind
+    }
+  }
+}
+
+
+
+function checkAdminStatus() {
+  // Token aus der Session holen
+  const token = sessionStorage.getItem('token');
+
+  // Überprüfen, ob ein Token vorhanden ist
+  if (token) {
+    // Token aufteilen und den Payload extrahieren
+    const tokenParts = token.split('.');
+    const payloadBase64 = tokenParts[1];
+    const payload = JSON.parse(atob(payloadBase64));
+
+    // Überprüfen, ob der Benutzer ein Administrator ist
+    const isAdmin = payload.admin;
+
+    return isAdmin;
+  } else {
+    return false; // Kein Token gefunden, Benutzer ist kein Administrator
+  }
+}
+
+// Beispielaufruf der Funktion
+const isAdmin = checkAdminStatus();
+console.log(isAdmin); // true oder false, je nachdem, ob der Benutzer ein Administrator ist

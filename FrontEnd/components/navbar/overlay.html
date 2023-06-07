@@ -16,7 +16,8 @@
   <!--CSS-->
   <link rel="stylesheet" href="/frontend/style.css">
   
-  <script src="/frontend/scripts/userInterface.js" defer></script>
+  
+
 </head>
 <body>
   <nav class="navbar fixed-top navbar-expand-lg bg-dark" style="box-shadow: 0 0 3rem 1rem #222121;">
@@ -27,10 +28,10 @@
         <a class="navbar-brand text-white">FrogWebshop</a>
       </div>
       <div>
+      <a id="adminInterfaceLink"></a>
       <a href="/frontend/index.html"><img class="navbar-img mx-3 my-1"
-          src="/frontend/components/navbar/img/sale_48.png" width="35" height="35" alt="sale"></a>
-      <a href="/frontend/shoppingCart.html"><img class="navbar-img ms-3 me-5 my-1"
-          src="/frontend/components/navbar/img/customer_48.png" width="35" height="35" alt="einkaufswagen"></a>
+          src="/frontend/components/navbar/img/sale_48.png" width="40" height="40" alt="sale"></a>
+      <span id="userInterfaceLink"></span>
         <button id="loginButtonOverlay" type="button" class="btn btn-outline-secondary text-white ms-3" data-bs-toggle="modal" data-bs-target="#navbarModal">
           Anmelden
         </button>
@@ -74,6 +75,8 @@
     </div>
   </nav>
 </footer>
+
+
 
 </body>
 </html>
