@@ -99,9 +99,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
-
-
 function replaceButtons(loginButton, logoutButton) {
   if (window.sessionStorage.getItem("token") !== null) {
     if (loginButton.parentNode) {
