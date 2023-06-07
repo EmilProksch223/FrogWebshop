@@ -41,7 +41,7 @@ public class SecurityConfig {
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                     // Allow unauthorized requests to certain endpoints
-                    .authorizeHttpRequests().requestMatchers("/login", "/products").permitAll()
+                    .authorizeHttpRequests().requestMatchers("/login", "/products", "/users").permitAll()
                     // Authenticate all other requests
                     .anyRequest().authenticated()
                     .and()

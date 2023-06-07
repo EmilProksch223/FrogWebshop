@@ -20,15 +20,8 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <!--Overlay-Header-->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      fetch('overlay.html')
-        .then(response => response.text())
-        .then(data => {
-          document.querySelector('overlay').innerHTML = data;
-        });
-    });
-  </script>
+  <script src="/frontend/components/navbar/loadOverlay.js" defer></script>
+  <script src="/frontend/scripts/login.js" defer></script>
 
 </head>
 <body>
@@ -135,6 +128,31 @@
 
     <div class="modal-dialog modal-dialog-scrollable" id="modal-agb">
                             
+    </div>
+
+    <div>
+      <form method="post" id="signIn-form2" class="row g-3">
+        <div class="col-12">
+            <h2>Registrieren 2</h2>
+        </div>
+
+        <div class="col-4">
+          <label class="form-label"></label>
+          <input type="text" class="form-control border border-dark" id="inputUsername">
+        </div>
+
+        <div class="col-md-6">
+          <label for="inputPassword4" class="form-label">Passwort</label>
+          <input type="password" class="form-control border border-dark" id="inputPassword4">
+        </div>
+
+
+
+
+
+
+      
+      </form>
     </div>
 
     <footer>

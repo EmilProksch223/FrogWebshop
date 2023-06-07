@@ -34,13 +34,33 @@ function createProduct(product) {
     //Create the name element
     const name = $(`<h5 class="card-title text-center">${product.name}</h5>`);
     //Create Dropdown
-    const drop = $(`<div class="d-flex justify-content-center mb-1 mt-2"><button type="button" class="btn btn-light" style="width: 1.5rem; height: 1.5rem; padding: 0;" data-bs-toggle="collapse" href="#plus-${product.id}" role="button" aria-expanded="false" data-toggle="tooltip" data-placement="top" title="Beschreibung anzeigen">
-        <i class="fas fa-caret-down"></i>
-        </button></div>`);
-    //Create the description element
-    const description = $(`<div class="collapse" id="plus-${product.id}"><p class="card-text">${product.description}</p></div></div>`);
-    //Create Footer
-    const cardFooter = $(`<div class="card-footer border border-1 border-top-1 d-flex justify-content-between">`)
+    const drop = $(`<div class="d-flex justify-content-center mb-1 mt-2">
+    <button type="button" class="btn btn-light" style="width: 1.5rem; height: 1.5rem; padding: 0;"
+      data-bs-toggle="modal" data-bs-target="#descriptionModal-${product.id}" data-toggle="tooltip"
+      data-placement="top" title="Beschreibung anzeigen">
+      <i class="fas fa-caret-down"></i>
+    </button>
+  </div>`);
+
+//Create the description element
+const description = $(`<div class="modal fade" id="descriptionModal-${product.id}" tabindex="-1" aria-labelledby="descriptionModalLabel-${product.id}" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white">
+              <div class="modal-header">
+                <h5 class="modal-title" id="descriptionModalLabel-${product.id}">Beschreibung</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>${product.description}</p>
+              </div>
+            </div>
+          </div>
+        </div>`);
+
+//Create Footer
+const cardFooter = $(`<div class="card-footer border border-1 border-top-1 d-flex justify-content-between">`);
+
+
 //Create the price element
 const price = $(`<p class="card-text mb-0">Preis: ${product.price.toFixed(2)} €</p>`);
 //Create add Product
