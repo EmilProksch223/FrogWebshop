@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const passwordInput = document.getElementById('password');
   const confirmPasswordInput = document.getElementById('confirmPassword');
   const agreementCheckbox = document.getElementById('agreementCheckbox');
+  const togglePasswordImage = document.getElementById('togglePassword');
 
   registrationForm.addEventListener('submit', function(event) {
     event.preventDefault();
@@ -58,4 +59,29 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+
+  // Password Show/Hide
+
+  togglePasswordImage.addEventListener('click', function() {
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      confirmPasswordInput.type = 'text';
+      togglePasswordImage.src = './img/hidepassword_48.png';
+    } else {
+      passwordInput.type = 'password';
+      confirmPasswordInput.type = 'password';
+      togglePasswordImage.src = './img/showpassword_48.png';
+    }
+  });
+
+  // ...
 });
+
+
+
+
+
+
+
+
+
