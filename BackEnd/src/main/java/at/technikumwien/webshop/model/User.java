@@ -16,6 +16,9 @@ public class User {
     @Column(name = "username", nullable = false)
     private String username;
 
+    @Column(name = "email", nullable = false)
+    private String email;
+
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -32,6 +35,14 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setUsername(String username) {

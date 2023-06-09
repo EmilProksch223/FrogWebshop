@@ -45,17 +45,26 @@
             <input type="text" class="form-control text-dark" id="username" required>
           </div>
           <div class="mb-3">
-            <label for="password" class="form-label text-white">Passwort</label>
-            <div class="row">
-              <div class="col-6 pe-0">
-              <input type="password" class="form-control text-dark" id="password" required>
+            <label for="email" class="form-label text-white">E-Mail</label>
+            <input type="email" class="form-control text-dark" id="email" required>
+          </div>
+          <div class="mb-3">
+            <div class="row d-flex justify-content-between">
+              <div class="col">
+                <label for="password" class="form-label text-white">Passwort</label>
+              </div>
+              <div class="col text-end">
+                <img src="./img/showpassword_48.png" alt="Toggle Password" class="password-toggle" id="togglePassword"
+                  width="30" height="30">
+              </div>
             </div>
-              <div class="col-1 px-1 ">
-              <img src="./img/showpassword_48.png" alt="Toggle Password" class="password-toggle" id="togglePassword" width="30" height="30">
+            <div class="row">
+              <div class="col">
+              <input type="password" class="form-control text-dark" id="password" required>
             </div>
             </div>
           </div>
-          <div class="mb-3 col-6">
+          <div class="mb-3">
             <label for="confirmPassword" class="form-label text-white">Passwort bestätigen</label>
             <input type="password" class="form-control text-dark" id="confirmPassword" required>
           </div>
