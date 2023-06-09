@@ -15,7 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (!agreementCheckbox.checked) {
-      alert('Bitte stimmen Sie den AGBs zu!');
+      alert('Bitte stimmen Sie den AGB zu!');
+      return;
+    }
+
+    if (sessionStorage.getItem("token")) {
+      alert('Bitte melden Sie sich zuerst ab!');
       return;
     }
 
@@ -32,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
       url: 'http://localhost:8080/users/createUser',
       type: 'POST',
       contentType: 'application/json',
+      headers: { "Authorization": sessionStorage.getItem("token") },
       data: JSON.stringify(user),
       success: function(response) {
         console.log('Daten erfolgreich gesendet:', response);
