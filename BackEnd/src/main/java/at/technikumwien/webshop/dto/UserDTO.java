@@ -14,6 +14,9 @@ public class UserDTO {
     @NotBlank(message = "Benutzername darf nicht leer sein")
     private String username;
 
+    @NotBlank
+    private String email;
+
     @NotBlank(message = "Passwort darf nicht leer sein")
     @Size(min = 8, message = "Passwort muss mindestens 8 Zeichen lang sein")
     private String password;
@@ -38,6 +41,14 @@ public class UserDTO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

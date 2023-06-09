@@ -4,23 +4,21 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import at.technikumwien.webshop.model.User;
 import at.technikumwien.webshop.repository.UserRepository;
 
-
 @Service
 public class UserService {
-    
+
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
@@ -28,9 +26,15 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-
-    @PostMapping
-    public User createUser(@RequestBody User user){
+    public User updateUser(User user) {
         return userRepository.save(user);
+    }
+
+    public User createUser(@RequestBody User user) {
+        return userRepository.save(user);
+    }
+
+    public void deleteUser(long id) {
+        userRepository.deleteById(id);
     }
 }

@@ -25,10 +25,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
     const password = passwordInput.value;
 
     const user = {
       username: username,
+      email: email,
       password: password,
       admin: false
     };
