@@ -62,9 +62,10 @@ public class ProductController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Product> createProduct(@RequestBody @Valid ProductDTO productDTO) {
         Product product = service.save(fromDTO(productDTO));
+        
         return ResponseEntity.created(URI.create("http://localhost:8080/products")).body(product);
     }
 

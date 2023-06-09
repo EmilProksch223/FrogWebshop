@@ -17,6 +17,7 @@ import at.technikumwien.webshop.dto.UserDTO;
 import at.technikumwien.webshop.model.User;
 import at.technikumwien.webshop.service.UserService;
 
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -33,7 +34,7 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @PostMapping
+    @PostMapping("/createUser")
     public ResponseEntity<User> createUser(@RequestBody @Valid UserDTO userDTO) {
         User user = fromDTO(userDTO);
         User createdUser = userService.createUser(user);
