@@ -1,0 +1,5 @@
+INSERT INTO `user`(`id`, `admin`, `password`, `username`) VALUES (1,true,'admin','admin');
+
+INSERT INTO `user`(`id`, `admin`, `password`, `username`) VALUES (2,false,'david','david');
+
+INSERT INTO `user`(`id`, `admin`, `password`, `username`) VALUES (3,false,'emil','emil');

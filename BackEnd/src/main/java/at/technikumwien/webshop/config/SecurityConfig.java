@@ -4,6 +4,10 @@ import at.technikumwien.webshop.security.AuthenticationFilter;
 import at.technikumwien.webshop.service.TokenService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+<<<<<<< HEAD
+=======
+import org.springframework.http.HttpMethod;
+>>>>>>> 2830e02aeb93e34278cb00e67bfd5b8d5777cc2e
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -32,6 +36,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+<<<<<<< HEAD
                     // Disable csrf
         httpSecurity.csrf().disable()
                     // Enable cors
@@ -48,6 +53,30 @@ public class SecurityConfig {
                     // Add filter to validate tokens with every request
                     .addFilterBefore(new AuthenticationFilter(tokenService),
                                      UsernamePasswordAuthenticationFilter.class);
+=======
+        // Disable csrf
+        httpSecurity.csrf().disable()
+                // Enable cors
+                .cors()
+                .and()
+                // Set session management to stateless
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                // Allow unauthorized requests to certain endpoints
+                .authorizeHttpRequests()
+                .requestMatchers(HttpMethod.POST, "/products", "/users/update").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/users/update").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/users/{id}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/users/createUser").permitAll()
+                .requestMatchers("/login", "/products").permitAll()
+                // Authenticate all other requests
+                .anyRequest().authenticated()
+                .and()
+                // Add filter to validate tokens with every request
+                .addFilterBefore(new AuthenticationFilter(tokenService),
+                        UsernamePasswordAuthenticationFilter.class);
+>>>>>>> 2830e02aeb93e34278cb00e67bfd5b8d5777cc2e
 
         return httpSecurity.build();
     }

@@ -35,7 +35,11 @@ $(document).on('click', '#add-to-cart-button', function() {
   const cartId = 1; // replace with your user's cart ID
   $.ajax({
     type: "POST",
+<<<<<<< HEAD
     url: "http://localhost:8080/api/shoppingcarts/" + cartId + "/products/" + productId,
+=======
+    url: "http://localhost:8080/shoppingcarts/" + cartId + "/products/" + productId,
+>>>>>>> 2830e02aeb93e34278cb00e67bfd5b8d5777cc2e
     success: function(data) {
       alert('Product added to cart!');
     },
