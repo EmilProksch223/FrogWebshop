@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $.post({
           url: "http://localhost:8080/login",
           contentType: "application/json",
+          headers: { "Authorization": sessionStorage.getItem("token") },
           data: JSON.stringify(user),
           success: function(data) {
             var timestamp = new Date().toISOString(); // Aktuellen Zeitpunkt erfassen
