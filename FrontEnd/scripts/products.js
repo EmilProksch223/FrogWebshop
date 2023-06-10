@@ -34,15 +34,6 @@ function createProduct(product) {
     //Create the name element
     const name = $(`<h5 class="card-title text-center">${product.name}</h5>`);
     //Create Dropdown
-<<<<<<< HEAD
-    const drop = $(`<div class="d-flex justify-content-center mb-1 mt-2"><button type="button" class="btn btn-light" style="width: 1.5rem; height: 1.5rem; padding: 0;" data-bs-toggle="collapse" href="#plus-${product.id}" role="button" aria-expanded="false" data-toggle="tooltip" data-placement="top" title="Beschreibung anzeigen">
-        <i class="fas fa-caret-down"></i>
-        </button></div>`);
-    //Create the description element
-    const description = $(`<div class="collapse" id="plus-${product.id}"><p class="card-text">${product.description}</p></div></div>`);
-    //Create Footer
-    const cardFooter = $(`<div class="card-footer border border-1 border-top-1 d-flex justify-content-between">`)
-=======
     const drop = $(`<div class="d-flex justify-content-center mb-1 mt-2">
     <button type="button" class="btn btn-light" style="width: 1.5rem; height: 1.5rem; padding: 0;"
       data-bs-toggle="modal" data-bs-target="#descriptionModal-${product.id}" data-toggle="tooltip"
@@ -70,7 +61,6 @@ const description = $(`<div class="modal fade" id="descriptionModal-${product.id
 const cardFooter = $(`<div class="card-footer border border-1 border-top-1 d-flex justify-content-between">`);
 
 
->>>>>>> 2830e02aeb93e34278cb00e67bfd5b8d5777cc2e
 //Create the price element
 const price = $(`<p class="card-text mb-0">Preis: ${product.price.toFixed(2)} €</p>`);
 //Create add Product

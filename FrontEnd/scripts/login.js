@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-$("#loginButton").on("click", _e => {
-    $.post({
-        url: "http://localhost:8080/login",
-        contentType: "application/json",
-        data: JSON.stringify({
-            username: $("#usernameInput").val(),
-            password: $("#passwordInput").val()
-        }),
-        success: data => sessionStorage.setItem("token", data),
-        error: console.error,
-    });
-});
-=======
 /* Login */
 
 function login() {
@@ -90,4 +76,3 @@ function checkAdminStatus() {
 // Beispielaufruf der Funktion
 const isAdmin = checkAdminStatus();
 console.log(isAdmin); // true oder false, je nachdem, ob der Benutzer ein Administrator ist
->>>>>>> 2830e02aeb93e34278cb00e67bfd5b8d5777cc2e
