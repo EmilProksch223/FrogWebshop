@@ -35,7 +35,7 @@ $(document).on('click', '#add-to-cart-button', function() {
   const cartId = 1; // replace with your user's cart ID
   $.ajax({
     type: "POST",
-    url: "http://localhost:8080/api/shoppingcarts/" + cartId + "/products/" + productId,
+    url: "http://localhost:8080/shoppingcarts/" + cartId + "/products/" + productId,
     success: function(data) {
       alert('Product added to cart!');
     },

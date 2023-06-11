@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap</title>
+
+  <!--Bootstrap CSS-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+
+  <!-- Bootstrap JS-->
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!--CSS-->
+  <link rel="stylesheet" href="/frontend/style.css">
+
+  <!-- JavaScript -->
+  <script src="/frontend/components/manaSymbols/manaSymbols.js"></script>
+</head>
+
+
+<body>
+  <div class="manaBigScreen d-none d-lg-block">
+    <div class="row justify-content-center">
+      <div class="col-lg-2 col-sm-3 col-4 text-center">
+        <label class="image-checkbox" title="w">
+          <img src="/frontend/components/manaSymbols/img/W.svg" width="40" height="40" alt="manaSymbole_white" />
+          <input type="checkbox" name="ManaSymbol[]" value="w" />
+        </label>
+      </div>
+      <div class="col-lg-2 col-sm-3 col-4 text-center">
+        <label class="image-checkbox" title="u">
+          <img src="/frontend/components/manaSymbols/img/U.svg" width="40" height="40" alt="ManaSymbole_u" />
+          <input type="checkbox" name="ManaSymbol[]" value="u" />
+        </label>
+      </div>
+      <div class="col-lg-2 col-sm-3 col-4 text-center">
+        <label class="image-checkbox" title="b">
+          <img src="/frontend/components/manaSymbols/img/B.svg" width="40" height="40" alt="ManaSymbole_b" />
+          <input type="checkbox" name="ManaSymbol[]" value="b" />
+        </label>
+      </div>
+      <div class="col-lg-2 col-sm-3 col-4 text-center">
+        <label class="image-checkbox" title="r">
+          <img src="/frontend/components/manaSymbols/img/R.svg" width="40" height="40" alt="ManaSymbole_r" />
+          <input type="checkbox" name="ManaSymbol[]" value="r" />
+        </label>
+      </div>
+      <div class="col-lg-2 col-sm-3 col-4 text-center">
+        <label class="image-checkbox" title="g">
+          <img src="/frontend/components/manaSymbols/img/G.svg" width="40" height="40" alt="ManaSymbole_g" />
+          <input type="checkbox" name="ManaSymbol[]" value="g" />
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="container dropdownSmallScreen d-block d-lg-none">
+    <div class="dropdown mt-1">
+      <button id="dropdownButton" class="btn btn-dark dropdown-toggle border border-light" type="button"
+        data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
+        Mana
+      </button>
+      <div class="dropdown-menu bg-dark border-light px-1" aria-labelledby="dropdownButton">
+        <label class="image-checkbox" title="w">
+          <img src="/frontend/components/manaSymbols/img/W.svg" width="40" height="40" alt="manaSymbole_white" />
+          <input type="checkbox" name="ManaSymbol[]" value="w" />
+        </label>
+        <label class="image-checkbox" title="u">
+          <img src="/frontend/components/manaSymbols/img/U.svg" width="40" height="40" alt="manaSymbole_blau" />
+          <input type="checkbox" name="ManaSymbol[]" value="u" />
+        </label>
+        <label class="image-checkbox" title="b">
+          <img src="/frontend/components/manaSymbols/img/B.svg" width="40" height="40" alt="manaSymbole_schwarz" />
+          <input type="checkbox" name="ManaSymbol[]" value="b" />
+        </label>
+        <label class="image-checkbox" title="r">
+          <img src="/frontend/components/manaSymbols/img/R.svg" width="40" height="40" alt="manaSymbole_rot" />
+          <input type="checkbox" name="ManaSymbol[]" value="r" />
+        </label>
+        <label class="image-checkbox" title="g">
+          <img src="/frontend/components/manaSymbols/img/G.svg" width="40" height="40" alt="manaSymbole_grün" />
+          <input type="checkbox" name="ManaSymbol[]" value="g" />
+        </label>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

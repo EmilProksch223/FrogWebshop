@@ -1,36 +1,38 @@
-package at.technikumwien.webshop.model;
+package at.technikumwien.webshop.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-@Entity(name = "user")
-public class User {
+/**
+ * DTO for {@link User}
+ */
+public class UserDTO {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "username", nullable = false)
+    @NotBlank(message = "Benutzername darf nicht leer sein")
     private String username;
 
-    @Column(name = "email", nullable = false)
+    @NotBlank
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @NotBlank(message = "Passwort darf nicht leer sein")
+    @Size(min = 8, message = "Passwort muss mindestens 8 Zeichen lang sein")
     private String password;
 
-    @Column(name = "admin", nullable = false)
-    private boolean admin;
+    @NotNull(message = "admin darf nicht null sein")
+    private Boolean admin;
 
-    // /////////////////////////////////////////////////////////////////////////
+     // /////////////////////////////////////////////////////////////////////////
     // Getters and Setters
     // /////////////////////////////////////////////////////////////////////////
-
+    
     public Long getId() {
         return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -64,4 +66,5 @@ public class User {
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
+
 }
