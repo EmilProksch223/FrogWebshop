@@ -54,8 +54,9 @@ public class UserController {
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get();
             existingUser.setUsername(userDTO.getUsername());
-            existingUser.setAdmin(userDTO.isAdmin());
             existingUser.setEmail(userDTO.getEmail());
+            existingUser.setActive(userDTO.isActive());
+            existingUser.setAdmin(userDTO.isAdmin());
             User updatedUser = userService.updateUser(existingUser);
             return ResponseEntity.ok(updatedUser);
         } else {
@@ -80,6 +81,7 @@ public class UserController {
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
+        user.setActive(userDTO.isActive());
         user.setAdmin(userDTO.isAdmin());
         return user;
     }

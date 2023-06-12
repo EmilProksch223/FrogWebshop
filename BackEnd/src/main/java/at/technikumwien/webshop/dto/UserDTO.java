@@ -4,9 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-/**
- * DTO for {@link User}
- */
 public class UserDTO {
 
     private Long id;
@@ -20,6 +17,8 @@ public class UserDTO {
     @NotBlank(message = "Passwort darf nicht leer sein")
     @Size(min = 8, message = "Passwort muss mindestens 8 Zeichen lang sein")
     private String password;
+
+    private boolean active;
 
     @NotNull(message = "admin darf nicht null sein")
     private Boolean admin;
@@ -58,6 +57,15 @@ public class UserDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
 
     public boolean isAdmin() {
         return admin;
