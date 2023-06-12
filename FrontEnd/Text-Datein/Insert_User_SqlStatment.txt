@@ -1,5 +1,5 @@
-INSERT INTO `user`(`id`, `admin`, `password`, `username`) VALUES (1,true,'admin','admin');
+INSERT INTO `user`(`id`, `admin`, `password`, `username`, `email`, `active`) VALUES (1,true,'admin','admin','admin@magicfrog.at',true);
 
-INSERT INTO `user`(`id`, `admin`, `password`, `username`) VALUES (2,false,'david','david');
+INSERT INTO `user`(`id`, `admin`, `password`, `username`, `email`, `active`) VALUES (2,false,'david','david1234','david@magicfrog.at',true);
 
-INSERT INTO `user`(`id`, `admin`, `password`, `username`) VALUES (3,false,'emil','emil');
+INSERT INTO `user`(`id`, `admin`, `password`, `username`, `email`, `active`) VALUES (3,false,'emil','emil1234','emil@magicfrog.at',true);

@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
       username: username,
       email: email,
       password: password,
+      active: true,
       admin: false
     };
 
@@ -64,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       error: function(xhr, status, error) {
         console.error('Fehler beim Senden der Daten:', error);
-        // Do something on error, such as showing an error message
+        
       }
     });
   });
@@ -82,8 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
       togglePasswordImage.src = './img/showpassword_48.png';
     }
   });
-
-  // ...
 });
 
 

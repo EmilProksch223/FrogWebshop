@@ -27,7 +27,7 @@ public class AuthenticationService {
     public String login(String username, String password) {
         var user = userRepository.findByUsernameAndPassword(username, password);
 
-        if (user.isEmpty()) {
+        if (user.isEmpty() || !user.get().isActive()) {
             throw new BadRequestException();
         }
 
