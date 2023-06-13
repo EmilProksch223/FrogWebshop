@@ -28,7 +28,7 @@ public class AuthenticationService {
         var user = userRepository.findByUsernameAndPassword(username, password);
 
         if (user.isEmpty() || !user.get().isActive()) {
-            throw new BadRequestException();
+            throw new BadRequestException("User existiert nicht oder ist inaktiv");
         }
 
         return tokenService.generateToken(user.get());

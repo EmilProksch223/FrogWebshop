@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import at.technikumwien.webshop.dto.UserDTO;
 import at.technikumwien.webshop.model.User;
+import at.technikumwien.webshop.service.BadRequestException;
 import at.technikumwien.webshop.service.UserService;
 
 @RestController
@@ -42,6 +43,9 @@ public class UserController {
 
     @PostMapping("/createUser")
     public ResponseEntity<User> createUser(@RequestBody @Valid UserDTO userDTO) {
+        if (userService.existsByUsername(userDTO.getUsername())) {
+        throw new BadRequestException("Benutzername existiert schon!");
+    }
         User user = fromDTO(userDTO);
         User createdUser = userService.createUser(user);
         return ResponseEntity.created(URI.create("http://localhost:8080/users")).body(createdUser);

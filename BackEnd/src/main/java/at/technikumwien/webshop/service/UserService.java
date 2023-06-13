@@ -37,4 +37,10 @@ public class UserService {
     public void deleteUser(long id) {
         userRepository.deleteById(id);
     }
+
+    public boolean existsByUsername(String username) {
+    // Implementiere den Code, um zu überprüfen, ob der Benutzername existiert
+    // Rückgabe true, wenn der Benutzername existiert, ansonsten false
+    return userRepository.existsByUsername(username);
+}
 }
