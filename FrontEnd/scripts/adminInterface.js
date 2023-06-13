@@ -41,7 +41,7 @@ function createEditUserHandler(user) {
 
         var row = $("<tr></tr>");
 
-        var idCell = $("<td></td>").text(user.id);
+        var idCell = $("<td class='align-middle'></td>").text(user.id);
         row.append(idCell);
 
         var usernameInput = $("<input id='username' type='text' class='form-control' value='" + user.username + "'>");

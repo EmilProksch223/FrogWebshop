@@ -87,7 +87,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
+document.getElementById("showFormButton").addEventListener("click", function() {
+  var form = document.getElementById("addressForm");
+  if (form.style.display === "none") {
+    form.style.display = "block";
+  } else {
+    form.style.display = "none";
+  }
+});
 
 
 
