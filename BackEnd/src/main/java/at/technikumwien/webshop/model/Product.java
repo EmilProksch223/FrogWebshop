@@ -5,9 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
-/**
- * Der hier angegebene Name bestimmt den Namen der Tabelle in der Datenbank.
- */
 @Entity(name = "product")
 public class Product {
     
@@ -37,26 +34,26 @@ public class Product {
     @Column(name = "active")
     private boolean active;
 
-    // /////////////////////////////////////////////////////////////////////////
+    /////
     // Init
-    // /////////////////////////////////////////////////////////////////////////
-
-    public Product(String name, String description, String imageUrl, double price, int quantity, String manaType) {
+    /////
+    public Product(String name, String description, String imageUrl, double price, int quantity, String manaType, Boolean active) {
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
         this.price = price;
         this.quantity = quantity;
         this.manaType = manaType;
+        this.active = active;
     }
 
     public Product() {
         // noop
     }
 
-    // /////////////////////////////////////////////////////////////////////////
+    /////
     // Getters and Setters
-    // /////////////////////////////////////////////////////////////////////////
+    /////
 
     public Long getId() {
         return id;

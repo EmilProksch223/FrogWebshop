@@ -4,25 +4,23 @@ document.addEventListener('DOMContentLoaded', function() {
   
     formCreateProduct.addEventListener('submit', function(event) {
       event.preventDefault();
-  
-      // Überprüfen der Checkboxen
+      
+      //Ceckboxen überprüfen
       const manaSymbolsCheckboxes = document.querySelectorAll('input[name="ManaSymbol[]"]:checked');
       if (manaSymbolsCheckboxes.length === 0) {
         alert('Bitte wählen Sie mindestens einen Mana-Symbol-Checkbox aus!');
         return;
       }
-  
-      // Daten aus dem Formular abrufen
-      const productName = document.getElementById('inputProductName').value;
-      const productPrice = document.getElementById('inputProductPrice').value;
-      const productQuantity = document.getElementById('inputProductQuantity').value;
-      const productDescription = descriptionInput.value;
-  
-      // Erstellen des Datenobjekts
+
       const manaSymbols = [];
       for (let i = 0; i < manaSymbolsCheckboxes.length; i++) {
         manaSymbols.push(manaSymbolsCheckboxes[i].value);
       }
+  
+      const productName = document.getElementById('inputProductName').value;
+      const productPrice = document.getElementById('inputProductPrice').value;
+      const productQuantity = document.getElementById('inputProductQuantity').value;
+      const productDescription = descriptionInput.value;
       
       const manaSymbolsString = manaSymbols.join("");
       console.log(manaSymbolsString)
@@ -32,12 +30,12 @@ document.addEventListener('DOMContentLoaded', function() {
         description: productDescription,
         price: productPrice,
         quantity: productQuantity,
-        manaType: manaSymbolsString // Hinzufügen des manaSymbolsString zur Datenstruktur
+        manaType: manaSymbolsString,
+        active: false 
       };
   
-      // Ajax-Anfrage senden
       $.ajax({
-        url: 'http://localhost:8080/products', // Anpassen des Endpunkts
+        url: 'http://localhost:8080/products', 
         type: 'POST',
         contentType: 'application/json',
         headers: { "Authorization": sessionStorage.getItem("token") },
@@ -45,11 +43,9 @@ document.addEventListener('DOMContentLoaded', function() {
         success: function(response) {
           console.log('Daten erfolgreich gesendet:', response);
           alert('Daten erfolgreich gesendet!');
-          // Weitere Aktionen nach dem Speichern ausführen
         },
         error: function(xhr, status, error) {
           console.error('Fehler beim Senden der Daten:', error);
-          // Aktionen bei Fehler durchführen, wie z.B. Fehlermeldung anzeigen
         }
       });
     });

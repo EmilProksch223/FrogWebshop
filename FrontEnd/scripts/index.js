@@ -15,7 +15,7 @@ document.getElementById("filter-button").onclick = function (event) {
 
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/products?manasymbols=" + encodeURIComponent(manaSymbolsString) + "&searchterm=" + encodeURIComponent(searchterm),
+        url: "http://localhost:8080/products/active?manasymbols=" + encodeURIComponent(manaSymbolsString) + "&searchterm=" + encodeURIComponent(searchterm),
         cors: true,
         success: function (products) { addProductstoPage(products) },
         error: function (error) { console.error(error) }

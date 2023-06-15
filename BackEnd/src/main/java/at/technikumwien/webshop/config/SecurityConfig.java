@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -32,6 +34,11 @@ public class SecurityConfig {
     // /////////////////////////////////////////////////////////////////////////
 
     @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+    
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         // Disable csrf
         httpSecurity.csrf().disable()
@@ -44,11 +51,11 @@ public class SecurityConfig {
                 // Allow unauthorized requests to certain endpoints
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/products", "/users/update").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/users", "/products").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/users/update").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/users/{id}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/users/createUser").permitAll()
-                .requestMatchers("/login", "/products").permitAll()
+                .requestMatchers("/login", "/products/active", "/products/active?manasymbols=w&searchterm=").permitAll()
                 // Authenticate all other requests
                 .anyRequest().authenticated()
                 .and()

@@ -1,36 +1,39 @@
 package at.technikumwien.webshop.service;
 
+import at.technikumwien.webshop.model.User;
 import at.technikumwien.webshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AuthenticationService {
-    
+
     private final TokenService tokenService;
     private final UserRepository userRepository;
-
-    // /////////////////////////////////////////////////////////////////////////
-    // Init
-    // /////////////////////////////////////////////////////////////////////////
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AuthenticationService(TokenService tokenService, UserRepository userRepository) {
-        this.tokenService =  tokenService;
+    public AuthenticationService(TokenService tokenService, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.tokenService = tokenService;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Methods
-    // /////////////////////////////////////////////////////////////////////////
-
     public String login(String username, String password) {
-        var user = userRepository.findByUsernameAndPassword(username, password);
+        Optional<User> userOptional = userRepository.findByUsername(username);
 
-        if (user.isEmpty()) {
-            throw new BadRequestException();
+        if (userOptional.isEmpty() || !userOptional.get().isActive()) {
+            throw new BadRequestException("Benutzer existiert nicht oder ist inaktiv");
         }
 
-        return tokenService.generateToken(user.get());
+        User user = userOptional.get();
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new BadRequestException("Ungültige Anmeldeinformationen");
+        }
+
+        return tokenService.generateToken(user);
     }
 }

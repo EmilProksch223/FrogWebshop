@@ -19,4 +19,6 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findByManaType(String manaType);
+    
+    List<Product> findByActive(boolean active);
 }
