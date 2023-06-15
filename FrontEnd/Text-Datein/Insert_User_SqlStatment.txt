@@ -1,4 +1,4 @@
-INSERT INTO `user`(`id`, `admin`, `password`, `username`, `email`, `active`) VALUES (1,true,'admin','admin','admin@magicfrog.at',true);
+INSERT INTO `user`(`id`, `admin`, `password`, `username`, `email`, `active`) VALUES (1,true,'$2y$10$KmwQwJx87vyoLe9RVcKW2etbaZYwYN7nhKIvVvBVyXc1mOQqdCEie','admin','admin@magicfrog.at',true);
 
 INSERT INTO `user`(`id`, `admin`, `password`, `username`, `email`, `active`) VALUES (2,false,'david','david1234','david@magicfrog.at',true);
 
