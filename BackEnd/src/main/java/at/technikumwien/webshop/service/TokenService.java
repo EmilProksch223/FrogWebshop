@@ -13,7 +13,10 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import static io.jsonwebtoken.SignatureAlgorithm.HS256;
 
@@ -60,4 +63,12 @@ public class TokenService {
 
         return Optional.of(new UserPrincipal(userId, sub, admin));
     }
+
+    public String extractTokenFromRequest(HttpServletRequest request) {
+        String bearerToken = request.getHeader("Authorization");
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+          return bearerToken.substring(7);
+        }
+        return null;
+      }
 }
