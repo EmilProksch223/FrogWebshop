@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var actionOne = document.createElement('li');
         var actionOneLink = document.createElement('a');
         actionOneLink.className = 'dropdown-item text-white';
-        actionOneLink.href = '#';
+        actionOneLink.href = '/frontend/userProfile.html';
         actionOneLink.innerHTML = 'Profil';
         actionOne.appendChild(actionOneLink);
 

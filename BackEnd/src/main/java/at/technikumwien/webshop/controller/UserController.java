@@ -5,9 +5,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import at.technikumwien.webshop.dto.UserDTO;
 import at.technikumwien.webshop.model.User;
+import at.technikumwien.webshop.security.UserPrincipal;
 import at.technikumwien.webshop.service.BadRequestException;
+import at.technikumwien.webshop.service.TokenService;
 import at.technikumwien.webshop.service.UserService;
 
 @RestController
@@ -32,16 +36,35 @@ public class UserController {
     @Autowired
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final TokenService tokenService;
 
-    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder, TokenService tokenService) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.tokenService = tokenService;
     }
 
     @GetMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<User> getAllUser() {
         return userService.getAllUsers();
+    }
+
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<Optional<User>> getUserProfile(@PathVariable Long id, HttpServletRequest request) {
+        String token = tokenService.extractTokenFromRequest(request);
+
+        if (token != null) {
+            Optional<UserPrincipal> userPrincipal = tokenService.parseToken(token);
+
+            if (userPrincipal.isPresent()) {
+                if (userPrincipal.get().getUserId().equals(id)) {
+                    Optional<User> userProfile = userService.getUserById(id);
+                    return ResponseEntity.ok(userProfile);
+                }
+            }
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
     @PostMapping("/createUser")

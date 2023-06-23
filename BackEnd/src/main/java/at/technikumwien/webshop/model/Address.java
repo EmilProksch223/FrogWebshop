@@ -5,19 +5,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 
 @Entity(name = "address")
 public class Address {
 
     @Id
-    @GeneratedValue
-    @Column(name = "address_id")
-    private Long addressId;
-
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = true, insertable = false, updatable = false)
-    private User user;
+    @Column(name = "user_id")
+    private Long id;
 
     @Column(name = "firstName")
     private String firstName;
@@ -43,6 +39,11 @@ public class Address {
     @Column(name = "country")
     private String country;
 
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "user_id")
+    private User user;
+
     /////
     // Init
     /////
@@ -66,6 +67,14 @@ public class Address {
     // Getters and Setters
     /////
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public User getUser() {
         return user;
     }
