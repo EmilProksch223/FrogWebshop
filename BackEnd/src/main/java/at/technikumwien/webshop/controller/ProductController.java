@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Optional;
 
 import at.technikumwien.webshop.dto.ProductDTO;
-import at.technikumwien.webshop.dto.UserDTO;
 import at.technikumwien.webshop.model.Product;
-import at.technikumwien.webshop.model.User;
 import at.technikumwien.webshop.service.ProductService;
 import jakarta.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -84,11 +84,26 @@ public class ProductController {
         if (optionalProduct.isPresent()) {
             Product existingProduct = optionalProduct.get();
             existingProduct.setName(productDTO.getName());
-            existingProduct.setQuantity(productDTO.getQuantity());
+            existingProduct.setDescription(productDTO.getDescription());
+            existingProduct.setImageUrl(productDTO.getImageUrl());
             existingProduct.setPrice(productDTO.getPrice());
+            existingProduct.setQuantity(productDTO.getQuantity());
+            existingProduct.setManaType(productDTO.getManaType());
             existingProduct.setActive(productDTO.isActive());
             Product updatedProduct = service.updateProduct(existingProduct);
             return ResponseEntity.ok(updatedProduct);
+        }else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        Optional<Product> optionalProduct = service.getProductById(id);
+        if (optionalProduct.isPresent()) {
+            service.deleteProduct(id);
+            return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
         }

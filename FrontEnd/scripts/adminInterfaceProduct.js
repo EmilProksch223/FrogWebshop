@@ -86,23 +86,20 @@ function createSaveProductHandler(product) {
 
         // Überprüfe, ob das Eingabefeld leer ist
         if (newProductname.trim() === "") {
-            // Wenn das Eingabefeld leer ist, behalte den alten Benutzernamen bei
             newProductname = product.name;
         }
-
         if (newProductPrice.trim() === "") {
-            // Wenn das Eingabefeld leer ist, behalte die alte E-Mail-Adresse bei
             newProductPrice = product.price;
         }
-
         if (newQuantity.trim() === "") {
-            // Wenn das Eingabefeld leer ist, behalte die alte E-Mail-Adresse bei
             newQuantity = product.quantity;
         }
+        
 
         var updatedProduct = {
             id: productId,
             name: newProductname,
+            description: product.description,
             imageUrl: product.imageUrl,
             price: newProductPrice,
             quantity: newQuantity,

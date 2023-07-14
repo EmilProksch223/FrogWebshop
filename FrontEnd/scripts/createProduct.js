@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         success: function(response) {
           console.log('Daten erfolgreich gesendet:', response);
           alert('Daten erfolgreich gesendet!');
+          loadProducts();
         },
         error: function(xhr, status, error) {
           console.error('Fehler beim Senden der Daten:', error);
