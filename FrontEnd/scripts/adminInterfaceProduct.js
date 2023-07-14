@@ -4,12 +4,12 @@ function loadProducts() {
         method: "GET",
         headers: { "Authorization": sessionStorage.getItem("token") },
         success: function (products) {
-            var productTableBody = $("#productTableBody");
+            let productTableBody = $("#productTableBody");
             productTableBody.empty();
 
-            for (var i = 0; i < products.length; i++) {
-                var product = products[i];
-                var row = $("<tr></tr>");
+            for (let i = 0; i < products.length; i++) {
+                let product = products[i];
+                let row = $("<tr></tr>");
                 row.append($("<td class='align-middle'>" + product.id + "</td>"));
                 row.append($("<td class='align-middle'>" + product.name + "</td>"));
                 row.append($("<td class='align-middle'>" + product.quantity + "</td>"));
@@ -17,13 +17,13 @@ function loadProducts() {
                 row.append($("<td class='align-middle'>" + (product.active ? "&#10004;&#65039;" : "&#10060;") + "</td>"));
                 
 
-                var editButton = $("<button class='btn btn-primary'>Bearbeiten</button>");
+                let editButton = $("<button class='btn btn-primary'>Bearbeiten</button>");
                 editButton.click(createEditProductHandler(product));
 
-                var deleteButton = $("<button class='btn btn-danger mx-1'>Löschen</button>");
+                let deleteButton = $("<button class='btn btn-danger mx-1'>Löschen</button>");
                 deleteButton.click(createDeleteProductHandler(product.id));
 
-                var buttonCell = $("<td class='text-end'></td>").append(editButton, deleteButton);
+                let buttonCell = $("<td class='text-end'></td>").append(editButton, deleteButton);
                 row.append(buttonCell);
 
                 productTableBody.append(row);
@@ -36,99 +36,52 @@ function loadProducts() {
 }
 function createEditProductHandler(product) {
     return function () {
-        var productTableBody = $("#productTableBody");
+        let productTableBody = $("#productTableBody");
         productTableBody.empty();
 
-        var row = $("<tr></tr>");
+        let row1 = $("<div class='row mb-3'></div>");
 
-        var idCell = $("<td class='align-middle'></td>").text(product.id);
-        row.append(idCell);
+        let priceCol = $("<div class='col-6 col-sm-3 mb-2 p-0'></div>");
+        let priceLabel = $("<label for='inputProductPrice' class='form-label'>Preis</label>");
+        let priceInput = $("<input type='text' class='form-control' id='inputProductPrice' name='inputProductPrice' aria-label='Euro amount' value='" + product.price + "'>");
+        let priceInputGroup = $("<div class='input-group'></div>");
+        let priceInputGroupAddon = $("<span class='input-group-text'>€</span>");
 
-        var productnameInput = $("<input id='productname' type='text' class='form-control' value='" + product.name + "'>");
-        var productnameCell = $("<td></td>").append(productnameInput);
-        row.append(productnameCell);
+        priceInputGroup.append(priceInput, priceInputGroupAddon);
+        priceCol.append(priceLabel, priceInputGroup);
 
-        var quantityInput = $("<input id='quantity' type='text' class='form-control' value='" + product.quantity + "'>");
-        var quantityCell = $("<td></td>").append(quantityInput);
-        row.append(quantityCell);
+        let quantityCol = $("<div class='col-6 col-sm-3'></div>");
+        let quantityLabel = $("<label for='inputProductQuantity' class='form-label'>Menge</label>");
+        let quantityInput = $("<input type='number' class='form-control' id='inputProductQuantity' name='inputProductQuantity' value='" + product.quantity + "'>");
 
-        var priceInput = $("<input id='price' type='text' class='form-control' value='" + product.price + "'>");
-        var priceCell = $("<td></td>").append(priceInput);
-        row.append(priceCell);
+        quantityCol.append(quantityLabel, quantityInput);
 
-        var activeDropdown = $("<select class='form-control' id='activeDropdown'></select>");
-        activeDropdown.append($("<option value='true'>&#10004;&#65039;</option>"));
-        activeDropdown.append($("<option value='false'>&#10060;</option>"));
-        activeDropdown.val(product.active.toString());
-        var activeCell = $("<td></td>").append(activeDropdown);
-        row.append(activeCell);
+        let imageCol = $("<div class='col p-0'></div>");
+        let imageLabel = $("<label for='inputProductImg' class='form-label'>Bild hochladen</label>");
+        let imageInput = $("<input class='form-control' type='file' id='inputProductImg' name='inputProductImg' disabled>");
 
-        var saveButton = $("<button class='btn btn-primary mx-1'>Speichern</button>");
-        saveButton.click(createSaveProductHandler(product));
-        var cancelButton = $("<button class='btn btn-secondary'>Abbrechen</button>");
-        cancelButton.click(function () {
-            loadProducts();
-        });
+        imageCol.append(imageLabel, imageInput);
 
-        var buttonCell = $("<td class='text-end'></td>").append(saveButton, cancelButton);
-        row.append(buttonCell);
+        row1.append(priceCol, quantityCol, imageCol);
 
-        productTableBody.append(row);
+        let row2 = $("<div class='row mb-3'></div>");
+
+        let descriptionLabel = $("<label for='inputProductDescription' class='form-label col-md-2'>Beschreibung:</label>");
+        let descriptionInput = $("<textarea class='form-control col-md-10' id='inputProductDescription' name='inputProductDescription'>" + product.description + "</textarea>");
+
+        row2.append(descriptionLabel, descriptionInput);
+
+        let row3 = $("<div class='row mb-3'></div>");
+
+        let manaTypeLabel = $("<label class='col-form-label col-md-2'>Mana Type:</label>");
+        let manaTypeInput = $("<input type='text' class='form-control col-md-10' id='inputProductManaType' name='inputProductManaType' value='" + product.manaType + "'>");
+
+        row3.append(manaTypeLabel, manaTypeInput);
+
+        productTableBody.append(row1, row2, row3);
     };
 }
-function createSaveProductHandler(product) {
-    return function () {
-        var productId = product.id;
-        var newProductname = $("#productname").val();
-        var newQuantity = $("#quantity").val();
-        var newProductPrice = $("#price").val();
-        var isActive = $("#activeDropdown").val() === "true";
 
-        // Überprüfe, ob das Eingabefeld leer ist
-        if (newProductname.trim() === "") {
-            newProductname = product.name;
-        }
-        if (newProductPrice.trim() === "") {
-            newProductPrice = product.price;
-        }
-        if (newQuantity.trim() === "") {
-            newQuantity = product.quantity;
-        }
-        
-
-        var updatedProduct = {
-            id: productId,
-            name: newProductname,
-            description: product.description,
-            imageUrl: product.imageUrl,
-            price: newProductPrice,
-            quantity: newQuantity,
-            manaType: product.manaType,
-            active: isActive,
-        };
-
-        console.log("updatedProduct:", updatedProduct);
-
-        // AJAX PUT-Anfrage senden, um den Benutzer zu aktualisieren
-        $.ajax({
-            url: "http://localhost:8080/products/update",
-            method: "PUT",
-            headers: { "Authorization": sessionStorage.getItem("token") },
-            data: JSON.stringify(updatedProduct),
-            contentType: "application/json",
-            success: function (response) {
-                // Hier kannst du den Code zum Handhaben der erfolgreichen Aktualisierung implementieren
-                console.log("Updated product:", response);
-
-                // Lade die Benutzer erneut, um die aktualisierten Daten anzuzeigen
-                loadProducts();
-            },
-            error: function (error) {
-                console.error(error);
-            }
-        });
-    };
-}
 
 function createDeleteProductHandler(productId) {
     return function () {
