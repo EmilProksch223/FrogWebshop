@@ -3,9 +3,12 @@ package at.technikumwien.webshop.controller;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import at.technikumwien.webshop.dto.ProductDTO;
+import at.technikumwien.webshop.dto.UserDTO;
 import at.technikumwien.webshop.model.Product;
+import at.technikumwien.webshop.model.User;
 import at.technikumwien.webshop.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -49,11 +52,11 @@ public class ProductController {
         for (Product product : allProducts) {
             if (manaSymbolsString != null
                     && !product.getManaType().toLowerCase().contains(manaSymbolsString.toLowerCase())) {
-                continue; 
+                continue;
             }
 
             if (searchterm != null && !product.getName().toLowerCase().contains(searchterm.toLowerCase())) {
-                continue; 
+                continue;
             }
 
             activeProducts.add(product);
@@ -72,6 +75,23 @@ public class ProductController {
     @PutMapping("/setActive/{id}")
     public Product setActive(@PathVariable Long id) {
         return service.setActive(id);
+    }
+
+    @PutMapping("/update")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Product> updateProduct(@RequestBody @Valid ProductDTO productDTO) {
+        Optional<Product> optionalProduct = service.getProductById(productDTO.getId());
+        if (optionalProduct.isPresent()) {
+            Product existingProduct = optionalProduct.get();
+            existingProduct.setName(productDTO.getName());
+            existingProduct.setQuantity(productDTO.getQuantity());
+            existingProduct.setPrice(productDTO.getPrice());
+            existingProduct.setActive(productDTO.isActive());
+            Product updatedProduct = service.updateProduct(existingProduct);
+            return ResponseEntity.ok(updatedProduct);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     private static Product fromDTO(ProductDTO productDTO) {

@@ -52,8 +52,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/products", "/users/update").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/users", "/products").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT, "/users/update").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/users/{id}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/users/update", "/products/updates").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/users/{id}", "/products/{id}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/users/createUser").permitAll()
                 .requestMatchers("/login", "/products/active", "/products/active?manasymbols=w&searchterm=").permitAll()
                 // Authenticate all other requests

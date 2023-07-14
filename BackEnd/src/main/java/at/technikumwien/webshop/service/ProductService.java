@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import at.technikumwien.webshop.model.Product;
+import at.technikumwien.webshop.model.User;
 import at.technikumwien.webshop.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -48,5 +49,9 @@ public class ProductService {
 
     public List<Product> getActiveProducts() {
         return productRepository.findByActive(true);
+    }
+
+    public Product updateProduct(Product product) {
+        return productRepository.save(product);
     }
 }

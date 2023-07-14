@@ -26,6 +26,7 @@
     <script src="/frontend/components/navbar/loadOverlay.js" defer></script>
     <script src="/frontend/scripts/login.js" defer></script>
     <script src="../scripts/adminInterface.js" defer></script>
+    <script src="../scripts/adminInterfaceProduct.js" defer></script>
 
 </head>
 
@@ -77,6 +78,29 @@
                     </form>
                 </div>
             </div>
+            <div class="col-xxl-7">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 border border-dark rounded p-3 bg-light">
+                            <div class="container">
+                                <h1>Prokdukt Liste</h1>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Anzahl</th>
+                                            <th>Preis</th>
+                                            <th>Active</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="productTableBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="container mt-3">
@@ -100,6 +124,7 @@
             </div>
         </div>
     </div>
+    
 </body>
 
 </html>
