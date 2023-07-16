@@ -34,9 +34,30 @@ public class ProductController {
 
     @GetMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public List<Product> getAllProducts() {
-        return service.getAllProducts();
+    public List<Product> getAllProducts(
+            @RequestParam(name = "searchterm", required = false) String searchterm) {
+        List<Product> activeProducts = new ArrayList<>();
+        List<Product> allProducts = service.getAllProducts();
+        System.out.print("Funktion");
+        if (searchterm == null) {
+            System.out.print("alle Produkte");
+            return allProducts;
+        }
+            
+        for (Product product : allProducts) {
+            System.out.print("Filter");
+
+            if (searchterm != null  && (!product.getName().toLowerCase().contains(searchterm.toLowerCase()))) {
+           continue;
+       }
+
+            activeProducts.add(product);
+        }
+
+        return activeProducts;
     }
+
+
 
     @GetMapping("/active")
     public List<Product> getActiveProducts(

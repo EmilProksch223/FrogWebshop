@@ -31,8 +31,10 @@ document.addEventListener('DOMContentLoaded', function() {
         price: productPrice,
         quantity: productQuantity,
         manaType: manaSymbolsString,
-        active: false 
+        active: false,
       };
+
+      console.log(product)
   
       $.ajax({
         url: 'http://localhost:8080/products', 

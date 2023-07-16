@@ -1,47 +1,20 @@
+let currentPage = 1; // Aktuelle Seite
+let allProducts = [];
+
+// Alle Produkte laden
+
+$(document).ready(function () {
+    loadProducts();
+});
+
 function loadProducts() {
     $.ajax({
         url: "http://localhost:8080/products",
         method: "GET",
         headers: { "Authorization": sessionStorage.getItem("token") },
         success: function (products) {
-            const container = $("#productListContainer");
-            container.find("h2").text("Produkt Liste");
-
-            const table = $("<table class='table table-striped'></table>");
-            const thead = $("<thead><tr></tr></thead>");
-            const thead1 = $("<th>ID</th><th>Name</th><th>Anzahl</th><th>Preis</th><th>Active</th>");
-            const thead2 = $("<th><div class='input-group input-group-sm ms-4 pe-4 '><input class='form-control me-1 border-dark' type='search' placeholder='Search' aria-label='Search' id='search'></div></th>");
-
-            thead.append(thead1, thead2)
-            
-            const tbody = $("<tbody id='productTableBody'></tbody>");
-
-            for (let i = 0; i < products.length; i++) {
-                let product = products[i];
-                let row = $("<tr></tr>");
-                row.append($("<td class='align-middle'>" + product.id + "</td>"));
-                row.append($("<td class='align-middle'>" + product.name + "</td>"));
-                row.append($("<td class='align-middle'>" + product.quantity + "</td>"));
-                row.append($("<td class='align-middle'>" + product.price + " €</td>"));
-                row.append($("<td class='align-middle'>" + (product.active ? "&#10004;&#65039;" : "&#10060;") + "</td>"));
-
-                let editButton = $("<button class='btn btn-primary'>Bearbeiten</button>");
-                editButton.click(createEditProductHandler(product));
-                editButton.click(function () {
-                    loadManaSymbols();
-                });
-
-                let deleteButton = $("<button class='btn btn-danger mx-1'>Löschen</button>");
-                deleteButton.click(createDeleteProductHandler(product.id));
-
-                let buttonCell = $("<td class='text-end'></td>").append(editButton, deleteButton);
-                row.append(buttonCell);
-
-                tbody.append(row);
-            }
-
-            table.append(thead, tbody);
-            container.empty().append("<h2 class='text-center mb-0'>Produkt Liste</h2>", table);
+            allProducts = products;
+            createProductTable(products, currentPage);
         },
         error: function (error) {
             console.error(error);
@@ -49,9 +22,98 @@ function loadProducts() {
     });
 }
 
-$(document).ready(function () {
-    loadProducts();
+//Filter Produkte laden
+
+$(document).on('click', '#filterButton', function () {
+
+    console.log("test")
+
+    let productTableBody = $("#productTableBody");
+    productTableBody.empty();
+
+    const searchterm = document.getElementById('search').value;
+    console.log(searchterm);
+    $.ajax({
+        type: "GET",
+        headers: { "Authorization": sessionStorage.getItem("token") },
+        url: "http://localhost:8080/products?searchterm=" + encodeURIComponent(searchterm),
+        cors: true,
+        success: function (products) {
+            allProducts = products; // Alle Produkte aktualisieren
+            currentPage = 1;
+            createProductTable(products, currentPage)
+        },
+        error: function (error) { console.error(error) }
+    });
 });
+
+//Tabelle mit Produkten erzeugen
+
+function createProductTable(products, currentPage) {
+    const divPages =$("#pagesButton");
+    divPages.show();
+
+    const productsPerPage = 6;
+    const startIndex = (currentPage - 1) * productsPerPage;
+    const endIndex = startIndex + productsPerPage;
+    const productsToShow = products.slice(startIndex, endIndex);
+
+    const container = $("#productListContainer");
+    container.find("h2").text("Produkt Liste");
+
+    const table = $("<table class='table table-striped mt-3'></table>");
+    const thead = $("<thead class='align-middle'><tr></tr></thead>");
+    const thead1 = $("<th>ID</th><th>Name</th><th>Anzahl</th><th>Preis</th><th>Active</th>");
+    const thead2 = $("<th><div class='input-group input-group-sm ms-4 pe-4'><input class='form-control border-dark' type='search' placeholder='Search' aria-label='Search' id='search'><button class='btn btn-outline-dark bg-light' onclick='filterButton' type='button' id='filterButton'><img src='../img/search_icon.svg' width='20'></img></button></div></th>");
+    thead.append(thead1, thead2)
+
+    const tbody = $("<tbody id='productTableBody'></tbody>");
+
+    for (let i = 0; i < productsToShow.length; i++) {
+        let product = productsToShow[i];
+        let row = $("<tr></tr>");
+        row.append($("<td class='align-middle'>" + product.id + "</td>"));
+        row.append($("<td class='align-middle'>" + product.name + "</td>"));
+        row.append($("<td class='align-middle'>" + product.quantity + "</td>"));
+        row.append($("<td class='align-middle'>" + product.price + " €</td>"));
+        row.append($("<td class='align-middle'>" + (product.active ? "&#10004;&#65039;" : "&#10060;") + "</td>"));
+
+        let editButton = $("<button class='btn btn-primary'>Bearbeiten</button>");
+        editButton.click(createEditProductHandler(product));
+        editButton.click(function () {
+            loadManaSymbols();
+        });
+
+        let deleteButton = $("<button class='btn btn-danger mx-1'>Löschen</button>");
+        deleteButton.click(createDeleteProductHandler(product.id));
+
+        let buttonCell = $("<td class='text-end'></td>").append(editButton, deleteButton);
+        row.append(buttonCell);
+
+        tbody.append(row);
+    }
+
+    table.append(thead, tbody);
+    container.empty().append("<h2 class='text-center mb-0'>Produkt Liste</h2>", table);
+}
+
+//seiten
+
+$(document).on('click', '#previousPage', function() {
+    if (currentPage > 1) {
+        currentPage--;
+        createProductTable(allProducts, currentPage);
+    }
+});
+
+$(document).on('click', '#nextPage', function() {
+    const totalPages = Math.ceil(allProducts.length / 6);
+    if (currentPage < totalPages) {
+        currentPage++;
+        createProductTable(allProducts, currentPage);
+    }
+});
+// Produkt löschen
 
 function createDeleteProductHandler(productId) {
     return function () {
@@ -72,6 +134,7 @@ function createDeleteProductHandler(productId) {
     };
 }
 
+//Produkte bearbeiten (Ansicht)
 
 function createEditProductHandler(product) {
     return function () {
@@ -81,6 +144,9 @@ function createEditProductHandler(product) {
         const container = $("#productListContainer");
         container.find("h2").text(`Produkt ID: ${product.id}`);
         container.find("table").remove();
+
+        const divPages =$("#pagesButton");
+        divPages.hide();
 
         let row1 = $("<div class='row'></div>");
 
@@ -131,7 +197,7 @@ function createEditProductHandler(product) {
 
         let row5 = $("<div class='row mb-3'></div>");
         let saveCol = $("<div class='col ms-0 me-auto'></div>");
-        let saveButton = $("<button class='btn btn-primary mx-1'>Speichern</button>");
+        let saveButton = $("<button class='btn btn-success mx-1'>Speichern</button>");
         saveCol.append(saveButton);
         saveButton.click(createSaveProductHandler(product));
 
@@ -150,6 +216,8 @@ function createEditProductHandler(product) {
         loadManaSymbols(); // Funktion erneut aufrufen
     };
 }
+
+//Überarbeitet Produkte der DB hinzufügen
 
 function createSaveProductHandler(product) {
     return function () {
@@ -207,24 +275,5 @@ function createSaveProductHandler(product) {
     };
 }
 
-function searchProducts(){
-    let productTableBody = $("#productTableBody");
-        productTableBody.empty();
 
-    const searchterm = document.getElementById('search').value;
-    console.log(searchterm);
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:8080/products/active?manasymbols=" + encodeURIComponent(manaSymbolsString) + "&searchterm=" + encodeURIComponent(searchterm),
-        cors: true,
-        success: function (products) { addProductstoPage(products) },
-        error: function (error) { console.error(error) }
-    });
 
-    document.getElementById("search").addEventListener("keydown", function(event) {
-        if (event.key === "Enter") {
-        event.preventDefault();
-        document.getElementById("filter-button").click();
-        }
-    });
-}
