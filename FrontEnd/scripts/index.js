@@ -3,7 +3,7 @@ document.getElementById("filter-button").onclick = function (event) {
     removeProducts();
 
     const manaSymbols = [];
-    const checkboxes = document.querySelectorAll('input[name="ManaSymbol[]"]:checked');
+    const checkboxes = document.querySelectorAll('input[name="ManaSymbolCreate[]"]:checked');
     for (let i = 0; i < checkboxes.length; i++) {
         manaSymbols.push(checkboxes[i].value);
     }

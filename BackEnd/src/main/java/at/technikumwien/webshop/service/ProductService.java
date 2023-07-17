@@ -49,4 +49,12 @@ public class ProductService {
     public List<Product> getActiveProducts() {
         return productRepository.findByActive(true);
     }
+
+    public Product updateProduct(Product product) {
+        return productRepository.save(product);
+    }
+
+    public void deleteProduct(long id) {
+        productRepository.deleteById(id);
+    }
 }
