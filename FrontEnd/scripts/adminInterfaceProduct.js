@@ -26,8 +26,6 @@ function loadProducts() {
 
 $(document).on('click', '#filterButton', function () {
 
-    console.log("test")
-
     let productTableBody = $("#productTableBody");
     productTableBody.empty();
 
@@ -52,6 +50,7 @@ $(document).on('click', '#filterButton', function () {
 function createProductTable(products, currentPage) {
     const divPages =$("#pagesButton");
     divPages.show();
+    divPages.find("p").text(currentPage);
 
     const productsPerPage = 6;
     const startIndex = (currentPage - 1) * productsPerPage;
@@ -78,7 +77,7 @@ function createProductTable(products, currentPage) {
         row.append($("<td class='align-middle'>" + product.price + " €</td>"));
         row.append($("<td class='align-middle'>" + (product.active ? "&#10004;&#65039;" : "&#10060;") + "</td>"));
 
-        let editButton = $("<button class='btn btn-primary'>Bearbeiten</button>");
+        let editButton = $("<button class='btn btn-primary' id='editButton'>Bearbeiten</button>");
         editButton.click(createEditProductHandler(product));
         editButton.click(function () {
             loadManaSymbols();
@@ -192,16 +191,16 @@ function createEditProductHandler(product) {
 
         let row4 = $("<div class='row mb-3'></div>");
         let manaLabel = $("<div class='row mb-2'>Mana</div>");
-        let manaInput = $("<div class='row justify-content-between mb-3'><manaSymbols></manaSymbols></div>");
+        let manaInput = $("<div class='row justify-content-between mb-3'><manaSymbols1></manaSymbols1></div>");
         row4.append(manaLabel, manaInput);
 
         let row5 = $("<div class='row mb-3'></div>");
-        let saveCol = $("<div class='col ms-0 me-auto'></div>");
+        let saveCol = $("<div class='col text-end'></div>");
         let saveButton = $("<button class='btn btn-success mx-1'>Speichern</button>");
         saveCol.append(saveButton);
         saveButton.click(createSaveProductHandler(product));
 
-        let cancelCol = $("<div class='col'></div>");
+        let cancelCol = $("<div class='col text-start'></div>");
         let cancelButton = $("<button class='btn btn-secondary'>Abbrechen</button>");
         cancelCol.append(cancelButton);
         cancelButton.click(function () {
@@ -213,7 +212,7 @@ function createEditProductHandler(product) {
 
         container.append(productTableBody);
 
-        loadManaSymbols(); // Funktion erneut aufrufen
+         // Funktion erneut aufrufen
     };
 }
 

@@ -20,6 +20,7 @@ public class ProductDTO {
     private String name;
 
     @NotBlank(message = "Beschreibung darf nicht leer sein!")
+    @Length(max = 1000)
     private String description;
 
     private String imageUrl;
