@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     event.preventDefault();
 
     //Ceckboxen überprüfen
-    const manaSymbolsCheckboxes = document.querySelectorAll('input[name="ManaSymbol[]"]:checked');
+    const manaSymbolsCheckboxes = document.querySelectorAll('input[name="ManaSymbolCreate[]"]:checked');
     if (manaSymbolsCheckboxes.length === 0) {
       alert('Bitte wählen Sie mindestens einen Mana-Symbol-Checkbox aus!');
       return;

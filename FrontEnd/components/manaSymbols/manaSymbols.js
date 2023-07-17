@@ -12,6 +12,7 @@ function loadManaSymbols() {
                 const currentId = checkbox.getAttribute('id');
                 const newId = 'create-' + currentId;
                 checkbox.setAttribute('id', newId);
+                checkbox.setAttribute('name', 'ManaSymbolCreate[]')
             });
         });
 }
@@ -22,17 +23,14 @@ function loadManaSymbols2(manaSymbolsString) {
         .then(response => response.text())
         .then(data => {
             document.querySelector('manaSymbols2').innerHTML = data;
-            const checkbox = document.getElementById('b');
-            console.log(checkbox);
+            
+
 
             const chars = [...manaSymbolsString];
-            console.log(chars);
-
             for (let i = 0; i < chars.length; i++) {
                 console.log(i);
                 const manaSymbol = chars[i];
                 const checkbox = document.getElementById(manaSymbol);
-                console.log(checkbox);
                 if (checkbox) {
                     checkbox.checked = true;
                 }

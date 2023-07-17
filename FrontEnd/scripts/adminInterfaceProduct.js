@@ -49,7 +49,7 @@ $(document).on('click', '#filterButton', function () {
 //Tabelle mit Produkten erzeugen
 
 function createProductTable(products, currentPage) {
-    const divPages =$("#pagesButton");
+    const divPages = $("#pagesButton");
     divPages.show();
     divPages.find("p").text(currentPage);
 
@@ -90,25 +90,25 @@ function createProductTable(products, currentPage) {
 
         tbody.append(row);
 
-        
+
     }
 
     table.append(thead, tbody);
     container.empty().append("<h2 class='text-center mb-0'>Produkt Liste</h2>", table);
 
-    
+
 }
 
 //seiten
 
-$(document).on('click', '#previousPage', function() {
+$(document).on('click', '#previousPage', function () {
     if (currentPage > 1) {
         currentPage--;
         createProductTable(allProducts, currentPage);
     }
 });
 
-$(document).on('click', '#nextPage', function() {
+$(document).on('click', '#nextPage', function () {
     const totalPages = Math.ceil(allProducts.length / 6);
     if (currentPage < totalPages) {
         currentPage++;
@@ -147,7 +147,7 @@ function createEditProductHandler(product) {
         container.find("h2").text(`Produkt ID: ${product.id}`);
         container.find("table").remove();
 
-        const divPages =$("#pagesButton");
+        const divPages = $("#pagesButton");
         divPages.hide();
 
         let row1 = $("<div class='row'></div>");
@@ -224,11 +224,21 @@ function createEditProductHandler(product) {
 
 function createSaveProductHandler(product) {
     return function () {
+
+        const manaSymbols = [];
+        const checkboxes = document.querySelectorAll('input[name="ManaSymbol[]"]:checked');
+        for (let i = 0; i < checkboxes.length; i++) {
+            manaSymbols.push(checkboxes[i].value);
+        }
+        const manaSymbolsString = manaSymbols.join("");
+        console.log(manaSymbolsString);
+
+
         let productId = product.id;
         let newProductName = document.getElementById("editProductName").value;
         let newProductPrice = parseFloat($("#editProductPrice").val());
         let newProductQuantity = parseInt($("#editProductQuantity").val());
-        let newManaType = product.manaType;
+        let newManaType = manaSymbolsString;
         let newProductImg = product.imageUrl;
         let newProductDescription = $("#editProductDescription").val();
         let productIsActive = $("#editProductActive").val() === "true";
@@ -278,26 +288,5 @@ function createSaveProductHandler(product) {
     };
 }
 
-function checkedManaType1(manaSymbolsString) {
-    const chars = [...manaSymbolsString];
-    console.log(chars);
-  
-    for (let i = 0; i < chars.length; i++) {
-        console.log(i);
-        const manaSymbol = chars[i];
-        const checkbox = document.getElementById(manaSymbol);
-        console.log(checkbox);
-        if (checkbox) {
-            checkbox.checked = true;
-        }
-    }
-}
 
-  
-  function checkedManaType2(manaSymbolsString) {
-    const manaSymbol = 'b';
-    console.log(manaSymbol);
-    const checkbox = document.getElementById(manaSymbol);
-    console.log(checkbox);
-  }
 
