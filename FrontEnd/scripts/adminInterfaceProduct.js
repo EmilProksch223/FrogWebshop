@@ -1,6 +1,7 @@
 let currentPage = 1; // Aktuelle Seite
 let allProducts = [];
 
+
 // Alle Produkte laden
 
 $(document).ready(function () {
@@ -77,11 +78,9 @@ function createProductTable(products, currentPage) {
         row.append($("<td class='align-middle'>" + product.price + " €</td>"));
         row.append($("<td class='align-middle'>" + (product.active ? "&#10004;&#65039;" : "&#10060;") + "</td>"));
 
-        let editButton = $("<button class='btn btn-primary' id='editButton'>Bearbeiten</button>");
+        let editButton = $("<button class='btn btn-primary' id='editButton1'>Bearbeiten</button>");
         editButton.click(createEditProductHandler(product));
-        editButton.click(function () {
-            loadManaSymbols();
-        });
+
 
         let deleteButton = $("<button class='btn btn-danger mx-1'>Löschen</button>");
         deleteButton.click(createDeleteProductHandler(product.id));
@@ -90,10 +89,14 @@ function createProductTable(products, currentPage) {
         row.append(buttonCell);
 
         tbody.append(row);
+
+        
     }
 
     table.append(thead, tbody);
     container.empty().append("<h2 class='text-center mb-0'>Produkt Liste</h2>", table);
+
+    
 }
 
 //seiten
@@ -191,7 +194,10 @@ function createEditProductHandler(product) {
 
         let row4 = $("<div class='row mb-3'></div>");
         let manaLabel = $("<div class='row mb-2'>Mana</div>");
-        let manaInput = $("<div class='row justify-content-between mb-3'><manaSymbols1></manaSymbols1></div>");
+        let manaInput = $("<div class='row justify-content-between'><manaSymbols2></manaSymbols2></div>");
+
+        loadManaSymbols2(product.manaType);
+
         row4.append(manaLabel, manaInput);
 
         let row5 = $("<div class='row mb-3'></div>");
@@ -211,8 +217,6 @@ function createEditProductHandler(product) {
         productTableBody.append(row1, row2, row3, row4, row5);
 
         container.append(productTableBody);
-
-         // Funktion erneut aufrufen
     };
 }
 
@@ -274,5 +278,26 @@ function createSaveProductHandler(product) {
     };
 }
 
+function checkedManaType1(manaSymbolsString) {
+    const chars = [...manaSymbolsString];
+    console.log(chars);
+  
+    for (let i = 0; i < chars.length; i++) {
+        console.log(i);
+        const manaSymbol = chars[i];
+        const checkbox = document.getElementById(manaSymbol);
+        console.log(checkbox);
+        if (checkbox) {
+            checkbox.checked = true;
+        }
+    }
+}
 
+  
+  function checkedManaType2(manaSymbolsString) {
+    const manaSymbol = 'b';
+    console.log(manaSymbol);
+    const checkbox = document.getElementById(manaSymbol);
+    console.log(checkbox);
+  }
 
