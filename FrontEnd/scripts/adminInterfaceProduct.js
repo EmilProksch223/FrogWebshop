@@ -64,7 +64,7 @@ function createProductTable(products, currentPage) {
     const table = $("<table class='table table-striped mt-3'></table>");
     const thead = $("<thead class='align-middle'><tr></tr></thead>");
     const thead1 = $("<th>ID</th><th>Name</th><th>Anzahl</th><th>Preis</th><th>Active</th>");
-    const thead2 = $("<th><div class='input-group input-group-sm ms-4 pe-4'><input class='form-control border-dark' type='search' placeholder='Search' aria-label='Search' id='search'><button class='btn btn-outline-dark bg-light' onclick='filterButton' type='button' id='filterButton'><img src='../img/search_icon.svg' width='20'></img></button></div></th>");
+    const thead2 = $("<th><div class='input-group input-group-sm ms-4 pe-4'><input class='form-control border-dark' type='search' placeholder='Search' aria-label='Search' id='search'><button class='btn btn-outline-dark bg-light' onclick='filterButton' type='button' id='filterButton'>&#x1F50D;</button></div></th>");
     thead.append(thead1, thead2)
 
     const tbody = $("<tbody id='productTableBody'></tbody>");
@@ -78,11 +78,11 @@ function createProductTable(products, currentPage) {
         row.append($("<td class='align-middle'>" + product.price + " €</td>"));
         row.append($("<td class='align-middle'>" + (product.active ? "&#10004;&#65039;" : "&#10060;") + "</td>"));
 
-        let editButton = $("<button class='btn btn-primary' id='editButton1'>Bearbeiten</button>");
+        let editButton = $("<button class='btn btn-primary' id='editButton1'>&#x2692;&#xFE0F; Bearbeiten</button>");
         editButton.click(createEditProductHandler(product));
 
 
-        let deleteButton = $("<button class='btn btn-danger mx-1'>Löschen</button>");
+        let deleteButton = $("<button class='btn btn-danger mx-1'>&#x1F5D1;&#xFE0F; Löschen</button>");
         deleteButton.click(createDeleteProductHandler(product.id));
 
         let buttonCell = $("<td class='text-end'></td>").append(editButton, deleteButton);
@@ -194,20 +194,20 @@ function createEditProductHandler(product) {
 
         let row4 = $("<div class='row mb-3'></div>");
         let manaLabel = $("<div class='row mb-2'>Mana</div>");
-        let manaInput = $("<div class='row justify-content-between'><manaSymbols2></manaSymbols2></div>");
+        let manaInput = $("<div class='row justify-content-between mb-2'><manaSymbols2></manaSymbols2></div>");
 
         loadManaSymbols2(product.manaType);
 
         row4.append(manaLabel, manaInput);
 
-        let row5 = $("<div class='row mb-3'></div>");
+        let row5 = $("<div class='row mt-4'></div>");
         let saveCol = $("<div class='col text-end'></div>");
-        let saveButton = $("<button class='btn btn-success mx-1'>Speichern</button>");
+        let saveButton = $("<button class='btn btn-success mx-1'>&#x1F4BE; Speichern</button>");
         saveCol.append(saveButton);
         saveButton.click(createSaveProductHandler(product));
 
         let cancelCol = $("<div class='col text-start'></div>");
-        let cancelButton = $("<button class='btn btn-secondary'>Abbrechen</button>");
+        let cancelButton = $("<button class='btn btn-secondary'>&#x2716;&#xFE0F; Abbrechen</button>");
         cancelCol.append(cancelButton);
         cancelButton.click(function () {
             loadProducts();

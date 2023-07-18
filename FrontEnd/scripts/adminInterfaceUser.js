@@ -16,10 +16,10 @@ function loadUsers() {
                 row.append($("<td class='align-middle'>" + (user.active ? "&#10004;&#65039;" : "&#10060;") + "</td>"));
                 row.append($("<td class='align-middle'>" + (user.admin ? "&#10004;&#65039;" : "&#10060;") + "</td>"));
 
-                var editButton = $("<button class='btn btn-primary'>Bearbeiten</button>");
+                var editButton = $("<button class='btn btn-primary'>	&#x2692;&#xFE0F; Bearbeiten</button>");
                 editButton.click(createEditUserHandler(user));
 
-                var deleteButton = $("<button class='btn btn-danger mx-1'>Löschen</button>");
+                var deleteButton = $("<button class='btn btn-danger mx-1'>&#x1F5D1;&#xFE0F; Löschen</button>");
                 deleteButton.click(createDeleteUserHandler(user.id));
 
                 var buttonCell = $("<td class='text-end'></td>").append(editButton, deleteButton);
@@ -66,9 +66,9 @@ function createEditUserHandler(user) {
         var adminCell = $("<td></td>").append(adminDropdown);
         row.append(adminCell);
 
-        var saveButton = $("<button class='btn btn-primary mx-1'>Speichern</button>");
+        var saveButton = $("<button class='btn btn-primary mx-1'>&#x1F4BE; Speichern</button>");
         saveButton.click(createSaveUserHandler(user));
-        var cancelButton = $("<button class='btn btn-secondary'>Abbrechen</button>");
+        var cancelButton = $("<button class='btn btn-secondary'>&#x2716;&#xFE0F; Abbrechen</button>");
         cancelButton.click(function () {
             loadUsers();
         });

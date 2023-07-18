@@ -6,7 +6,7 @@ function loadManaSymbols() {
         .then(response => response.text())
         .then(data => {
             document.querySelector('manaSymbols').innerHTML = data;
-
+            imgaCheckboxenNotVisbile();
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             checkboxes.forEach(function (checkbox) {
                 const currentId = checkbox.getAttribute('id');
@@ -23,9 +23,7 @@ function loadManaSymbols2(manaSymbolsString) {
         .then(response => response.text())
         .then(data => {
             document.querySelector('manaSymbols2').innerHTML = data;
-            
-
-
+            imgaCheckboxenNotVisbile();
             const chars = [...manaSymbolsString];
             for (let i = 0; i < chars.length; i++) {
                 console.log(i);
@@ -36,6 +34,22 @@ function loadManaSymbols2(manaSymbolsString) {
                 }
             }
         });
+}
+//keine Checkboxen, Bilder fungieren als Checkboxen mit Umrandung 
+function imgaCheckboxenNotVisbile() {
+    let imageCheckboxes = document.querySelectorAll(".image-checkbox");
 
+    for (let i = 0; i < imageCheckboxes.length; i++) {
+        let imageCheckbox = imageCheckboxes[i];
+        let input = imageCheckbox.querySelector("input[type='checkbox']");
+        input.style.display = "none"; // Verstecke die Checkbox
 
+        // Füge Klick-Eventlistener zum imageCheckbox-Element hinzu
+        imageCheckbox.addEventListener("click", function (e) {
+            let input = this.querySelector("input[type='checkbox']");
+            input.checked = !input.checked; // Ändere den Status der Checkbox
+            this.classList.toggle("image-checkbox-checked"); // Wechsle die Klasse des Bildes
+            e.preventDefault();
+        });
+    }
 }

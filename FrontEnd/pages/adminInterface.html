@@ -11,6 +11,8 @@
     <!--Eigenen Files-->
     <script src="/frontend/components/manaSymbols/manaSymbols.js" defer></script>
     <script src="../scripts/createProduct.js" defer></script>
+    <script src="../scripts/adminInterfaceUser.js" defer></script>
+    <script src="../scripts/adminInterfaceProduct.js" defer></script>
 
     <link rel="stylesheet" href="../style.css">
 
@@ -25,8 +27,8 @@
     <!--Overlay-Header-->
     <script src="/frontend/components/navbar/loadOverlay.js" defer></script>
     <script src="/frontend/scripts/login.js" defer></script>
-    <script src="../scripts/adminInterface.js" defer></script>
-    <script src="../scripts/adminInterfaceProduct.js" defer></script>
+
+
 
 </head>
 
@@ -73,7 +75,7 @@
                             <manaSymbols></manaSymbols>
                         </div>
                         <div class="row justify-content-center">
-                            <button class="btn btn-success mt-3" type="submit" id="createProduct">Produkt erstellen</button>
+                            <button class="btn btn-success mt-3" type="submit" id="createProduct">&#x2795; Produkt erstellen</button>
                         </div>
                     </form>
                 </div>
@@ -85,7 +87,7 @@
                             <div class="container" id="productListContainer">
                                 <h2 class="text-center mb-0">Prokdukt Liste</h2>
                             </div>
-                            <div class="row text-center mt-4" id="pagesButton">
+                            <div class="row text-center" id="pagesButton">
                                 <div class="col text-end"><button id="previousPage" class="btn btn-dark">Vorherige Seite</button></div>
                                 <div class="col-1 d-flex align-items-center justify-content-center"><p class="m-0"></p></div>
                                 <div class="col text-start"><button id="nextPage" class="btn btn-dark">Nächste Seite</button></div>
