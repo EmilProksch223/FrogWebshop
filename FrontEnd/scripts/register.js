@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
           headers: { "Authorization": sessionStorage.getItem("token") },
           data: JSON.stringify(user),
           success: function(data) {
-            var timestamp = new Date().toISOString(); // Aktuellen Zeitpunkt erfassen
+            let timestamp = new Date().toISOString(); // Aktuellen Zeitpunkt erfassen
             sessionStorage.setItem("token", data);
             sessionStorage.setItem("loginTimestamp", timestamp); // Timestamp speichern
             location.href = "index.html";
@@ -88,11 +88,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 document.getElementById("showFormButton").addEventListener("click", function() {
-  var form = document.getElementById("addressForm");
+  let form = document.getElementById("addressForm");
   if (form.style.display === "none") {
     form.style.display = "block";
+    document.getElementById("showFormButton").innerHTML = "Lieferadresse ausblenden &#x1F69A;";
   } else {
     form.style.display = "none";
+    document.getElementById("showFormButton").innerHTML = "Lieferadresse hinzufügen &#x1F69A;";
   }
 });
 

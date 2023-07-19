@@ -18,18 +18,17 @@ document.addEventListener('DOMContentLoaded', function () {
           sessionStorage.removeItem('token');
           sessionStorage.removeItem('loginTimestamp');
           console.log('Token und Login-Zeitstempel wurden gelöscht');
+
           var currentPage = window.location.pathname; // Aktuelle Seite ermitteln
           if (currentPage === '/frontend/index.html') {
             window.location.reload(); // Seite neu laden, wenn sich auf der Indexseite befindet
           } else {
             window.location.href = '/frontend/index.html'; // Auf die Indexseite umleiten, wenn sich auf einer anderen Seite befindet
           }
-          // Hier kannst du ggf. weitere Aktionen nach dem Abmelden ausführen
+          // weitere Aktionen nach dem Abmelden
         });
 
         replaceButtons(loginButton, logoutButton); // Funktion zum Austausch der Buttons aufrufen
-      } else {
-        console.log('Das Element mit der ID "loginButtonOverlay" wurde nicht gefunden.');
       }
 
       var userInterfaceLink = document.getElementById('userInterfaceLink');
@@ -43,15 +42,15 @@ document.addEventListener('DOMContentLoaded', function () {
         dropdownToggle.className = 'dropdown-toggle mx-3';
         dropdownToggle.setAttribute('data-bs-toggle', 'dropdown');
         dropdownToggle.setAttribute('aria-expanded', 'false');
-        dropdownToggle.width = '40'; // Breite des Bildes
-        dropdownToggle.height = '40'; // Höhe des Bildes
+        dropdownToggle.width = '40';
+        dropdownToggle.height = '40';
 
         var dropdownMenu = document.createElement('ul');
         dropdownMenu.className = 'dropdown-menu dropdown-menu-end bg-dark border border-white';
         dropdownMenu.style.position = 'absolute';
         dropdownMenu.style.left = '50%';
         dropdownMenu.style.transform = 'translateX(-50%)';
-        dropdownMenu.style.top = 'calc(100% + 1.5rem)'; // Verschiebung um 1.5rem nach unten 
+        dropdownMenu.style.top = 'calc(100% + 1.5rem)';
 
         var actionOne = document.createElement('li');
         var actionOneLink = document.createElement('a');
@@ -88,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (isAdmin) {
         var adminLink = document.getElementById('adminInterfaceLink');
         if (adminLink) {
-          adminLink.href = '/frontend/pages/adminInterface.html'; // Hier die URL der administrativen Seite einfügen
+          adminLink.href = '/frontend/pages/adminInterface.html';
           adminLink.innerHTML = '<img class="navbar-img mx-3 my-1" src="/frontend/components/navbar/img/admin_settings_tools_48.png" width="40" height="40" alt="sale">';
         } else {
           console.log('Das Element mit der ID "adminInterfaceLink" wurde nicht gefunden.');

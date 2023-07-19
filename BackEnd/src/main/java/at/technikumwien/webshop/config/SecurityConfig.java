@@ -50,12 +50,13 @@ public class SecurityConfig {
                 .and()
                 // Allow unauthorized requests to certain endpoints
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST, "/products", "/users/update").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/products", "/users/update", "/files").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/users", "/products").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/users/update", "/products/update").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/users/{id}", "/products/{id}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/users/createUser").permitAll()
-                .requestMatchers("/login", "/products/active").permitAll()
+                .requestMatchers(HttpMethod.GET, "/files/**").permitAll()
+                .requestMatchers("/login", "/products/active", "/positions").permitAll()
 
                 // Authenticate all other requests
                 .anyRequest().authenticated()

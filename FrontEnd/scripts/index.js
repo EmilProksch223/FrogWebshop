@@ -8,10 +8,7 @@ document.getElementById("filter-button").onclick = function (event) {
         manaSymbols.push(checkboxes[i].value);
     }
     const manaSymbolsString = manaSymbols.join("");
-    console.log(manaSymbolsString);
-
     const searchterm = document.getElementById('search').value;
-    console.log(searchterm);
 
     $.ajax({
         type: "GET",

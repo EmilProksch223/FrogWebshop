@@ -23,17 +23,19 @@ function loadManaSymbols2(manaSymbolsString) {
         .then(response => response.text())
         .then(data => {
             document.querySelector('manaSymbols2').innerHTML = data;
-            imgaCheckboxenNotVisbile();
+            
             const chars = [...manaSymbolsString];
             for (let i = 0; i < chars.length; i++) {
-                console.log(i);
                 const manaSymbol = chars[i];
                 const checkbox = document.getElementById(manaSymbol);
                 if (checkbox) {
                     checkbox.checked = true;
                 }
             }
+
         });
+
+
 }
 //keine Checkboxen, Bilder fungieren als Checkboxen mit Umrandung 
 function imgaCheckboxenNotVisbile() {
