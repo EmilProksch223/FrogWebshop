@@ -1,17 +1,13 @@
 package at.technikumwien.webshop.controller;
 
 import at.technikumwien.webshop.model.File;
-import at.technikumwien.webshop.model.User;
 import at.technikumwien.webshop.repository.FileRepository;
 
 import at.technikumwien.webshop.service.StorageService;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,7 +27,6 @@ public class FileHandlingController {
         this.storageService = storageService;
         this.fileRepository = fileRepository;
     }
-
 
     @PostMapping()
     public String handleFileUpload(@RequestParam("file")MultipartFile file) throws IOException {

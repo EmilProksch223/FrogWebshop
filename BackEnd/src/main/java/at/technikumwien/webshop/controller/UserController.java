@@ -116,7 +116,7 @@ public class UserController {
         userDTO.setId(user.getId());
         userDTO.setUsername(user.getUsername());
         userDTO.setEmail(user.getEmail());
-        userDTO.setPassword(user.getPassword()); // Du könntest dies ändern, um das Passwort nicht zurückzugeben
+        userDTO.setPassword(user.getPassword()); 
         userDTO.setActive(user.isActive());
         userDTO.setAdmin(user.isAdmin());
     
@@ -126,7 +126,7 @@ public class UserController {
             addressDTO.setStreet(address.getStreet());
             addressDTO.setCity(address.getCity());
             addressDTO.setPostalCode(address.getPostalCode());
-            // Füge weitere Attribute hinzu, falls vorhanden
+            // Füge weitere Attribute hinzu
             userDTO.setAddress(addressDTO);
         }
     
