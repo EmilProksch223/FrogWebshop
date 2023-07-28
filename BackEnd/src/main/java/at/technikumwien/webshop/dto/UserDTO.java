@@ -23,13 +23,16 @@ public class UserDTO {
     @NotNull(message = "admin darf nicht null sein")
     private Boolean admin;
 
-     // /////////////////////////////////////////////////////////////////////////
+    private AddressDTO address; // Feld für die Adresse hinzufügen
+
+    // /////////////////////////////////////////////////////////////////////////
     // Getters and Setters
     // /////////////////////////////////////////////////////////////////////////
-    
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -66,7 +69,6 @@ public class UserDTO {
         this.active = active;
     }
 
-
     public boolean isAdmin() {
         return admin;
     }
@@ -75,4 +77,11 @@ public class UserDTO {
         this.admin = admin;
     }
 
+    public AddressDTO getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressDTO address) {
+        this.address = address;
+    }
 }
