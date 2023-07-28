@@ -29,9 +29,9 @@ $(document).on('click', '#filterButton', function () {
 
     let productTableBody = $("#productTableBody");
     productTableBody.empty();
-
+    
     const searchterm = document.getElementById('search').value;
-    console.log(searchterm);
+
     $.ajax({
         type: "GET",
         headers: { "Authorization": sessionStorage.getItem("token") },
@@ -63,7 +63,7 @@ function createProductTable(products, currentPage) {
 
     const table = $("<table class='table table-striped mt-3'></table>");
     const thead = $("<thead class='align-middle'><tr></tr></thead>");
-    const thead1 = $("<th>ID</th><th>Name</th><th>Anzahl</th><th>Preis</th><th>Active</th>");
+    const thead1 = $("<th>ID</th><th>Name</th><th class='text-end pe-2'>Menge</th><th class='text-end pe-3'>Preis</th><th class='text-center'>Active</th>");
     const thead2 = $("<th><div class='input-group input-group-sm ms-4 pe-4'><input class='form-control border-dark' type='search' placeholder='Search' aria-label='Search' id='search'><button class='btn btn-outline-dark bg-light' onclick='filterButton' type='button' id='filterButton'>&#x1F50D;</button></div></th>");
     thead.append(thead1, thead2)
 
@@ -71,12 +71,12 @@ function createProductTable(products, currentPage) {
 
     for (let i = 0; i < productsToShow.length; i++) {
         let product = productsToShow[i];
-        let row = $("<tr></tr>");
+        let row = $("<tr class='text-'></tr>");
         row.append($("<td class='align-middle'>" + product.id + "</td>"));
-        row.append($("<td class='align-middle'>" + product.name + "</td>"));
-        row.append($("<td class='align-middle'>" + product.quantity + "</td>"));
-        row.append($("<td class='align-middle'>" + product.price + " €</td>"));
-        row.append($("<td class='align-middle'>" + (product.active ? "&#10004;&#65039;" : "&#10060;") + "</td>"));
+        row.append($("<td class='align-middle ps-0'>" + product.name + "</td>"));
+        row.append($("<td class='align-middle text-end pe-3'>" + product.quantity + "</td>"));
+        row.append($("<td class='align-middle text-end pe-3'>" + product.price.toFixed(2) + " €</td>"));
+        row.append($("<td class='align-middle text-center'>" + (product.active ? "&#10004;&#65039;" : "&#10060;") + "</td>"));
 
         let editButton = $("<button class='btn btn-primary' id='editButton1'>&#x2692;&#xFE0F; Bearbeiten</button>");
         editButton.click(createEditProductHandler(product));
@@ -171,7 +171,7 @@ function createEditProductHandler(product) {
 
         let col1 = $("<div class='col-6 col-sm-3 mb-2 p-0'></div>");
         let priceLabel = $("<label for='editProductPrice' class='form-label p-0'>Preis</label>");
-        let priceInput = $("<div class='input-group'><input type='text' class='form-control' id='editProductPrice' name='editProductPrice' aria-label='Euro amount' value='" + product.price + "'><span class='input-group-text'>€</span></div>");
+        let priceInput = $("<div class='input-group'><input type='text' class='form-control' id='editProductPrice' name='editProductPrice' aria-label='Euro amount' value='" + product.price.toFixed(2) + "'><span class='input-group-text'>€</span></div>");
         col1.append(priceLabel, priceInput);
 
         let col2 = $("<div class='col-6 col-sm-3'></div>");
@@ -231,8 +231,6 @@ function createSaveProductHandler(product) {
             manaSymbols.push(checkboxes[i].value);
         }
         const manaSymbolsString = manaSymbols.join("");
-        console.log(manaSymbolsString);
-
 
         let productId = product.id;
         let newProductName = document.getElementById("editProductName").value;

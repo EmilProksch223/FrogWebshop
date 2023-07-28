@@ -23,33 +23,61 @@ document.addEventListener('DOMContentLoaded', function () {
     const productDescription = descriptionInput.value;
 
     const manaSymbolsString = manaSymbols.join("");
-    console.log(manaSymbolsString)
 
+    const fileInput = document.getElementById("inputProductImg");
+    const file = fileInput.files[0];
 
-    const product = {
-      name: productName,
-      description: productDescription,
-      price: productPrice,
-      quantity: productQuantity,
-      manaType: manaSymbolsString,
-      active: false,
-    };
+    console.log(file);
 
-    console.log(product)
+    const formData = new FormData();
+    formData.append("file", file);
+
+    console.log(formData);
 
     $.ajax({
-      url: 'http://localhost:8080/products',
+      url: 'http://localhost:8080/files',
       type: 'POST',
-      contentType: 'application/json',
+      contentType: false, // Setze contentType auf false, damit FormData den richtigen Header setzt
+      processData: false, // Setze processData auf false, damit FormData nicht den Inhalt formatiert
       headers: { "Authorization": sessionStorage.getItem("token") },
-      data: JSON.stringify(product),
+      data: formData,
       success: function (response) {
-        console.log('Daten erfolgreich gesendet:', response);
-        alert('Daten erfolgreich gesendet!');
-        loadProducts();
+        console.log('File erfolgreich gesendet:', response);
+        alert('File erfolgreich gesendet!');
+
+        // Erhalte den Namen des hochgeladenen Bildes aus der Antwort und erstelle die imageUrl
+        const imageName = response;
+        const imageUrl = imageName;
+
+        // Hier senden wir die restlichen Produktinformationen an den Server
+        const product = {
+          name: productName,
+          description: productDescription,
+          price: productPrice,
+          quantity: productQuantity,
+          imageUrl: imageUrl,
+          manaType: manaSymbolsString,
+          active: false,
+        };
+
+        $.ajax({
+          url: 'http://localhost:8080/products',
+          type: 'POST',
+          contentType: 'application/json',
+          headers: { "Authorization": sessionStorage.getItem("token") },
+          data: JSON.stringify(product),
+          success: function (response) {
+            console.log('Daten erfolgreich gesendet:', response);
+            alert('Daten erfolgreich gesendet!');
+            loadProducts();
+          },
+          error: function (xhr, status, error) {
+            console.error('Fehler beim Senden der Daten:', error);
+          }
+        });
       },
       error: function (xhr, status, error) {
-        console.error('Fehler beim Senden der Daten:', error);
+        console.error('Fehler beim Senden des Bildes:', error);
       }
     });
   });

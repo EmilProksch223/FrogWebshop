@@ -17,14 +17,32 @@ function addProductstoPage(products) {
       productsContainer.append(row);
     }
 
-    row.append(createProduct(products[i]));
+    getProductImagePath(products[i].imageUrl, function (file) {
+      row.append(createProduct(products[i], file));
+    });
   }
 }
 
-function createProduct(product) {
+function getProductImagePath(imageNum, callback) {
+  $.ajax({
+    url: `http://localhost:8080/files/` + imageNum,
+    type: 'GET',
+    cors: true,
+    headers: { "Authorization": sessionStorage.getItem("token") },
+    success: function (file) {
+      console.log(file); // Der Dateipfad sollte hier ausgegeben werden
+      callback(file); // Rufe das Callback mit dem Dateipfad auf
+    },
+    error: function (error) {
+      console.error('Fehler beim Abrufen des Bildpfads:', error);
+    }
+  });
+}
+
+function createProduct(product, file) {
   const cardContainer = $("<div>", { class: "col-12 col-lg-4 col-xxl-3 d-flex justify-content-center mb-3" });
   const card = $("<div>", { class: "card bg-dark border border-5 border-light text-white p-3", style: "width: 22rem;" });
-  const image = $(`<img class="card-img-top border border-1 border-light rounded" height="350" src="${product.imageUrl}">`);
+  const image = $(`<img class="card-img-top border border-1 border-light rounded" height="350" src="${file}">`);
   const cardBody = $(`<div class="card-body border border-1 border-bottom-0 rounded-top-1 mt-1 ">`);
   const name = $(`<h5 class="card-title text-center">${product.name}</h5>`);
   const drop = $(`<div class="d-flex justify-content-center mb-1 mt-2">
@@ -85,6 +103,7 @@ function createProduct(product) {
   </button>
 `);
 
+
   cardBody.append(name, drop, details);
   card.append(image, cardBody, cardFooter);
   cardContainer.append(card);
@@ -92,6 +111,21 @@ function createProduct(product) {
 
   return cardContainer;
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Hier wählst du einen übergeordneten Container aus, der bereits existiert und die Buttons enthalten wird
+  const container = document.getElementById("productsContainer");
+  // Hier fügst du den Event Listener hinzu, der auf Klicks innerhalb des Containers reagiert
+  container.addEventListener("click", function (event) {
+    // Überprüfe, ob das geklickte Element ein Button mit der gewünschten Klasse ist
+    if (event.target.matches(".btn-light")) {
+      const addToCartButton = event.target;
+      const productId = addToCartButton.dataset.productId;
+      const quantity = 1;
+      addProductToCart(productId, quantity)
+    }
+  });
+});
 
 function addProductToCart(product, quantity) {
   const data = {
