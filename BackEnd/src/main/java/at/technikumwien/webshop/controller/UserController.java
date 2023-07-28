@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import at.technikumwien.webshop.dto.AddressDTO;
 import at.technikumwien.webshop.dto.UserDTO;
+import at.technikumwien.webshop.model.Address;
 import at.technikumwien.webshop.model.User;
 import at.technikumwien.webshop.service.BadRequestException;
 import at.technikumwien.webshop.service.UserService;
@@ -44,11 +46,23 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/{id}/address")
+    public ResponseEntity<UserDTO> getUserWithAddress(@PathVariable Long id) {
+        Optional<User> optionalUser = userService.getUserById(id);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            UserDTO userDTO = fromUserAndAddress(user);
+            return ResponseEntity.ok(userDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping("/createUser")
     public ResponseEntity<User> createUser(@RequestBody @Valid UserDTO userDTO) {
         if (userService.existsByUsername(userDTO.getUsername())) {
-        throw new BadRequestException("Benutzername existiert schon!");
-    }
+            throw new BadRequestException("Benutzername existiert schon!");
+        }
         User user = fromDTO(userDTO);
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
@@ -63,10 +77,8 @@ public class UserController {
         Optional<User> optionalUser = userService.getUserById(userDTO.getId());
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get();
-            existingUser.setUsername(userDTO.getUsername());
-            existingUser.setEmail(userDTO.getEmail());
-            existingUser.setActive(userDTO.isActive());
-            existingUser.setAdmin(userDTO.isAdmin());
+            fromDTO(existingUser, userDTO);
+    
             User updatedUser = userService.updateUser(existingUser);
             return ResponseEntity.ok(updatedUser);
         } else {
@@ -86,13 +98,38 @@ public class UserController {
         }
     }
 
+    private User fromDTO(User existingUser, UserDTO userDTO) {
+        existingUser.setUsername(userDTO.getUsername());
+        existingUser.setEmail(userDTO.getEmail());
+        existingUser.setPassword(userDTO.getPassword());
+        existingUser.setActive(userDTO.isActive());
+        existingUser.setAdmin(userDTO.isAdmin());
+        return existingUser;
+    }
+
     private User fromDTO(UserDTO userDTO) {
-        User user = new User();
-        user.setUsername(userDTO.getUsername());
-        user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword());
-        user.setActive(userDTO.isActive());
-        user.setAdmin(userDTO.isAdmin());
-        return user;
+        return fromDTO(new User(), userDTO);
+    }
+
+    private UserDTO fromUserAndAddress(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setUsername(user.getUsername());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPassword(user.getPassword()); // Du könntest dies ändern, um das Passwort nicht zurückzugeben
+        userDTO.setActive(user.isActive());
+        userDTO.setAdmin(user.isAdmin());
+    
+        Address address = user.getAddress();
+        if (address != null) {
+            AddressDTO addressDTO = new AddressDTO();
+            addressDTO.setStreet(address.getStreet());
+            addressDTO.setCity(address.getCity());
+            addressDTO.setPostalCode(address.getPostalCode());
+            // Füge weitere Attribute hinzu, falls vorhanden
+            userDTO.setAddress(addressDTO);
+        }
+    
+        return userDTO;
     }
 }

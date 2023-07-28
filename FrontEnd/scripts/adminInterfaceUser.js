@@ -106,7 +106,8 @@ function createSaveUserHandler(user) {
             email: newEmail,
             password: user.password,
             active: isActive,
-            admin: isAdmin
+            admin: isAdmin,
+            address: user.address || {} // Füge eine leere Adresse hinzu, wenn keine Adresse vorhanden ist
         };
 
         console.log("updatedUser:", updatedUser);
@@ -131,6 +132,7 @@ function createSaveUserHandler(user) {
         });
     };
 }
+
 
 
 function createDeleteUserHandler(userId) {
