@@ -21,17 +21,17 @@ public class SecurityConfig {
 
     private final TokenService tokenService;
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Init
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Init
+    /////
 
     public SecurityConfig(TokenService tokenService) {
         this.tokenService = tokenService;
     }
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Methods
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Methods
+    /////
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -51,12 +51,12 @@ public class SecurityConfig {
                 // Allow unauthorized requests to certain endpoints
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/products", "/users/update", "/files").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/users", "/products").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/users", "/products", "/addresses").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/users/update", "/products/update").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/users/{id}", "/products/{id}").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/users/createUser").permitAll()
+                .requestMatchers(HttpMethod.POST, "/users/createUser", "/addresses/users/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/files/**").permitAll()
-                .requestMatchers("/login", "/products/active", "/addresses", "/addresses/users/**", "/users/{id}/address").permitAll()
+                .requestMatchers("/login", "/products/active", "/users/{id}/address").permitAll()
 
                 // Authenticate all other requests
                 .anyRequest().authenticated()

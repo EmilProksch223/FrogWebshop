@@ -18,47 +18,58 @@ public class ProductService {
         this.productRepository = repository;
     }
 
+    /////
+    //Methods
+    /////
+
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
-     public List<Product> getAllProductsFiltered(String searchterm) {
+    public List<Product> getAllProductsFiltered(String searchterm) {
         if (searchterm == null || searchterm.isBlank()) {
             return getAllProducts();
         }
-
         List<Product> allProducts = getAllProducts();
         List<Product> filteredProducts = new ArrayList<>();
-
         for (Product product : allProducts) {
             if (product.getName().toLowerCase().contains(searchterm.toLowerCase())) {
                 filteredProducts.add(product);
             }
         }
-
         return filteredProducts;
+    }
+
+    public List<Product> getActiveProducts() {
+        return productRepository.findByActive(true);
     }
 
     public List<Product> getActiveProductsFiltered(String manaSymbolsString, String searchterm) {
         List<Product> activeProducts = getActiveProducts();
         List<Product> filteredProducts = new ArrayList<>();
-
         for (Product product : activeProducts) {
-            if (manaSymbolsString != null && !product.getManaType().toLowerCase().contains(manaSymbolsString.toLowerCase())) {
+            if (manaSymbolsString != null
+                    && !product.getManaType().toLowerCase().contains(manaSymbolsString.toLowerCase())) {
                 continue;
             }
-
-            if (searchterm != null && !searchterm.isBlank() && !product.getName().toLowerCase().contains(searchterm.toLowerCase())) {
+            if (searchterm != null && !searchterm.isBlank()
+                    && !product.getName().toLowerCase().contains(searchterm.toLowerCase())) {
                 continue;
             }
-
             filteredProducts.add(product);
         }
-
         return filteredProducts;
     }
 
-     public Product updateProductFromDTO(Product existingProduct, ProductDTO productDTO) {
+    public Product createProduct(Product product) {
+        return productRepository.save(product);
+    }
+
+    public Product updateProduct(Product product) {
+        return productRepository.save(product);
+    }
+
+    public Product updateProductFromDTO(Product existingProduct, ProductDTO productDTO) {
         existingProduct.setName(productDTO.getName());
         existingProduct.setDescription(productDTO.getDescription());
         existingProduct.setImageUrl(productDTO.getImageUrl());
@@ -66,24 +77,15 @@ public class ProductService {
         existingProduct.setQuantity(productDTO.getQuantity());
         existingProduct.setManaType(productDTO.getManaType());
         existingProduct.setActive(productDTO.isActive());
-
         return updateProduct(existingProduct);
+    }
+
+    public void deleteProduct(long id) {
+        productRepository.deleteById(id);
     }
 
     public Optional<Product> getProductById(Long productId) {
         return productRepository.findById(productId);
-    }
-
-    public List<Product> findByManaType(String manaSymbolString) {
-        return productRepository.findByManaType(manaSymbolString);
-    }
-
-    public Product createProduct(Product product) {
-        return productRepository.save(product);
-    }
-
-    public Product save(Product product) {
-        return productRepository.save(product);
     }
 
     public Product setActive(Long id) {
@@ -96,15 +98,11 @@ public class ProductService {
         return save(product);
     }
 
-    public List<Product> getActiveProducts() {
-        return productRepository.findByActive(true);
+    public List<Product> findByManaType(String manaSymbolString) {
+        return productRepository.findByManaType(manaSymbolString);
     }
 
-    public Product updateProduct(Product product) {
+    public Product save(Product product) {
         return productRepository.save(product);
-    }
-
-    public void deleteProduct(long id) {
-        productRepository.deleteById(id);
     }
 }

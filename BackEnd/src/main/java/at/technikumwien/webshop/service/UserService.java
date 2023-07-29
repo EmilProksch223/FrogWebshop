@@ -18,6 +18,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    /////
+    //Methods
+    /////
+    
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }

@@ -13,12 +13,20 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RestController
 @RequestMapping("/carts")
 public class CartController {
+
+    /////
+    //Init
+    /////
     
     private CartService cartService;
 
     public CartController(CartService cartService) {
         this.cartService = cartService;
     }
+
+    /////
+    //Methods
+    /////
 
     @ResponseStatus(code = CREATED)
     @PostMapping

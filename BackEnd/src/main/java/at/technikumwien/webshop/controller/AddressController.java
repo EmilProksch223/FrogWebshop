@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,10 @@ import at.technikumwien.webshop.service.UserService;
 @RequestMapping("/addresses")
 public class AddressController {
 
+    /////
+    //Init
+    /////
+
     private final AddressService addressService;
     private final UserService userService;
 
@@ -31,7 +36,12 @@ public class AddressController {
         this.userService = userService;
     }
 
+    /////
+    //Methods
+    /////
+
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<Address> getAllAddresses() {
         return addressService.getAllAddresses();
     }
@@ -50,6 +60,10 @@ public class AddressController {
 
         return ResponseEntity.ok(createdAddress);
     }
+
+    /////
+    //AddressDTO-Objekt in Address-Objekt
+    /////
 
     private Address fromDTO(AddressDTO addressDTO) {
         Address address = new Address();

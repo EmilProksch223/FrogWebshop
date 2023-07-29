@@ -25,11 +25,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/products")
 public class ProductController {
 
+    /////
+    //Init
+    /////
+
     private ProductService service;
 
     public ProductController(ProductService service) {
         this.service = service;
     }
+
+    /////
+    //Methods
+    /////
 
     @GetMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -80,6 +88,10 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    /////
+    //ProductDTO-Objekt in Product-Objekt
+    /////
 
     private static Product fromDTO(ProductDTO productDTO) {
         return new Product(productDTO.getName(),

@@ -19,6 +19,10 @@ import java.util.Optional;
 @RequestMapping("/files")
 public class FileHandlingController {
 
+    /////
+    // Init
+    /////
+
     private final StorageService storageService;
     private final FileRepository fileRepository;
 
@@ -27,6 +31,10 @@ public class FileHandlingController {
         this.storageService = storageService;
         this.fileRepository = fileRepository;
     }
+
+    /////
+    //Methods
+    /////
 
     @PostMapping()
     public String handleFileUpload(@RequestParam("file")MultipartFile file) throws IOException {

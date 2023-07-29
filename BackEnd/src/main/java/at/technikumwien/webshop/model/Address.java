@@ -39,7 +39,7 @@ public class Address {
 
 
     /////
-    // Init
+    //Init
     /////
     public Address(String firstName, String lastName, String gender, String street, String addressLine2,
             String postalCode, String city, String country) {
@@ -54,11 +54,10 @@ public class Address {
     }
 
     public Address() {
-        // noop
     }
 
     /////
-    // Getters and Setters
+    //Getters and Setters
     /////
 
     public Long getId() {

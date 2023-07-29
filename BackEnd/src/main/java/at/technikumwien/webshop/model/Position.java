@@ -28,12 +28,11 @@ public class Position {
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Init
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Init
+    /////
 
     public Position() {
-        // default constructor for jpa
     }
 
     public Position(Long id, Integer quantity) {
@@ -41,9 +40,9 @@ public class Position {
         this.quantity = quantity;
     }
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Getters and Setters
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Getters and Setters
+    /////
 
     public Long getId() {
         return id;
