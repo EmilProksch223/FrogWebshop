@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import at.technikumwien.webshop.dto.AddressDTO;
 import at.technikumwien.webshop.model.Address;
 import at.technikumwien.webshop.model.User;
 import at.technikumwien.webshop.service.AddressService;
@@ -62,9 +61,10 @@ public class AddressController {
     }
 
     /////
-    //AddressDTO-Objekt in Address-Objekt
+    //AddressDTO-Object in Address-Object
     /////
 
+    /* 
     private Address fromDTO(AddressDTO addressDTO) {
         Address address = new Address();
         address.setFirstName(addressDTO.getFirstName());
@@ -77,4 +77,5 @@ public class AddressController {
         address.setCountry(addressDTO.getCountry());
         return address;
     }
+    */
 }

@@ -31,6 +31,7 @@ public class ProductController {
 
     private ProductService service;
 
+
     public ProductController(ProductService service) {
         this.service = service;
     }
@@ -79,7 +80,7 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         Optional<Product> optionalProduct = service.getProductById(id);
         if (optionalProduct.isPresent()) {
             service.deleteProduct(id);
@@ -90,7 +91,7 @@ public class ProductController {
     }
 
     /////
-    //ProductDTO-Objekt in Product-Objekt
+    //ProductDTO-Object in Product-Object
     /////
 
     private static Product fromDTO(ProductDTO productDTO) {

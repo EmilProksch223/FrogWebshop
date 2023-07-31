@@ -6,7 +6,7 @@ public class LoginDTO {
     private String password;
 
     /////
-    // Getter
+    //Getter
     /////
 
     public String getUsername() {
