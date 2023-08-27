@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import at.technikumwien.webshop.dto.AddressDTO;
 import at.technikumwien.webshop.model.Address;
 import at.technikumwien.webshop.model.User;
 import at.technikumwien.webshop.service.AddressService;
@@ -21,6 +21,10 @@ import at.technikumwien.webshop.service.UserService;
 @RestController
 @RequestMapping("/addresses")
 public class AddressController {
+
+    /////
+    //Init
+    /////
 
     private final AddressService addressService;
     private final UserService userService;
@@ -31,7 +35,12 @@ public class AddressController {
         this.userService = userService;
     }
 
+    /////
+    //Methods
+    /////
+
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<Address> getAllAddresses() {
         return addressService.getAllAddresses();
     }
@@ -51,6 +60,11 @@ public class AddressController {
         return ResponseEntity.ok(createdAddress);
     }
 
+    /////
+    //AddressDTO-Object in Address-Object
+    /////
+
+    /* 
     private Address fromDTO(AddressDTO addressDTO) {
         Address address = new Address();
         address.setFirstName(addressDTO.getFirstName());
@@ -63,4 +77,5 @@ public class AddressController {
         address.setCountry(addressDTO.getCountry());
         return address;
     }
+    */
 }

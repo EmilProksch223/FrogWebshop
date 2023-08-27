@@ -14,17 +14,16 @@ public class AuthenticationContoller {
 
     private final AuthenticationService authenticationService;
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Init
-    // /////////////////////////////////////////////////////////////////////////
-
+    /////
+    //Init
+    /////
     public AuthenticationContoller(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Methods
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Methods
+    /////
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO, HttpServletResponse response) {

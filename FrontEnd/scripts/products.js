@@ -60,7 +60,7 @@ function createProduct(product, file) {
         <div class="row">
           <div class="col-4">
             <div class="d-flex align-items-start h-100">
-              <img src="${product.imageUrl}" alt="${product.name}"
+              <img src="${file}" alt="${product.name}"
                 class="img-fluid border border-light">
             </div>
           </div>

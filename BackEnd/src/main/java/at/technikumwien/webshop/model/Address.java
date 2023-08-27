@@ -3,14 +3,14 @@ package at.technikumwien.webshop.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity(name = "address")
 public class Address {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "firstName")
@@ -39,7 +39,7 @@ public class Address {
 
 
     /////
-    // Init
+    //Init
     /////
     public Address(String firstName, String lastName, String gender, String street, String addressLine2,
             String postalCode, String city, String country) {
@@ -54,11 +54,10 @@ public class Address {
     }
 
     public Address() {
-        // noop
     }
 
     /////
-    // Getters and Setters
+    //Getters and Setters
     /////
 
     public Long getId() {

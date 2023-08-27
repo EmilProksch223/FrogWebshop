@@ -1,7 +1,6 @@
 package at.technikumwien.webshop.service;
 
 import at.technikumwien.webshop.model.File;
-import at.technikumwien.webshop.model.User;
 import at.technikumwien.webshop.repository.FileRepository;
 import at.technikumwien.webshop.service.StorageService;
 
