@@ -1,7 +1,6 @@
 package at.technikumwien.webshop.service;
 
 import at.technikumwien.webshop.model.File;
-import at.technikumwien.webshop.model.User;
 import at.technikumwien.webshop.repository.FileRepository;
 import at.technikumwien.webshop.service.StorageService;
 
@@ -15,13 +14,14 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
+import java.util.Optional;
+
 
 @Service
 public class StorageService {
 
     private final Path storageDirectory;// The directory where files will be stored
-    private final FileRepository fileRepository;
+    private FileRepository fileRepository;
 
     public StorageService(FileRepository fileRepository) {
         this.fileRepository = fileRepository;
@@ -38,7 +38,7 @@ public class StorageService {
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
         File fileEntity = new File();
-        fileEntity.setPath("img/Produkte_img/" + filename);
+        fileEntity.setPath(filename);
 
         return fileEntity;
     }
@@ -68,7 +68,28 @@ public class StorageService {
         return timestamp + "_" + originalFilename;
     }
 
-    public List<File> getAllFiles() {
-        return (List<File>) fileRepository.findAll();
+    public void deleteFile(Long fileId) {
+        // Zuerst das File-Objekt aus der Datenbank abrufen
+        Optional<File> optionalFile = fileRepository.findById(fileId);
+
+        if (optionalFile.isPresent()) {
+            File fileEntity = optionalFile.get();
+            String filename = fileEntity.getPath();
+            Path filePath = storageDirectory.resolve(filename);
+
+            // Zuerst aus der Datenbank löschen
+            fileRepository.deleteById(fileId);
+
+            // Dann aus dem Dateisystem löschen
+            try {
+                Files.deleteIfExists(filePath);
+            } catch (IOException e) {
+                // Hier kannst du eine entsprechende Fehlerbehandlung hinzufügen, wenn das Löschen fehlschlägt.
+                e.printStackTrace();
+            }
+        } else {
+            // Datei nicht gefunden oder bereits gelöscht
+            // Hier kannst du eine Fehlerbehandlung hinzufügen oder einfach nichts tun.
+        }
     }
 }

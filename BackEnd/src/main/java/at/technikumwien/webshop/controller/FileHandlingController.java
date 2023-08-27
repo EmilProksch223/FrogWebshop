@@ -1,14 +1,12 @@
 package at.technikumwien.webshop.controller;
 
 import at.technikumwien.webshop.model.File;
-import at.technikumwien.webshop.model.User;
 import at.technikumwien.webshop.repository.FileRepository;
 
 import at.technikumwien.webshop.service.StorageService;
-
+import org.springframework.core.io.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -34,6 +31,7 @@ public class FileHandlingController {
 
 
     @PostMapping()
+    @PreAuthorize("hasRole('ADMIN')")
     public String handleFileUpload(@RequestParam("file")MultipartFile file) throws IOException {
 
         File fileEntity = storageService.store(file);
@@ -42,19 +40,20 @@ public class FileHandlingController {
         return fileEntity.getId().toString();
     }
 
-    @GetMapping()
-    public List<File> getAllFiles() {
-        return storageService.getAllFiles();
-    }
-
     @GetMapping("/{id}")
-    public ResponseEntity<String> getFilePath(@PathVariable Long id) {
+    public ResponseEntity<Resource> streamFile(@PathVariable Long id) throws IOException {
+
         Optional<File> fileEntity = fileRepository.findById(id);
-        if (fileEntity.isPresent()) {
-            String filePath = fileEntity.get().getPath(); // Hier den Dateipfad entsprechend anpassen
-            return ResponseEntity.ok(filePath);
+        if(fileEntity.isPresent()) {
+            Resource file = (Resource) storageService.serve(fileEntity.get());
+            return ResponseEntity
+                    .ok()
+                    .contentType(MediaType.IMAGE_JPEG)
+                    .body(file);
         } else {
             return ResponseEntity.notFound().build();
         }
+
     }
+
 }

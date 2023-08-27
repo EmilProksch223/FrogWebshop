@@ -7,13 +7,17 @@ import at.technikumwien.webshop.model.Product;
 import at.technikumwien.webshop.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class ProductService {
 
     private ProductRepository productRepository;
+    private StorageService storageService;
+    
 
-    public ProductService(ProductRepository repository) {
+    public ProductService(ProductRepository repository, StorageService storageService) {
         this.productRepository = repository;
+        this.storageService = storageService;
     }
 
     public List<Product> getAllProducts() {
@@ -56,5 +60,24 @@ public class ProductService {
 
     public void deleteProduct(long id) {
         productRepository.deleteById(id);
+    }
+
+    public void deleteProductAndFile(Long productId) {
+        // Suchen Sie das Produkt
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        
+        if (optionalProduct.isPresent()) {
+            // Produkt gefunden, entferne das zugehörige File
+            Product product = optionalProduct.get();
+            String imageUrl = product.getImageUrl();
+            long imageId = Long.parseLong(imageUrl);
+            storageService.deleteFile(imageId);
+    
+            // Lösche das Produkt
+            productRepository.delete(product);
+        } else {
+            // Produkt nicht gefunden, du kannst hier eine Fehlerbehandlung hinzufügen oder einfach nichts tun
+            // Zum Beispiel könntest du eine Fehlermeldung ausgeben oder eine Ausnahme werfen
+        }
     }
 }

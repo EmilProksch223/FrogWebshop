@@ -16,33 +16,26 @@ function addProductstoPage(products) {
       row = $(`<div class="row justify-content-center mt-3"></div>`);
       productsContainer.append(row);
     }
-
-    getProductImagePath(products[i].imageUrl, function (file) {
-      row.append(createProduct(products[i], file));
-    });
+    $.ajax({
+      url: `http://localhost:8080/files/${products[i].imageUrl}`,
+      cors: true, // Eventuell ist dies nicht notwendig, abhängig von deiner Konfiguration
+      headers: { "Authorization": sessionStorage.getItem("token") },
+      success: function(imageUrl) {
+          const productCard = createProduct(products[i], imageUrl);
+          row.append(productCard);
+      },
+      error: function(error) {
+          console.error(error);
+      }
+  });
   }
 }
 
-function getProductImagePath(imageNum, callback) {
-  $.ajax({
-    url: `http://localhost:8080/files/` + imageNum,
-    type: 'GET',
-    cors: true,
-    headers: { "Authorization": sessionStorage.getItem("token") },
-    success: function (file) {
-      console.log(file); // Der Dateipfad sollte hier ausgegeben werden
-      callback(file); // Rufe das Callback mit dem Dateipfad auf
-    },
-    error: function (error) {
-      console.error('Fehler beim Abrufen des Bildpfads:', error);
-    }
-  });
-}
 
-function createProduct(product, file) {
+function createProduct(product) {
   const cardContainer = $("<div>", { class: "col-12 col-lg-4 col-xxl-3 d-flex justify-content-center mb-3" });
   const card = $("<div>", { class: "card bg-dark border border-5 border-light text-white p-3", style: "width: 22rem;" });
-  const image = $(`<img class="card-img-top border border-1 border-light rounded" height="350" src="${file}">`);
+  const image = $(`<img class="card-img-top border border-1 border-light rounded" height="350" src="http://localhost:8080/files/${product.imageUrl}">`);
   const cardBody = $(`<div class="card-body border border-1 border-bottom-0 rounded-top-1 mt-1 ">`);
   const name = $(`<h5 class="card-title text-center">${product.name}</h5>`);
   const drop = $(`<div class="d-flex justify-content-center mb-1 mt-2">
