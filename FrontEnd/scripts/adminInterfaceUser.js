@@ -10,15 +10,16 @@ function loadUsers() {
             for (var i = 0; i < users.length; i++) {
                 var user = users[i];
                 var row = $("<tr></tr>");
-                row.append($("<td>" + user.id + "</td>"));
-                row.append($("<td>" + user.username + "</td>"));
-                row.append($("<td>" + user.email + "</td>"));
-                row.append($("<td>" + (user.admin ? "Yes" : "No") + "</td>"));
+                row.append($("<td class='align-middle'>" + user.id + "</td>"));
+                row.append($("<td class='align-middle'>" + user.username + "</td>"));
+                row.append($("<td class='align-middle'>" + user.email + "</td>"));
+                row.append($("<td class='align-middle'>" + (user.active ? "&#10004;&#65039;" : "&#10060;") + "</td>"));
+                row.append($("<td class='align-middle'>" + (user.admin ? "&#10004;&#65039;" : "&#10060;") + "</td>"));
 
-                var editButton = $("<button class='btn btn-primary'>Edit</button>");
+                var editButton = $("<button class='btn btn-primary'>	&#x2692;&#xFE0F; Bearbeiten</button>");
                 editButton.click(createEditUserHandler(user));
 
-                var deleteButton = $("<button class='btn btn-danger mx-1'>Delete</button>");
+                var deleteButton = $("<button class='btn btn-danger mx-1'>&#x1F5D1;&#xFE0F; Löschen</button>");
                 deleteButton.click(createDeleteUserHandler(user.id));
 
                 var buttonCell = $("<td class='text-end'></td>").append(editButton, deleteButton);
@@ -40,7 +41,7 @@ function createEditUserHandler(user) {
 
         var row = $("<tr></tr>");
 
-        var idCell = $("<td></td>").text(user.id);
+        var idCell = $("<td class='align-middle'></td>").text(user.id);
         row.append(idCell);
 
         var usernameInput = $("<input id='username' type='text' class='form-control' value='" + user.username + "'>");
@@ -51,16 +52,23 @@ function createEditUserHandler(user) {
         var emailCell = $("<td></td>").append(emailInput);
         row.append(emailCell);
 
+        var activeDropdown = $("<select class='form-control' id='activeDropdown'></select>");
+        activeDropdown.append($("<option value='true'>&#10004;&#65039;</option>"));
+        activeDropdown.append($("<option value='false'>&#10060;</option>"));
+        activeDropdown.val(user.active.toString());
+        var activeCell = $("<td></td>").append(activeDropdown);
+        row.append(activeCell);
+
         var adminDropdown = $("<select class='form-control' id='adminDropdown'></select>");
-        adminDropdown.append($("<option value='true'>Yes</option>"));
-        adminDropdown.append($("<option value='false'>No</option>"));
+        adminDropdown.append($("<option value='true'>&#10004;&#65039;</option>"));
+        adminDropdown.append($("<option value='false'>&#10060;</option>"));
         adminDropdown.val(user.admin.toString());
         var adminCell = $("<td></td>").append(adminDropdown);
         row.append(adminCell);
 
-        var saveButton = $("<button class='btn btn-primary mx-1'>Save</button>");
+        var saveButton = $("<button class='btn btn-primary mx-1'>&#x1F4BE; Speichern</button>");
         saveButton.click(createSaveUserHandler(user));
-        var cancelButton = $("<button class='btn btn-secondary'>Cancel</button>");
+        var cancelButton = $("<button class='btn btn-secondary'>&#x2716;&#xFE0F; Abbrechen</button>");
         cancelButton.click(function () {
             loadUsers();
         });
@@ -78,6 +86,7 @@ function createSaveUserHandler(user) {
         var userId = user.id;
         var newUsername = $("#username").val();
         var newEmail = $("#email").val();
+        var isActive = $("#activeDropdown").val() === "true";
         var isAdmin = $("#adminDropdown").val() === "true";
 
         // Überprüfe, ob das Eingabefeld leer ist
@@ -96,7 +105,9 @@ function createSaveUserHandler(user) {
             username: newUsername,
             email: newEmail,
             password: user.password,
-            admin: isAdmin
+            active: isActive,
+            admin: isAdmin,
+            address: user.address || {} // Füge eine leere Adresse hinzu, wenn keine Adresse vorhanden ist
         };
 
         console.log("updatedUser:", updatedUser);
@@ -121,6 +132,7 @@ function createSaveUserHandler(user) {
         });
     };
 }
+
 
 
 function createDeleteUserHandler(userId) {

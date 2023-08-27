@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -15,7 +16,7 @@ import jakarta.persistence.OneToMany;
 public class Cart {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -27,9 +28,9 @@ public class Cart {
     @JsonBackReference
     private Set<Position> positions;
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Init
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Init
+    /////
 
     public Cart() {
         // default constructor for jpa
@@ -39,9 +40,9 @@ public class Cart {
         this.user = user;
     }
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Getter and Setter
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Getters and Setters
+    /////
 
     public Long getId() {
         return id;

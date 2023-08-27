@@ -4,6 +4,8 @@ import at.technikumwien.webshop.model.Product;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.Length;
 
 /**
@@ -18,6 +20,7 @@ public class ProductDTO {
     private String name;
 
     @NotBlank(message = "Beschreibung darf nicht leer sein!")
+    @Length(max = 1000)
     private String description;
 
     private String imageUrl;
@@ -31,11 +34,12 @@ public class ProductDTO {
     @NotBlank
     private String manaType;
 
+    @NotNull
     private boolean active;
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Getters and Setters
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Getters and Setters
+    /////
 
     public Long getId() {
         return id;

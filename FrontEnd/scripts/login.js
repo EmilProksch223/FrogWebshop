@@ -73,6 +73,3 @@ function checkAdminStatus() {
   }
 }
 
-// Beispielaufruf der Funktion
-const isAdmin = checkAdminStatus();
-console.log(isAdmin); // true oder false, je nachdem, ob der Benutzer ein Administrator ist

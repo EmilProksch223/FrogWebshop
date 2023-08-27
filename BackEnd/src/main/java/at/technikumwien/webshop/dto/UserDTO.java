@@ -4,9 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-/**
- * DTO for {@link User}
- */
 public class UserDTO {
 
     private Long id;
@@ -21,16 +18,21 @@ public class UserDTO {
     @Size(min = 8, message = "Passwort muss mindestens 8 Zeichen lang sein")
     private String password;
 
+    private boolean active;
+
     @NotNull(message = "admin darf nicht null sein")
     private Boolean admin;
 
-     // /////////////////////////////////////////////////////////////////////////
-    // Getters and Setters
-    // /////////////////////////////////////////////////////////////////////////
-    
+    private AddressDTO address; // Feld für die Adresse hinzufügen
+
+    /////
+    //Getters and Setters
+    /////
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -59,6 +61,14 @@ public class UserDTO {
         this.password = password;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     public boolean isAdmin() {
         return admin;
     }
@@ -67,4 +77,11 @@ public class UserDTO {
         this.admin = admin;
     }
 
+    public AddressDTO getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressDTO address) {
+        this.address = address;
+    }
 }

@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
       username: username,
       email: email,
       password: password,
+      active: true,
       admin: false
     };
 
@@ -52,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
           headers: { "Authorization": sessionStorage.getItem("token") },
           data: JSON.stringify(user),
           success: function(data) {
-            var timestamp = new Date().toISOString(); // Aktuellen Zeitpunkt erfassen
+            let timestamp = new Date().toISOString(); // Aktuellen Zeitpunkt erfassen
             sessionStorage.setItem("token", data);
             sessionStorage.setItem("loginTimestamp", timestamp); // Timestamp speichern
             location.href = "index.html";
@@ -64,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       error: function(xhr, status, error) {
         console.error('Fehler beim Senden der Daten:', error);
-        // Do something on error, such as showing an error message
+        
       }
     });
   });
@@ -82,13 +83,20 @@ document.addEventListener('DOMContentLoaded', function() {
       togglePasswordImage.src = './img/showpassword_48.png';
     }
   });
-
-  // ...
 });
 
 
 
-
+document.getElementById("showFormButton").addEventListener("click", function() {
+  let form = document.getElementById("addressForm");
+  if (form.style.display === "none") {
+    form.style.display = "block";
+    document.getElementById("showFormButton").innerHTML = "Lieferadresse ausblenden &#x1F69A;";
+  } else {
+    form.style.display = "none";
+    document.getElementById("showFormButton").innerHTML = "Lieferadresse hinzufügen &#x1F69A;";
+  }
+});
 
 
 

@@ -3,23 +3,21 @@ package at.technikumwien.webshop.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-/**
- * Der hier angegebene Name bestimmt den Namen der Tabelle in der Datenbank.
- */
 @Entity(name = "product")
 public class Product {
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 1000)
     private String description;
 
     @Column(name = "image_url")
@@ -37,26 +35,26 @@ public class Product {
     @Column(name = "active")
     private boolean active;
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Init
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Init
+    /////
 
-    public Product(String name, String description, String imageUrl, double price, int quantity, String manaType) {
+    public Product(String name, String description, String imageUrl, double price, int quantity, String manaType, Boolean active) {
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
         this.price = price;
         this.quantity = quantity;
         this.manaType = manaType;
+        this.active = active;
     }
 
     public Product() {
-        // noop
     }
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Getters and Setters
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Getters and Setters
+    /////
 
     public Long getId() {
         return id;

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-=======
 
->>>>>>> 2830e02aeb93e34278cb00e67bfd5b8d5777cc2e
 <head>
   <title>Registrieren</title>
 
@@ -39,17 +36,20 @@
 <body class="bg-dark">
   <overlay></overlay>
 
-  <div class="container">
+  <div class="container pt-3">
     <div class="row">
-      <div class="col">
+      <div class="col-6">
         <form id="registrationForm">
-          <div class="mb-3">
-            <label for="username" class="form-label text-white">Benutzername</label>
-            <input type="text" class="form-control text-dark" id="username" required>
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label text-white">E-Mail</label>
-            <input type="email" class="form-control text-dark" id="email" required>
+          <h3 class="text-light mb-3">Registrieren:</h3>
+          <div class="row">
+            <div class="col-6 mb-3">
+              <label for="username" class="form-label text-white">Benutzername</label>
+              <input type="text" class="form-control text-dark" id="username" required>
+            </div>
+            <div class="col-6 mb-3">
+              <label for="email" class="form-label text-white">E-Mail</label>
+              <input type="email" class="form-control text-dark" id="email" required>
+            </div>
           </div>
           <div class="mb-3">
             <div class="row d-flex justify-content-between">
@@ -63,8 +63,8 @@
             </div>
             <div class="row">
               <div class="col">
-              <input type="password" class="form-control text-dark" id="password" required>
-            </div>
+                <input type="password" class="form-control text-dark" id="password" required>
+              </div>
             </div>
           </div>
           <div class="mb-3">
@@ -78,7 +78,63 @@
               <a class="text-white" data-bs-toggle="modal" data-bs-target="#myModal">
                 AGB</a> zu.
           </div>
-          <button type="submit" class="btn btn-light btn-submit text-dark border border-dark">Registrieren</button>
+            <div class="col d-flex justify-content-between">
+              <button type="submit" class="btn btn-light btn-submit text-dark border border-dark">Registrieren</button>
+              <button type="button" class="btn btn-primary" id="showFormButton">Lieferadresse hinzufügen &#x1F69A;</button>
+            </div>
+          </div>
+        </form>
+      <div class="col-6">
+        <form id="addressForm" style="display:none">
+          <h3 class="text-light mb-3">Lieferadresse:</h3>
+          <div class="row">
+            <div class="col-4 mb-3">
+              <label for="firstName" class="form-label text-white">Vorname</label>
+              <input type="text" class="form-control text-dark" id="firstName" required>
+            </div>
+            <div class="col-4 mb-3">
+              <label for="lastName" class="form-label text-white">Nachname</label>
+              <input type="text" class="form-control text-dark" id="lastName" required>
+            </div>
+            <div class="col-4 mb-3">
+              <label for="gender" class="form-label text-white">Geschlecht</label>
+              <select class="form-select text-dark" id="gender" required>
+                <option value="">Bitte auswählen</option>
+                <option value="männlich">Männlich</option>
+                <option value="weiblich">Weiblich</option>
+                <option value="divers">Divers</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8 mb-3">
+              <label for="street" class="form-label text-white">Straße</label>
+              <input type="text" class="form-control text-dark" id="street" required>
+            </div>
+            <div class="col-4 mb-3">
+              <label for="addressLine2" class="form-label text-white">Hausnummer</label>
+              <input type="text" class="form-control text-dark" id="addressLine2">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4 mb-3">
+              <label for="postalCode" class="form-label text-white">PLZ</label>
+              <input type="text" class="form-control text-dark" id="postalCode" required>
+            </div>
+            <div class="col-4 mb-3">
+              <label for="city" class="form-label text-white">Stadt</label>
+              <input type="text" class="form-control text-dark" id="city" required>
+            </div>
+            <div class="col-4 mb-3">
+              <label for="country" class="form-label text-white">Land</label>
+              <select class="form-select text-dark" id="country" required>
+                <option value="">Bitte auswählen</option>
+                <option value="Österreich">Österreich</option>
+                <option value="Schweiz">Schweiz</option>
+                <option value="Deutschland">Deutschland</option>
+              </select>
+            </div>
+          </div>
         </form>
       </div>
     </div>

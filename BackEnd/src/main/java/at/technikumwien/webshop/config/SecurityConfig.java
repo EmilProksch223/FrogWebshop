@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -19,18 +21,23 @@ public class SecurityConfig {
 
     private final TokenService tokenService;
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Init
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Init
+    /////
 
     public SecurityConfig(TokenService tokenService) {
         this.tokenService = tokenService;
     }
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Methods
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Methods
+    /////
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+    
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         // Disable csrf
@@ -43,12 +50,14 @@ public class SecurityConfig {
                 .and()
                 // Allow unauthorized requests to certain endpoints
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST, "/products", "/users/update").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT, "/users/update").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/users/{id}").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/users/createUser").permitAll()
-                .requestMatchers("/login", "/products").permitAll()
+                .requestMatchers(HttpMethod.POST, "/products", "/users/update", "/files").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/users", "/products", "/addresses").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/users/update", "/products/update").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/users/{id}", "/products/{id}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/users/createUser", "/addresses/users/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/files/**").permitAll()
+                .requestMatchers("/login", "/products/active", "/users/{id}/address").permitAll()
+
                 // Authenticate all other requests
                 .anyRequest().authenticated()
                 .and()

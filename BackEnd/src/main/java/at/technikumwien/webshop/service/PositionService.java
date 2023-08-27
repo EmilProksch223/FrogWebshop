@@ -19,9 +19,9 @@ public class PositionService {
     private final CartService cartService;
     private final ProductService productService;
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Init
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Init
+    /////
 
     public PositionService(PositionRepository positionRepository,
                            UserRepository userRepository,
@@ -33,9 +33,9 @@ public class PositionService {
         this.productService = productService;
     }
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Methods
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Methods
+    /////
 
     public Optional<Position> findById(Long id) {
         return positionRepository.findById(id);

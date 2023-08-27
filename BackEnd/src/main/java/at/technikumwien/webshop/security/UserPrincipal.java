@@ -6,9 +6,9 @@ public class UserPrincipal {
     private final String username;
     private final boolean admin;
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Init
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Init
+    /////
 
     public UserPrincipal(Long userId, String username, boolean admin) {
         this.userId = userId;
@@ -16,9 +16,9 @@ public class UserPrincipal {
         this.admin = admin;
     }
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Getters and Setters
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Getters and Setters
+    /////
 
     public Long getUserId() {
         return userId;

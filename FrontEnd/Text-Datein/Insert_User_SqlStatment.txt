@@ -1,5 +1,6 @@
-INSERT INTO `user`(`id`, `admin`, `password`, `username`) VALUES (1,true,'admin','admin');
+INSERT INTO `user`(`id`, `admin`, `password`, `username`, `email`, `active`) VALUES (1,true,'$2y$10$KmwQwJx87vyoLe9RVcKW2etbaZYwYN7nhKIvVvBVyXc1mOQqdCEie','admin','admin@magicfrog.at',true);
 
-INSERT INTO `user`(`id`, `admin`, `password`, `username`) VALUES (2,false,'david','david');
+INSERT INTO `user`(`id`, `admin`, `password`, `username`, `email`, `active`) VALUES (2,false,'$2a$10$j7XbO5U9ycA7I3s46tQjz.2m7I268aRUDe3tiYSdRWdWuigoZNCfq','david1234','david@magicfrog.at',true);
 
-INSERT INTO `user`(`id`, `admin`, `password`, `username`) VALUES (3,false,'emil','emil');
+INSERT INTO `user`(`id`, `admin`, `password`, `username`, `email`, `active`) VALUES (3,false,'$2a$10$UfgV4a30WaQom3kvwHrOXuePiMkFWL.bnyGvUzhim0fSm9FbvsW56
+','emil1234','emil@magicfrog.at',true);
