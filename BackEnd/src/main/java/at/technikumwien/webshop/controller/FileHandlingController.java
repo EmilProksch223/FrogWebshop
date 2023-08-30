@@ -29,6 +29,21 @@ public class FileHandlingController {
         this.fileRepository = fileRepository;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Resource> streamFile(@PathVariable Long id) throws IOException {
+
+        Optional<File> fileEntity = fileRepository.findById(id);
+        
+        if(fileEntity.isPresent()) {
+            Resource file = (Resource) storageService.serve(fileEntity.get());
+            return ResponseEntity
+                    .ok()
+                    .contentType(MediaType.IMAGE_JPEG)
+                    .body(file);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @PostMapping()
     @PreAuthorize("hasRole('ADMIN')")
@@ -40,20 +55,16 @@ public class FileHandlingController {
         return fileEntity.getId().toString();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Resource> streamFile(@PathVariable Long id) throws IOException {
+    @PutMapping("/update")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<String> fileUpdate(@RequestParam("file") MultipartFile file, @RequestParam("fileId") Long fileId) throws IOException{
+        
+        File fileEntity = storageService.updateFile(file, fileId);
 
-        Optional<File> fileEntity = fileRepository.findById(id);
-        if(fileEntity.isPresent()) {
-            Resource file = (Resource) storageService.serve(fileEntity.get());
-            return ResponseEntity
-                    .ok()
-                    .contentType(MediaType.IMAGE_JPEG)
-                    .body(file);
+        if (fileEntity != null) {
+            return ResponseEntity.ok("Datei aktualisiert mit ID: " + fileEntity.getId());
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok("Keine Änderungen an dem Bild vorgenommen.");
         }
-
-    }
-
+    }   
 }

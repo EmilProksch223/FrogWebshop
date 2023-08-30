@@ -9,13 +9,13 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Optional;
-
 
 @Service
 public class StorageService {
@@ -84,7 +84,8 @@ public class StorageService {
             try {
                 Files.deleteIfExists(filePath);
             } catch (IOException e) {
-                // Hier kannst du eine entsprechende Fehlerbehandlung hinzufügen, wenn das Löschen fehlschlägt.
+                // Hier kannst du eine entsprechende Fehlerbehandlung hinzufügen, wenn das
+                // Löschen fehlschlägt.
                 e.printStackTrace();
             }
         } else {
@@ -92,4 +93,39 @@ public class StorageService {
             // Hier kannst du eine Fehlerbehandlung hinzufügen oder einfach nichts tun.
         }
     }
+
+    public File updateFile(MultipartFile file, Long fileId) throws IOException {
+        Optional<File> optionalFile = fileRepository.findById(fileId);
+
+        if (optionalFile.isPresent()) {
+            File fileEntity = optionalFile.get();
+            String oldFilename = fileEntity.getPath();
+            String newFilename = file.getOriginalFilename();
+            Path filePath = storageDirectory.resolve(oldFilename);
+            System.out.println(filePath);
+            
+
+            if (!oldFilename.equals(newFilename)) {
+                // Dateiname hat sich geändert, lösche das alte File
+                try {
+                    Files.deleteIfExists(filePath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                // Speichere das neue File
+                File savedFile = store(file);
+                fileEntity.setPath(savedFile.getPath());
+                fileRepository.save(fileEntity);
+
+                return savedFile;
+            } else {
+
+                return null;
+            }
+        } else {
+            throw new FileNotFoundException("File not found with ID: " + fileId);
+        }
+    }
+
 }

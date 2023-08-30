@@ -29,7 +29,7 @@ $(document).on('click', '#filterButton', function () {
 
     let productTableBody = $("#productTableBody");
     productTableBody.empty();
-    
+
     const searchterm = document.getElementById('search').value;
 
     $.ajax({
@@ -180,8 +180,8 @@ function createEditProductHandler(product) {
         col2.append(quantityLabel, quantityInput);
 
         let col3 = $("<div class='col p-0'></div>");
-        let imgLabel = $("<label for='editProductImg' class='form-label p-0'><a>&#128444;&#65039;</a> Bild ändern</label>");
-        let imgInput = $("<input type='file' class='form-control' id='editProductImg' name='editProductImg'>");
+        let imgLabel = $("<label for='updateProductImg' class='form-label p-0'><a href='http://localhost:8080/files/" + product.imageUrl + "'>&#128444;&#65039;</a> Bild ändern</label>");
+        let imgInput = $("<input type='file' class='form-control' id='updateProductImg' name='updateProductImg'>");
         col3.append(imgLabel, imgInput);
 
         row2.append(col1, col2, col3);
@@ -268,6 +268,34 @@ function createSaveProductHandler(product) {
 
         console.log("updatedProduct: ", updatedProduct);
 
+        const fileInput = document.getElementById("updateProductImg");
+        const file = fileInput.files[0];
+    
+        console.log(file);
+    
+        if(file){
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("fileId", productId);
+        
+            console.log(formData);
+    
+            $.ajax({
+                url: 'http://localhost:8080/files/update',
+                type: 'PUT',
+                contentType: false, // Setze contentType auf false, damit FormData den richtigen Header setzt
+                processData: false, // Setze processData auf false, damit FormData nicht den Inhalt formatiert
+                headers: { "Authorization": sessionStorage.getItem("token") },
+                data: formData,
+                success: function (response) {
+                    console.log('File erfolgreich geändert:', response);
+                    alert('File erfolgreich geändert!');
+    
+                    
+                }
+            });
+        }
+        
         $.ajax({
             url: "http://localhost:8080/products/update",
             method: "PUT",
@@ -282,9 +310,11 @@ function createSaveProductHandler(product) {
             error: function (error) {
                 console.error(error);
             }
+
         });
-    };
-}
+    }
+};
+
 
 
 

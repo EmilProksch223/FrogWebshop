@@ -58,6 +58,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    // Überflüssig?
     public void deleteProduct(long id) {
         productRepository.deleteById(id);
     }
