@@ -30,12 +30,21 @@ $(document).on('click', '#filterButton', function () {
     let productTableBody = $("#productTableBody");
     productTableBody.empty();
 
-    const searchterm = document.getElementById('search').value;
+    const searchterm = document.getElementById("search").value;
+    const activeFilter = null;
+
+    if(document.getElementById("active").checked = true){
+        activeFilter = 1;
+    } else if(document.getElementById("inactive").checked = true){
+        activeFilter = 0;
+    }
+    
+    
 
     $.ajax({
         type: "GET",
         headers: { "Authorization": sessionStorage.getItem("token") },
-        url: "http://localhost:8080/products?searchterm=" + encodeURIComponent(searchterm),
+        url: "http://localhost:8080/products?activeFiler" + activeFilter + "&searchterm=" + encodeURIComponent(searchterm),
         cors: true,
         success: function (products) {
             allProducts = products; // Alle Produkte aktualisieren
@@ -64,8 +73,9 @@ function createProductTable(products, currentPage) {
     const table = $("<table class='table table-striped mt-3'></table>");
     const thead = $("<thead class='align-middle'><tr></tr></thead>");
     const thead1 = $("<th>ID</th><th>Name</th><th class='text-end pe-2'>Menge</th><th class='text-end pe-3'>Preis</th><th class='text-center'>Active</th>");
+    const activeFilter = $("<th></th>")
     const thead2 = $("<th><div class='input-group input-group-sm ms-4 pe-4'><input class='form-control border-dark' type='search' placeholder='Search' aria-label='Search' id='search'><button class='btn btn-outline-dark bg-light' onclick='filterButton' type='button' id='filterButton'>&#x1F50D;</button></div></th>");
-    thead.append(thead1, thead2)
+    thead.append(thead1, activeFilter, thead2)
 
     const tbody = $("<tbody id='productTableBody'></tbody>");
 

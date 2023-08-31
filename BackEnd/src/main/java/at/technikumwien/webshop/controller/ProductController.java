@@ -35,29 +35,27 @@ public class ProductController {
     @GetMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<Product> getAllProducts(
-            @RequestParam(name = "searchterm", required = false) String searchterm) {
-        List<Product> activeProducts = new ArrayList<>();
+            @RequestParam(name = "searchterm", required = false) String searchterm,
+            @RequestParam(name = "activeFilter", required = false) Boolean activeFilter) {
+        List<Product> filteredProducts = new ArrayList<>();
         List<Product> allProducts = service.getAllProducts();
         System.out.print("Funktion");
-        if (searchterm == null) {
-            System.out.print("alle Produkte");
+        if (searchterm == null && activeFilter == null) {
             return allProducts;
         }
-            
         for (Product product : allProducts) {
             System.out.print("Filter");
 
-            if (searchterm != null  && (!product.getName().toLowerCase().contains(searchterm.toLowerCase()))) {
-           continue;
-       }
-
-            activeProducts.add(product);
+            if (searchterm != null && (!product.getName().toLowerCase().contains(searchterm.toLowerCase()))) {
+                continue;
+            }
+            if (activeFilter != null && product.isActive() != activeFilter) {
+                continue;
+            }
+            filteredProducts.add(product);
         }
-
-        return activeProducts;
+        return filteredProducts;
     }
-
-
 
     @GetMapping("/active")
     public List<Product> getActiveProducts(
@@ -69,20 +67,16 @@ public class ProductController {
         if (manaSymbolsString == null && searchterm == null) {
             return allProducts;
         }
-
         for (Product product : allProducts) {
             if (manaSymbolsString != null
                     && !product.getManaType().toLowerCase().contains(manaSymbolsString.toLowerCase())) {
                 continue;
             }
-
             if (searchterm != null && !product.getName().toLowerCase().contains(searchterm.toLowerCase())) {
                 continue;
             }
-
             activeProducts.add(product);
         }
-
         return activeProducts;
     }
 
@@ -113,7 +107,7 @@ public class ProductController {
             existingProduct.setActive(productDTO.isActive());
             Product updatedProduct = service.updateProduct(existingProduct);
             return ResponseEntity.ok(updatedProduct);
-        }else {
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
