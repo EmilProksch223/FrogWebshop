@@ -31,6 +31,10 @@ import at.technikumwien.webshop.service.UserService;
 @RequestMapping("/users")
 public class UserController {
 
+    /////
+    //Init
+    /////
+
     @Autowired
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
@@ -39,6 +43,10 @@ public class UserController {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
+
+    /////
+    //Methods
+    /////
 
     @GetMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -78,7 +86,7 @@ public class UserController {
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get();
             fromDTO(existingUser, userDTO);
-    
+
             User updatedUser = userService.updateUser(existingUser);
             return ResponseEntity.ok(updatedUser);
         } else {
@@ -98,6 +106,10 @@ public class UserController {
         }
     }
 
+    /////
+    //UserDTO-Objekt in User-Objekt
+    /////
+
     private User fromDTO(User existingUser, UserDTO userDTO) {
         existingUser.setUsername(userDTO.getUsername());
         existingUser.setEmail(userDTO.getEmail());
@@ -116,20 +128,23 @@ public class UserController {
         userDTO.setId(user.getId());
         userDTO.setUsername(user.getUsername());
         userDTO.setEmail(user.getEmail());
-        userDTO.setPassword(user.getPassword()); // Du könntest dies ändern, um das Passwort nicht zurückzugeben
+        userDTO.setPassword(user.getPassword());
         userDTO.setActive(user.isActive());
         userDTO.setAdmin(user.isAdmin());
-    
+
         Address address = user.getAddress();
         if (address != null) {
             AddressDTO addressDTO = new AddressDTO();
-            addressDTO.setStreet(address.getStreet());
-            addressDTO.setCity(address.getCity());
-            addressDTO.setPostalCode(address.getPostalCode());
-            // Füge weitere Attribute hinzu, falls vorhanden
+            address.setFirstName(addressDTO.getFirstName());
+            address.setLastName(addressDTO.getLastName());
+            address.setGender(addressDTO.getGender());
+            address.setStreet(addressDTO.getStreet());
+            address.setAddressLine2(addressDTO.getAddressLine2());
+            address.setPostalCode(addressDTO.getPostalCode());
+            address.setCity(addressDTO.getCity());
+            address.setCountry(addressDTO.getCountry());
             userDTO.setAddress(addressDTO);
         }
-    
         return userDTO;
     }
 }

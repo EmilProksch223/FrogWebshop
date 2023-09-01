@@ -1,7 +1,6 @@
 package at.technikumwien.webshop.controller;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,64 +25,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/products")
 public class ProductController {
 
+    /////
+    //Init
+    /////
+
     private ProductService service;
+
 
     public ProductController(ProductService service) {
         this.service = service;
     }
 
+    /////
+    //Methods
+    /////
+
     @GetMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public List<Product> getAllProducts(
-            @RequestParam(name = "searchterm", required = false) String searchterm) {
-        List<Product> activeProducts = new ArrayList<>();
-        List<Product> allProducts = service.getAllProducts();
-        System.out.print("Funktion");
-        if (searchterm == null) {
-            System.out.print("alle Produkte");
-            return allProducts;
-        }
-            
-        for (Product product : allProducts) {
-            System.out.print("Filter");
-
-            if (searchterm != null  && (!product.getName().toLowerCase().contains(searchterm.toLowerCase()))) {
-           continue;
-       }
-
-            activeProducts.add(product);
-        }
-
-        return activeProducts;
+    public List<Product> getAllProducts(@RequestParam(name = "searchterm", required = false) String searchterm) {
+        return service.getAllProductsFiltered(searchterm);
     }
-
-
 
     @GetMapping("/active")
     public List<Product> getActiveProducts(
             @RequestParam(name = "manasymbols", required = false) String manaSymbolsString,
             @RequestParam(name = "searchterm", required = false) String searchterm) {
-        List<Product> activeProducts = new ArrayList<>();
-        List<Product> allProducts = service.getActiveProducts();
-
-        if (manaSymbolsString == null && searchterm == null) {
-            return allProducts;
-        }
-
-        for (Product product : allProducts) {
-            if (manaSymbolsString != null
-                    && !product.getManaType().toLowerCase().contains(manaSymbolsString.toLowerCase())) {
-                continue;
-            }
-
-            if (searchterm != null && !product.getName().toLowerCase().contains(searchterm.toLowerCase())) {
-                continue;
-            }
-
-            activeProducts.add(product);
-        }
-
-        return activeProducts;
+        return service.getActiveProductsFiltered(manaSymbolsString, searchterm);
     }
 
     @PostMapping
@@ -104,16 +71,9 @@ public class ProductController {
         Optional<Product> optionalProduct = service.getProductById(productDTO.getId());
         if (optionalProduct.isPresent()) {
             Product existingProduct = optionalProduct.get();
-            existingProduct.setName(productDTO.getName());
-            existingProduct.setDescription(productDTO.getDescription());
-            existingProduct.setImageUrl(productDTO.getImageUrl());
-            existingProduct.setPrice(productDTO.getPrice());
-            existingProduct.setQuantity(productDTO.getQuantity());
-            existingProduct.setManaType(productDTO.getManaType());
-            existingProduct.setActive(productDTO.isActive());
-            Product updatedProduct = service.updateProduct(existingProduct);
+            Product updatedProduct = service.updateProductFromDTO(existingProduct, productDTO);
             return ResponseEntity.ok(updatedProduct);
-        }else {
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
@@ -129,6 +89,10 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    /////
+    //ProductDTO-Object in Product-Object
+    /////
 
     private static Product fromDTO(ProductDTO productDTO) {
         return new Product(productDTO.getName(),
