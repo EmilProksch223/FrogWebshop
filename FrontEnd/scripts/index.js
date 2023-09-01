@@ -45,3 +45,5 @@ $(document).on('click', '#add-to-cart-button', function() {
 function removeProducts() {
   $("#productsContainer").empty();
 }
+
+

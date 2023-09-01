@@ -83,7 +83,7 @@ public class ProductController {
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         Optional<Product> optionalProduct = service.getProductById(id);
         if (optionalProduct.isPresent()) {
-            service.deleteProduct(id);
+            service.deleteProductAndFile(id);
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
