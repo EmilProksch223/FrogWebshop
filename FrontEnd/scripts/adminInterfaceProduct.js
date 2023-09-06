@@ -1,330 +1,254 @@
-let currentPage = 1; // Aktuelle Seite
-let allProducts = [];
-
-
-// Alle Produkte laden
+// Produkte als Liste hinzufügen
 
 $(document).ready(function () {
-    loadProducts();
+  loadProducts();
 });
 
 function loadProducts() {
-    $.ajax({
-        url: "http://localhost:8080/products",
-        method: "GET",
-        headers: { "Authorization": sessionStorage.getItem("token") },
-        success: function (products) {
-            allProducts = products;
-            createProductTable(products, currentPage);
-        },
-        error: function (error) {
-            console.error(error);
-        }
-    });
+  $.ajax({
+    url: "http://localhost:8080/products",
+    method: "GET",
+    headers: { "Authorization": sessionStorage.getItem("token") },
+    success: function (products) {
+      allProducts = products;
+      currentPage = 1;
+      addProductsToList(products);
+    },
+    error: function (error) {
+      console.error(error);
+    }
+  });
 }
 
-//Filter Produkte laden
+//Filter Produkte / Produkte laden
 
 $(document).on('click', '#filterButton', function () {
+  let productTableBody = $("#productTableBody");
+  productTableBody.empty();
 
-    let productTableBody = $("#productTableBody");
-    productTableBody.empty();
+  const searchterm = document.getElementById("search").value;
+  let activeFilter = "";
 
-    const searchterm = document.getElementById("search").value;
-    const activeFilter = null;
+  if (document.getElementById("create-activeCheckbox").checked === true) {
+    activeFilter = true;
+  } else if (document.getElementById("create-inactiveCheckbox").checked === true) {
+    activeFilter = false;
+  }
 
-    if(document.getElementById("active").checked = true){
-        activeFilter = 1;
-    } else if(document.getElementById("inactive").checked = true){
-        activeFilter = 0;
-    }
-    
-    
-
-    $.ajax({
-        type: "GET",
-        headers: { "Authorization": sessionStorage.getItem("token") },
-        url: "http://localhost:8080/products?activeFiler" + activeFilter + "&searchterm=" + encodeURIComponent(searchterm),
-        cors: true,
-        success: function (products) {
-            allProducts = products; // Alle Produkte aktualisieren
-            currentPage = 1;
-            createProductTable(products, currentPage)
-        },
-        error: function (error) { console.error(error) }
-    });
+  $.ajax({
+    url: "http://localhost:8080/products?activeFilter=" + activeFilter + "&searchterm=" + encodeURIComponent(searchterm),
+    type: "GET",
+    headers: { "Authorization": sessionStorage.getItem("token") },
+    success: function (products) {
+      allProducts = products; // Alle Produkte aktualisieren
+      currentPage = 1;
+      addProductsToList(products)
+    },
+    error: function (error) { console.error(error) }
+  });
 });
 
-//Tabelle mit Produkten erzeugen
 
-function createProductTable(products, currentPage) {
-    const divPages = $("#pagesButton");
-    divPages.show();
-    divPages.find("p").text(currentPage);
+function addProductsToList(products) {
+  const divPages = $("#pagesButton");
+  divPages.show();
+  divPages.find("p").text(currentPage);
 
-    const productsPerPage = 6;
-    const startIndex = (currentPage - 1) * productsPerPage;
-    const endIndex = startIndex + productsPerPage;
-    const productsToShow = products.slice(startIndex, endIndex);
+  const productsPerPage = 6;
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  const productsToShow = products.slice(startIndex, endIndex);
+  const productTableBody = $("#productTableBody");
 
-    const container = $("#productListContainer");
-    container.find("h2").text("Produkt Liste");
+  productTableBody.empty();
 
-    const table = $("<table class='table table-striped mt-3'></table>");
-    const thead = $("<thead class='align-middle'><tr></tr></thead>");
-    const thead1 = $("<th>ID</th><th>Name</th><th class='text-end pe-2'>Menge</th><th class='text-end pe-3'>Preis</th><th class='text-center'>Active</th>");
-    const activeFilter = $("<th></th>")
-    const thead2 = $("<th><div class='input-group input-group-sm ms-4 pe-4'><input class='form-control border-dark' type='search' placeholder='Search' aria-label='Search' id='search'><button class='btn btn-outline-dark bg-light' onclick='filterButton' type='button' id='filterButton'>&#x1F50D;</button></div></th>");
-    thead.append(thead1, activeFilter, thead2)
-
-    const tbody = $("<tbody id='productTableBody'></tbody>");
-
-    for (let i = 0; i < productsToShow.length; i++) {
-        let product = productsToShow[i];
-        let row = $("<tr class='text-'></tr>");
-        row.append($("<td class='align-middle'>" + product.id + "</td>"));
-        row.append($("<td class='align-middle ps-0'>" + product.name + "</td>"));
-        row.append($("<td class='align-middle text-end pe-3'>" + product.quantity + "</td>"));
-        row.append($("<td class='align-middle text-end pe-3'>" + product.price.toFixed(2) + " €</td>"));
-        row.append($("<td class='align-middle text-center'>" + (product.active ? "&#10004;&#65039;" : "&#10060;") + "</td>"));
-
-        let editButton = $("<button class='btn btn-primary' id='editButton1'>&#x2692;&#xFE0F; Bearbeiten</button>");
-        editButton.click(createEditProductHandler(product));
+  productsToShow.forEach(function (product) {
+    const row = $("<tr>");
+    row.append($("<td>").text(product.id));
+    row.append($("<td>").text(product.name));
+    row.append($("<td class='text-end d-none d-md-table-cell'>").text(product.price.toFixed(2) + "€"));
+    row.append($("<td class='text-center d-none d-md-table-cell'>").html(product.active ? "&#10004;&#65039;" : "&#10060;"));
+    row.append($("<td class='text-end pe-4 d-none d-md-table-cell'>").text(product.quantity));
+    const editButton = $("<button class='btn btn-primary mx-1' id='editButton'><span class='text-nowrap'><span class='d-none d-sm-inline'>Bearbeiten</span><span>&#x2692;&#xFE0F;</span></span></button>");
+    editButton.click(function () {
+      editProduct(product);
+    });
+    const deleteButton = $("<button class='btn btn-danger mx-1' id='deleteButton'>&#x1F5D1;&#xFE0F;</button>");
+    deleteButton.click(function () {
+      deleteProduct(product.id);
+    })
 
 
-        let deleteButton = $("<button class='btn btn-danger mx-1'>&#x1F5D1;&#xFE0F; Löschen</button>");
-        deleteButton.click(createDeleteProductHandler(product.id));
 
-        let buttonCell = $("<td class='text-end'></td>").append(editButton, deleteButton);
-        row.append(buttonCell);
+    const handler = $("<td class='text-end pe-0'>");
+    handler.append(editButton, deleteButton);
+    row.append(handler);
 
-        tbody.append(row);
+    productTableBody.append(row);
+  });
+}
 
+//Produkte bearbeiten
 
-    }
+function editProduct(product) {
 
-    table.append(thead, tbody);
-    container.empty().append("<h2 class='text-center mb-0'>Produkt Liste</h2>", table);
+  let productListContainer = document.getElementById("productListContainer");
+  let productEditContainer = document.getElementById("productEditContainer");
 
+  productListContainer.style.display = "none";
+  productEditContainer.style.display = "block";
+
+  const container = $("#productEditContainer");
+  container.find("h2").text(`Produkt ID: ${product.id}`);
+
+  $("#editProductName").val(product.name);
+  $("#editProductActive").val(product.active.toString());
+
+  $("#editProductPrice").val(product.price);
+  $("#editProductQuantity").val(product.quantity);
+  $("#showProductImage").attr("href", "http://localhost:8080/files/" + product.imageUrl);
+  $("#editProductDescription").val(product.description);
+
+  loadManaSymbols2(product.manaType);
+
+  $("#saveEditProduct").off("click").on("click", function () {
+    saveProduct(product);
+  })
 
 }
 
-//seiten
+$(document).on('click', '#cancelEditProduct', function () {
+  let productListContainer = document.getElementById("productListContainer");
+  let productEditContainer = document.getElementById("productEditContainer");
 
-$(document).on('click', '#previousPage', function () {
-    if (currentPage > 1) {
-        currentPage--;
-        createProductTable(allProducts, currentPage);
-    }
+  productListContainer.style.display = "block";
+  productEditContainer.style.display = "none";
+
 });
 
-$(document).on('click', '#nextPage', function () {
-    const totalPages = Math.ceil(allProducts.length / 6);
-    if (currentPage < totalPages) {
-        currentPage++;
-        createProductTable(allProducts, currentPage);
-    }
-});
+
 // Produkt löschen
 
-function createDeleteProductHandler(productId) {
-    return function () {
-        if (confirm("Are you sure you want to delete this product?")) {
-            $.ajax({
-                url: "http://localhost:8080/products/" + productId,
-                method: "DELETE",
-                headers: { "Authorization": sessionStorage.getItem("token") },
-                success: function (response) {
-                    console.log("Deleted product:", response);
-                    loadProducts();
-                },
-                error: function (error) {
-                    console.error(error);
-                }
-            });
-        }
-    };
-}
-
-//Produkte bearbeiten (Ansicht)
-
-function createEditProductHandler(product) {
-    return function () {
-        let productTableBody = $("#productTableBody");
-        productTableBody.empty();
-
-        const container = $("#productListContainer");
-        container.find("h2").text(`Produkt ID: ${product.id}`);
-        container.find("table").remove();
-
-        const divPages = $("#pagesButton");
-        divPages.hide();
-
-        let row1 = $("<div class='row'></div>");
-
-        let titleCol = $("<div class='col-9 mb-3 ps-0'></div>");
-        let titleLabel = $("<label for='editProductName' class='form-label p-0'>Titel</label>");
-        let titleInput = $("<input type='text' class='form-control' id='editProductName' name='editProductName' value='" + product.name + "'></input>");
-        titleCol.append(titleLabel, titleInput)
-
-        let activeCol = $("<div class='col-2 mb-3'></div>");
-        let activeLabel = $("<label for='editProductActive' class='form-label p-0'>Active</label>");
-        let activeDropdown = $("<select class='form-control' id='editProductActive'></select>");
-        activeDropdown.append($("<option value='true'>&#10004;&#65039;</option>"));
-        activeDropdown.append($("<option value='false'>&#10060;</option>"));
-        activeDropdown.val(product.active.toString());
-        activeCol.append(activeLabel, activeDropdown)
-
-        row1.append(titleCol, activeCol);
-
-        let row2 = $("<div class='row mb-3'></div>");
-
-        let col1 = $("<div class='col-6 col-sm-3 mb-2 p-0'></div>");
-        let priceLabel = $("<label for='editProductPrice' class='form-label p-0'>Preis</label>");
-        let priceInput = $("<div class='input-group'><input type='text' class='form-control' id='editProductPrice' name='editProductPrice' aria-label='Euro amount' value='" + product.price.toFixed(2) + "'><span class='input-group-text'>€</span></div>");
-        col1.append(priceLabel, priceInput);
-
-        let col2 = $("<div class='col-6 col-sm-3'></div>");
-        let quantityLabel = $("<label for='editProductQuantity' class='form-label p-0'>Menge</label>");
-        let quantityInput = $("<input type='number' class='form-control' id='editProductQuantity' name='editProductQuantity' value='" + product.quantity + "'></input>");
-        col2.append(quantityLabel, quantityInput);
-
-        let col3 = $("<div class='col p-0'></div>");
-        let imgLabel = $("<label for='updateProductImg' class='form-label p-0'><a href='http://localhost:8080/files/" + product.imageUrl + "'>&#128444;&#65039;</a> Bild ändern</label>");
-        let imgInput = $("<input type='file' class='form-control' id='updateProductImg' name='updateProductImg'>");
-        col3.append(imgLabel, imgInput);
-
-        row2.append(col1, col2, col3);
-
-        let row3 = $("<div class='row mb-3'></div>");
-
-        let descriptionLabel = $("<label for='editProductDescription' class='form-label p-0'>Beschreibung</label>");
-        let descriptionInput = $("<textarea type='text' class='form-control' id='editProductDescription' name='editProductDescription' rows='3'>" + product.description + "</textarea>");
-        row3.append(descriptionLabel, descriptionInput);
-
-        let row4 = $("<div class='row mb-3'></div>");
-        let manaLabel = $("<div class='row mb-2'>Mana</div>");
-        let manaInput = $("<div class='row justify-content-between mb-2'><manaSymbols2></manaSymbols2></div>");
-
-        loadManaSymbols2(product.manaType);
-
-        row4.append(manaLabel, manaInput);
-
-        let row5 = $("<div class='row mt-4'></div>");
-        let saveCol = $("<div class='col text-end'></div>");
-        let saveButton = $("<button class='btn btn-success mx-1'>&#x1F4BE; Speichern</button>");
-        saveCol.append(saveButton);
-        saveButton.click(createSaveProductHandler(product));
-
-        let cancelCol = $("<div class='col text-start'></div>");
-        let cancelButton = $("<button class='btn btn-secondary'>&#x2716;&#xFE0F; Abbrechen</button>");
-        cancelCol.append(cancelButton);
-        cancelButton.click(function () {
-            loadProducts();
-        });
-        row5.append(saveCol, cancelCol);
-
-        productTableBody.append(row1, row2, row3, row4, row5);
-
-        container.append(productTableBody);
-    };
-}
-
-//Überarbeitet Produkte der DB hinzufügen
-
-function createSaveProductHandler(product) {
-    return function () {
-
-        const manaSymbols = [];
-        const checkboxes = document.querySelectorAll('input[name="ManaSymbol[]"]:checked');
-        for (let i = 0; i < checkboxes.length; i++) {
-            manaSymbols.push(checkboxes[i].value);
-        }
-        const manaSymbolsString = manaSymbols.join("");
-
-        let productId = product.id;
-        let newProductName = document.getElementById("editProductName").value;
-        let newProductPrice = parseFloat($("#editProductPrice").val());
-        let newProductQuantity = parseInt($("#editProductQuantity").val());
-        let newManaType = manaSymbolsString;
-        let newProductImg = product.imageUrl;
-        let newProductDescription = $("#editProductDescription").val();
-        let productIsActive = $("#editProductActive").val() === "true";
-
-        if (newProductName.trim() === "") {
-            newProductName = product.name;
-        }
-        if (isNaN(newProductPrice)) {
-            newProductPrice = product.price;
-        }
-
-        if (isNaN(newProductQuantity)) {
-            newProductQuantity = product.quantity;
-        }
-        if (newProductDescription.trim() === "") {
-            newProductDescription = product.description;
-        }
-
-        let updatedProduct = {
-            id: productId,
-            name: newProductName,
-            price: newProductPrice,
-            quantity: newProductQuantity,
-            manaType: newManaType,
-            imageUrl: newProductImg,
-            description: newProductDescription,
-            active: productIsActive,
-        };
-
-        console.log("updatedProduct: ", updatedProduct);
-
-        const fileInput = document.getElementById("updateProductImg");
-        const file = fileInput.files[0];
-    
-        console.log(file);
-    
-        if(file){
-            const formData = new FormData();
-            formData.append("file", file);
-            formData.append("fileId", productId);
-        
-            console.log(formData);
-    
-            $.ajax({
-                url: 'http://localhost:8080/files/update',
-                type: 'PUT',
-                contentType: false, // Setze contentType auf false, damit FormData den richtigen Header setzt
-                processData: false, // Setze processData auf false, damit FormData nicht den Inhalt formatiert
-                headers: { "Authorization": sessionStorage.getItem("token") },
-                data: formData,
-                success: function (response) {
-                    console.log('File erfolgreich geändert:', response);
-                    alert('File erfolgreich geändert!');
-    
-                    
-                }
-            });
-        }
-        
-        $.ajax({
-            url: "http://localhost:8080/products/update",
-            method: "PUT",
-            headers: { "Authorization": sessionStorage.getItem("token") },
-            data: JSON.stringify(updatedProduct),
-            contentType: "application/json",
-            success: function (response) {
-                console.log("Updated product: ", response);
-
-                loadProducts();
-            },
-            error: function (error) {
-                console.error(error);
-            }
-
-        });
-    }
+function deleteProduct(productId) {
+  if (confirm("Are you sure you want to delete this product?")) {
+    $.ajax({
+      url: "http://localhost:8080/products/" + productId,
+      method: "DELETE",
+      headers: { "Authorization": sessionStorage.getItem("token") },
+      success: function (response) {
+        console.log("Deleted product:", response);
+        loadProducts();
+      },
+      error: function (error) {
+        console.error(error);
+      }
+    });
+  }
 };
 
 
+// Produkte speichern
 
+function saveProduct(product) {
+  // Datei-Upload, falls eine Datei ausgewählt wurde
+  const fileInput = document.getElementById("updateProductImg");
+  const file = fileInput.files[0];
 
+  if (file) {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("fileId", product.id);
+
+    $.ajax({
+      url: 'http://localhost:8080/files/update',
+      type: 'PUT',
+      contentType: false,
+      processData: false,
+      headers: { "Authorization": sessionStorage.getItem("token") },
+      data: formData,
+      success: function (response) {
+        console.log('File erfolgreich geändert:', response);
+        alert('File erfolgreich geändert!');
+      }
+    });
+  }
+
+  // Produkt-Upload
+
+  // Mana-Symbole sammeln
+  const manaSymbols = [...document.querySelectorAll('input[name="ManaSymbol[]"]:checked')].map(input => input.value).join("");
+
+  // Aktualisierte Produktinformationen
+  const updatedProduct = {
+    id: product.id,
+    name: $("#editProductName").val().trim() || product.name,
+    price: parseFloat($("#editProductPrice").val()) || product.price,
+    quantity: parseInt($("#editProductQuantity").val()) || product.quantity,
+    manaType: manaSymbols,
+    imageUrl: product.imageUrl,
+    description: $("#editProductDescription").val().trim() || product.description,
+    active: $("#editProductActive").val() === "true"
+  };
+
+  // Produkt aktualisieren
+  $.ajax({
+    url: "http://localhost:8080/products/update",
+    method: "PUT",
+    headers: { "Authorization": sessionStorage.getItem("token") },
+    data: JSON.stringify(updatedProduct),
+    contentType: "application/json",
+    success: function (response) {
+      console.log("Updated product: ", response);
+      loadProducts();
+    },
+    error: function (error) {
+      console.error(error);
+    }
+  });
+}
+
+$(document).on('click', '#saveEditProduct', function () {
+  let productListContainer = document.getElementById("productListContainer");
+  let productEditContainer = document.getElementById("productEditContainer");
+
+  productListContainer.style.display = "block";
+  productEditContainer.style.display = "none";
+});
+
+//Switch between List and Edit
+
+function displayProductEditOrList(displayProductList, displayProductEdit) {
+  let productListContainer = document.getElementById("productListContainer");
+  let productEditContainer = document.getElementById("productEditContainer");
+
+  productListContainer.style.display = displayProductList;
+  productEditContainer.style.display = displayProductEdit;
+
+}
+
+//Produkte pro Seite und Seite wechsel
+
+$(document).on('click', '#previousPage', function () {
+  if (currentPage > 1) {
+    currentPage--;
+    addProductsToList(allProducts);
+  }
+
+  updatePageButtons();
+});
+
+$(document).on('click', '#nextPage', function () {
+  const totalPages = Math.ceil(allProducts.length / 6);
+  if (currentPage < totalPages) {
+    currentPage++;
+    addProductsToList(allProducts);
+  }
+
+  updatePageButtons();
+});
+
+function updatePageButtons() {
+  const totalPages = Math.ceil(allProducts.length / 6);
+  $('#previousPage').prop('disabled', currentPage === 1);
+  $('#nextPage').prop('disabled', currentPage === totalPages);
+}

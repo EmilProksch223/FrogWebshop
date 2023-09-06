@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (isAdmin) {
         var adminLink = document.getElementById('adminInterfaceLink');
         if (adminLink) {
-          adminLink.href = '/frontend/pages/adminInterface.html';
+          adminLink.href = '/frontend/adminInterface.html';
           adminLink.innerHTML = '<img class="navbar-img mx-3 my-1" src="/frontend/components/navbar/img/admin_settings_tools_48.png" width="40" height="40" alt="sale">';
         } else {
           console.log('Das Element mit der ID "adminInterfaceLink" wurde nicht gefunden.');
@@ -106,9 +106,21 @@ function replaceButtons(loginButton, logoutButton) {
     } else {
       console.log('Das Elternelement des Login-Buttons wurde nicht gefunden.');
     }
-  } else {
-    console.log('Token nicht vorhanden, Login-Button wird angezeigt');
   }
 }
+
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === "Enter") {
+    const usernameInput = document.getElementById("usernameInput");
+    const passwordInput = document.getElementById("passwordInput");
+    const activeElement = document.activeElement;
+
+    if ((activeElement === usernameInput || activeElement === passwordInput) && activeElement.tagName === "INPUT") {
+      event.preventDefault();
+      document.getElementById("loginButton").click();
+    }
+  }
+});
 
 

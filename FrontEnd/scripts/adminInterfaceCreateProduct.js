@@ -45,11 +45,9 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('File erfolgreich gesendet:', response);
         alert('File erfolgreich gesendet!');
 
-        // Erhalte den Namen des hochgeladenen Bildes aus der Antwort und erstelle die imageUrl
         const imageName = response;
         const imageUrl = imageName;
 
-        // Hier senden wir die restlichen Produktinformationen an den Server
         const product = {
           name: productName,
           description: productDescription,

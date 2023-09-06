@@ -26,8 +26,11 @@
   <script src="/frontend/scripts/login.js" defer></script>
   <script src="/frontend/components/manaSymbols/manaSymbols.js" defer></script>
 
-  <script src="/frontend/scripts/otherPage.js" defer></script>
-  <script src="/frontend/scripts/adminInterfaceUserCopy.js" defer></script>
+  <!--AdminInterfaceScripts-->
+  <script src="/frontend/scripts/adminInterfaceCreateProduct.js" defer></script>
+  <script src="/frontend/scripts/adminInterfaceProduct.js" defer></script>
+  <script src="/frontend/scripts/adminInterfaceUser.js" defer></script>
+
 
 </head>
 
@@ -36,7 +39,9 @@
   <h1 class="p-3 text-center text-white">Admin Seite</h1>
   <div class="container">
     <div class="row justify-content-between">
-      <div class="col-12 col-xxl-4 border border-dark rounded my-3 mx-0 me-lg-3 p-3 bg-light">
+      <div class="col-12 col-xxl-5 border border-dark rounded my-3 mx-0 p-3 bg-light">
+
+        <!--Product Create-->
         <div class="container">
           <h2 class="text-center mb-0">Produkt erstellen</h2>
           <form id="formCreateProduct" method="POST">
@@ -80,8 +85,10 @@
         <div class="container">
           <div class="row">
             <div class="col-12">
+              
+              <!--Product List-->
               <div class="container" id="productListContainer">
-                <h2 class="text-center mb-0">Prokdukt Liste</h2>
+                <h2 class="text-center mb-0">Produktliste</h2>
                 <table class='table table-striped mt-3'>
                   <thead class='align-middle'>
                     <tr></tr>
@@ -92,27 +99,29 @@
                     <th class="text-end pe-2 d-none d-md-table-cell">Menge</th>
                     <th class="text-end">
                       <div class="input-group input-group-sm">
-                          <div class="row">
-                            <div class="col-2"></div>
-                              <div class="col-4">
-                                  <div class="row row-cols-1">
-                                      <div class="col d-flex align-items-center justify-content-end">
-                                          <label class="pe-1" for="activeCheckbox" style="font-size: 12px;">Active</label>
-                                          <input type="checkbox" id="activeCheckbox" name="activeCheckbox" value="1">
-                                      </div>
-                                      <div class="col d-flex align-items-center justify-content-end">
-                                          <label class="pe-1" for="inactiveCheckbox" style="font-size: 12px;">Inactive</label>
-                                          <input type="checkbox" id="inactiveCheckbox" name="inactiveCheckbox" value="2">
-                                      </div>
-                                  </div>
+                        <div class="row">
+                          <div class="col-2"></div>
+                          <div class="col-4">
+                            <div class="row row-cols-1">
+                              <div class="col d-flex align-items-center justify-content-end">
+                                <label class="pe-1" for="activeCheckbox" style="font-size: 12px;">Active</label>
+                                <input type="checkbox" id="activeCheckbox" name="activeCheckbox" value="1">
                               </div>
-                              <div class="col d-flex justify-content-end align-items-center ps-0">
-                                  <input class="form-control form-control-sm border-dark" type="search" placeholder="Search" aria-label="Search" id="search">
-                                  <button class="btn btn-outline-dark btn-sm bg-light" onclick="filterButton" type="button" id="filterButton">&#x1F50D;</button>
+                              <div class="col d-flex align-items-center justify-content-end">
+                                <label class="pe-1" for="inactiveCheckbox" style="font-size: 12px;">Inactive</label>
+                                <input type="checkbox" id="inactiveCheckbox" name="inactiveCheckbox" value="2">
                               </div>
+                            </div>
                           </div>
+                          <div class="col d-flex justify-content-end align-items-center ps-0">
+                            <input class="form-control form-control-sm border-dark" type="search" placeholder="Search"
+                              aria-label="Search" id="search">
+                            <button class="btn btn-outline-dark btn-sm bg-light" onclick="filterButton" type="button"
+                              id="filterButton">&#x1F50D;</button>
+                          </div>
+                        </div>
                       </div>
-                  </th>
+                    </th>
                   </thead>
                   <tbody id='productTableBody' class='align-middle'>
                   </tbody>
@@ -127,6 +136,7 @@
                 </div>
               </div>
 
+              <!--Product Edit-->
               <div class="container" id="productEditContainer" style="display : none">
                 <h2 class="text-center mb-0">Produkt Id:</h2>
                 <div class='row justify-content-between'>
@@ -158,7 +168,7 @@
                   </div>
                   <div class='col p-0'>
                     <label for='updateProductImg' class='form-label p-0'>
-                      <a id="showProductImage" href=''>&#128444;&#65039;</a> 
+                      <a id="showProductImage" href=''>&#128444;&#65039;</a>
                       Bild ändern
                     </label>
                     <input type='file' class='form-control' id='updateProductImg' name='updateProductImg'>
@@ -166,7 +176,8 @@
                 </div>
                 <div class='row mb-3'>
                   <label for='editProductDescription' class='form-label p-0'>Beschreibung</label>
-                  <textarea type='text' class='form-control' id='editProductDescription' name='editProductDescription' rows='3'></textarea>
+                  <textarea type='text' class='form-control' id='editProductDescription' name='editProductDescription'
+                    rows='3'></textarea>
                 </div>
                 <div class='row mb-3'>
                   <div class='row mb-2'>Mana</div>
@@ -175,7 +186,7 @@
                   </div>
                 </div>
                 <div class='row mt-4'>
-                  <div class='col text-end'>
+                  <div class='col text-end' id="saveEditCol">
                     <button class='btn btn-success mx-1' id="saveEditProduct">&#x1F4BE; Speichern</button>
                   </div>
                   <div class='col text-start'>
@@ -188,27 +199,64 @@
         </div>
       </div>
     </div>
+
+    <!--User List-->
     <div class="row">
       <div class="col-12 border border-dark rounded p-3 bg-light">
-          <div class="container">
-              <h1 class="text-center">Benutzer Liste</h1>
+        <div class="container">
+          <div class="row-col-1">
+            <div class="col">
+              <h1 class="text-center">Benutzerliste</h1>
               <table class="table table-striped">
-                  <thead>
-                      <tr>
-                          <th>ID</th>
-                          <th>Benutzername</th>
-                          <th>E-Mail</th>
-                          <th>Aktiv</th>
-                          <th>Admin</th>
-                      </tr>
-                  </thead>
-                  <tbody id="userTableBody"></tbody>
-              </table>
-          </div>
-      </div>
-  </div>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Benutzername</th>
+                    <th class="d-none d-md-table-cell">E-Mail</th>
+                    <th class="text-center">Aktiv</th>
+                    <th class="text-center">Admin</th>
+                  </tr>
+                </thead>
 
-  </div>
+                <!--User Edit-->
+                <tbody class="align-middle" id="userTableBody" style="display : table-row-group"></tbody>
+                <tbody class="align-middle" id="editUserTable" style="display : none">
+                  <tr>
+                    <td class='align-middle' id="editUserId"></td>
+                    <td class='align-middle'>
+                      <input id='editUserName' type='text' class='form-control'>
+                    </td>
+                    <td>
+                      <input id='editUserEmail' type='email' class='form-control'>
+                    </td>
+                    <td>
+                      <select class='form-control' id='editUserActive'>
+                        <option class="text-center" value='true'>&#10004;&#65039;</option>
+                        <option class="text-center" value='false'>&#10060;</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select class='form-control' id='editUserAdmin'>
+                        <option class="text-center" value='true'>&#10004;&#65039;</option>
+                        <option class="text-center" value='false'>&#10060;</option>
+                      </select>
+                    </td>
+                    <td class='text-end'>
+                      <button class='btn btn-primary mx-1' id="saveEditUser">&#x1F4BE; Speichern</button>
+                      <button class='btn btn-secondary' id="cancelEditUser">&#x2716;&#xFE0F; Abbrechen</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col">
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
   </div>
 
 
