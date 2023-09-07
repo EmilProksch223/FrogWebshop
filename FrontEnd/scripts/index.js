@@ -20,30 +20,13 @@ document.getElementById("filter-button").onclick = function (event) {
 };
 
 
-document.getElementById("search").addEventListener("keydown", function(event) {
+document.getElementById("search").addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
-    event.preventDefault();
-    document.getElementById("filter-button").click();
+        event.preventDefault();
+        document.getElementById("filter-button").click();
     }
-});
-
-$(document).on('click', '#add-to-cart-button', function() {
-  const productId = $(this).data('product-id');
-  const cartId = 1; // replace with your user's cart ID
-  $.ajax({
-    type: "POST",
-    url: "http://localhost:8080/shoppingcarts/" + cartId + "/products/" + productId,
-    success: function(data) {
-      alert('Product added to cart!');
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      alert('Error adding product to cart: ' + textStatus);
-    }
-  });
 });
 
 function removeProducts() {
-  $("#productsContainer").empty();
+    $("#productsContainer").empty();
 }
-
-

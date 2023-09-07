@@ -57,7 +57,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/users/{id}", "/products/{id}").hasRole("ADMIN")
                 //all user requests
                 .requestMatchers(HttpMethod.POST, "/users/createUser", "/positions").permitAll()
-                .requestMatchers(HttpMethod.GET, "/files/**", "/products/active").permitAll()
+                .requestMatchers(HttpMethod.GET, "/files/**", "/products/active", "/{cartId}/positions").permitAll()
                 .requestMatchers("/login", "/addresses", "/addresses/users/**", "/users/{id}/address").permitAll()
 
                 // Authenticate all other requests

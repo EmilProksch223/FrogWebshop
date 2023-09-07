@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var actionTwo = document.createElement('li');
         var actionTwoLink = document.createElement('a');
         actionTwoLink.className = 'dropdown-item text-white';
-        actionTwoLink.href = '#';
+        actionTwoLink.href = '/frontend/shoppingCart.html';
         actionTwoLink.innerHTML = 'Einkaufswagen';
         actionTwo.appendChild(actionTwoLink);
 

@@ -1,16 +1,23 @@
 package at.technikumwien.webshop.service;
 
 import at.technikumwien.webshop.model.Cart;
+import at.technikumwien.webshop.model.Position;
 import at.technikumwien.webshop.repository.CartRepository;
+
+import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.stereotype.Service;
 
 @Service
 public class CartService {
     
     private CartRepository cartRepository;
+    private final TokenService tokenService;
 
-    public CartService(CartRepository cartRepository) {
+    public CartService(CartRepository cartRepository, TokenService tokenService) {
         this.cartRepository = cartRepository;
+        this.tokenService = tokenService;
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -23,5 +30,18 @@ public class CartService {
 
     public Cart findByUserId(Long userId) {
         return cartRepository.findByUserId(userId);
+    }
+    
+    public Set<Position> getPositionsInCart(String token) {
+
+        Long userId = tokenService.getUserIdFromToken(token);
+        Optional<Cart> cartOptional = cartRepository.findCartByUserId(userId);
+
+        if (cartOptional.isPresent()) {
+            Cart cart = cartOptional.get();
+            return cart.getPositions(); // Hiermit werden alle Positionen für den angegebenen Warenkorb zurückgegeben
+        } else {
+            throw new EntityNotFoundException();
+        }
     }
 }

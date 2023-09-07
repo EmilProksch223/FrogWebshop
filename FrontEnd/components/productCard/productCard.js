@@ -1,12 +1,12 @@
-//Produkte abrufen und Container vorbereiten
+//Produkte abrufen 
 $.ajax({
     url: "http://localhost:8080/products/active",
     cors: true,
-    headers: { "Authorization": sessionStorage.getItem("token") },
     success: function (products) { addProductstoPage(products) },
     error: function (error) { console.error(error) }
 });
 
+//Produkt-Container vorbereiten
 function addProductstoPage(products) {
     const productsContainer = $("#productsContainer");
     productsContainer.empty();
@@ -20,18 +20,7 @@ function addProductstoPage(products) {
         let productCol = $(`<div class="col-12 col-lg-4 col-xxl-3 d-flex justify-content-center mb-3" id="productCol${products[i].id}"></div>`);
         row.append(productCol);
 
-        $.ajax({
-            url: `http://localhost:8080/files/${products[i].imageUrl}`,
-            cors: true,
-            headers: { "Authorization": sessionStorage.getItem("token") },
-            success: function () {
-                const productCard = loadProductCard(products[i]);
-                row.append(productCard);
-            },
-            error: function (error) {
-                console.error(error);
-            }
-        });
+        loadProductCard(products[i]);
     }
 }
 
@@ -117,6 +106,7 @@ function addProductToCart(product) {
         quantity: 1
     }
 
+    console.log(data);
     $.post({
         url: "http://localhost:8080/positions",
         headers: { "Authorization": sessionStorage.getItem("token") },

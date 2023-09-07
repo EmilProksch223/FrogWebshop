@@ -1,4 +1,4 @@
-/* Login */
+// Login
 
 function login() {
   $.post({
@@ -25,7 +25,7 @@ $(document).on('shown.bs.modal', '#navbarModal', function() {
 
 
 
-/*TokenTimeStampCheck*/ 
+// Token-Timestamp-Check
 
 function checkTokenValidity() {
   var loginTimestamp = sessionStorage.getItem("loginTimestamp");
@@ -40,13 +40,8 @@ function checkTokenValidity() {
       sessionStorage.removeItem("loginTimestamp");
       console.log("Token ist abgelaufen");
 
-      // Benutzer abmelden und zur Indexseite zurückleiten
       location.href = "index.html";
-
-      // Benachrichtigung anzeigen
       alert("Ihre Sitzung ist abgelaufen. Sie wurden abgemeldet.");
-
-      // Hier kannst du ggf. weitere Aktionen ausführen, die nach dem Abmelden erforderlich sind
     }
   }
 }
@@ -54,10 +49,8 @@ function checkTokenValidity() {
 
 
 function checkAdminStatus() {
-  // Token aus der Session holen
   const token = sessionStorage.getItem('token');
 
-  // Überprüfen, ob ein Token vorhanden ist
   if (token) {
     // Token aufteilen und den Payload extrahieren
     const tokenParts = token.split('.');
@@ -69,7 +62,7 @@ function checkAdminStatus() {
 
     return isAdmin;
   } else {
-    return false; // Kein Token gefunden, Benutzer ist kein Administrator
+    return false;
   }
 }
 
