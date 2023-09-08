@@ -36,8 +36,9 @@ public class Product {
     private boolean active;
 
     /////
-    // Init
+    //Init
     /////
+
     public Product(String name, String description, String imageUrl, double price, int quantity, String manaType, Boolean active) {
         this.name = name;
         this.description = description;
@@ -49,11 +50,10 @@ public class Product {
     }
 
     public Product() {
-        // noop
     }
 
     /////
-    // Getters and Setters
+    //Getters and Setters
     /////
 
     public Long getId() {

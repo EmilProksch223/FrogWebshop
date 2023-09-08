@@ -25,9 +25,9 @@ public class TokenService {
     // TODO: Place into application.properties
     private static final SecretKey JWT_SECRET = Keys.secretKeyFor(HS256);
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Methods
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Methods
+    /////
 
     public String generateToken(User user) {
         Date expirationDate = new Date(System.currentTimeMillis() + EXPIRES_IN);

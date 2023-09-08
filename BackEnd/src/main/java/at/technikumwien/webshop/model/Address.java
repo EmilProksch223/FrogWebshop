@@ -11,7 +11,10 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+<<<<<<< HEAD
     @Column(name = "id")
+=======
+>>>>>>> 608725aecd3628868d8365e1b73b21757b72c164
     private Long id;
 
     @Column(name = "firstName")
@@ -40,7 +43,7 @@ public class Address {
 
 
     /////
-    // Init
+    //Init
     /////
     public Address(String firstName, String lastName, String gender, String street, String addressLine2,
             String postalCode, String city, String country) {
@@ -55,11 +58,10 @@ public class Address {
     }
 
     public Address() {
-        // noop
     }
 
     /////
-    // Getters and Setters
+    //Getters and Setters
     /////
 
     public Long getId() {

@@ -20,11 +20,17 @@ public class PositionService {
     private final CartService cartService;
     private final ProductService productService;
 
+<<<<<<< HEAD
     private final TokenService tokenService;
 
     // /////////////////////////////////////////////////////////////////////////
     // Init
     // /////////////////////////////////////////////////////////////////////////
+=======
+    /////
+    //Init
+    /////
+>>>>>>> 608725aecd3628868d8365e1b73b21757b72c164
 
     public PositionService(PositionRepository positionRepository,
                            UserRepository userRepository,
@@ -38,9 +44,9 @@ public class PositionService {
         this.tokenService = tokenService;
     }
 
-    // /////////////////////////////////////////////////////////////////////////
-    // Methods
-    // /////////////////////////////////////////////////////////////////////////
+    /////
+    //Methods
+    /////
 
     public Optional<Position> findById(Long id) {
         return positionRepository.findById(id);
