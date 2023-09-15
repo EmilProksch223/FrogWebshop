@@ -11,10 +11,7 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-<<<<<<< HEAD
     @Column(name = "id")
-=======
->>>>>>> 608725aecd3628868d8365e1b73b21757b72c164
     private Long id;
 
     @Column(name = "firstName")

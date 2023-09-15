@@ -1,5 +1,5 @@
 $.ajax({
-    url: "http://localhost:8080/carts/2/positions", // Du kannst 1 als Hartcodierung verwenden, falls dies beabsichtigt ist
+    url: "http://localhost:8080/carts/{userId}/positions", // Du kannst 1 als Hartcodierung verwenden, falls dies beabsichtigt ist
     headers: { "Authorization": sessionStorage.getItem("token") },
     cors: true,
     success: function (positions) { addPositionsToPage(positions); },

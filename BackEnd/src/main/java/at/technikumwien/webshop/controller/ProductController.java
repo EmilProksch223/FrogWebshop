@@ -1,6 +1,7 @@
 package at.technikumwien.webshop.controller;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +43,6 @@ public class ProductController {
 
     @GetMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-<<<<<<< HEAD
     public List<Product> getAllProducts(
             @RequestParam(name = "searchterm", required = false) String searchterm,
             @RequestParam(name = "activeFilter", required = false) Boolean activeFilter) {
@@ -64,17 +64,12 @@ public class ProductController {
             filteredProducts.add(product);
         }
         return filteredProducts;
-=======
-    public List<Product> getAllProducts(@RequestParam(name = "searchterm", required = false) String searchterm) {
-        return service.getAllProductsFiltered(searchterm);
->>>>>>> 608725aecd3628868d8365e1b73b21757b72c164
     }
 
     @GetMapping("/active")
     public List<Product> getActiveProducts(
             @RequestParam(name = "manasymbols", required = false) String manaSymbolsString,
             @RequestParam(name = "searchterm", required = false) String searchterm) {
-<<<<<<< HEAD
         List<Product> activeProducts = new ArrayList<>();
         List<Product> allProducts = service.getActiveProducts();
 
@@ -92,9 +87,6 @@ public class ProductController {
             activeProducts.add(product);
         }
         return activeProducts;
-=======
-        return service.getActiveProductsFiltered(manaSymbolsString, searchterm);
->>>>>>> 608725aecd3628868d8365e1b73b21757b72c164
     }
 
     @PostMapping
@@ -115,7 +107,14 @@ public class ProductController {
         Optional<Product> optionalProduct = service.getProductById(productDTO.getId());
         if (optionalProduct.isPresent()) {
             Product existingProduct = optionalProduct.get();
-            Product updatedProduct = service.updateProductFromDTO(existingProduct, productDTO);
+            existingProduct.setName(productDTO.getName());
+            existingProduct.setDescription(productDTO.getDescription());
+            existingProduct.setImageUrl(productDTO.getImageUrl());
+            existingProduct.setPrice(productDTO.getPrice());
+            existingProduct.setQuantity(productDTO.getQuantity());
+            existingProduct.setManaType(productDTO.getManaType());
+            existingProduct.setActive(productDTO.isActive());
+            Product updatedProduct = service.updateProduct(existingProduct);
             return ResponseEntity.ok(updatedProduct);
         } else {
             return ResponseEntity.notFound().build();
