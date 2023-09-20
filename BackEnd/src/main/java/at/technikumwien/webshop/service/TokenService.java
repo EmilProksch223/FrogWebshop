@@ -44,7 +44,6 @@ public class TokenService {
 
     public Optional<UserPrincipal> parseToken(String jwt) {
         Jws<Claims> jwsClaims;
-
         try {
             jwsClaims = Jwts.parserBuilder()
                     .setSigningKey(JWT_SECRET.getEncoded())
@@ -59,5 +58,19 @@ public class TokenService {
         boolean admin = jwsClaims.getBody().get("admin", Boolean.class);
 
         return Optional.of(new UserPrincipal(userId, sub, admin));
+    }
+
+    public Long getUserIdFromToken(String token) {
+
+        if (token != null && token.startsWith("Bearer ")) {
+            token = token.substring(7); // Entferne Bearer
+        }
+
+        Optional<UserPrincipal> userPrincipalOptional = parseToken(token);
+        if (userPrincipalOptional.isPresent()) {
+            return userPrincipalOptional.get().getUserId();
+        } else {
+            return null;
+        }
     }
 }

@@ -8,6 +8,7 @@ import at.technikumwien.webshop.model.Product;
 import at.technikumwien.webshop.model.User;
 import at.technikumwien.webshop.repository.PositionRepository;
 import at.technikumwien.webshop.repository.UserRepository;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,18 +20,22 @@ public class PositionService {
     private final CartService cartService;
     private final ProductService productService;
 
-    /////
-    //Init
-    /////
+    private final TokenService tokenService;
+
+    // /////////////////////////////////////////////////////////////////////////
+    // Init
+    // /////////////////////////////////////////////////////////////////////////
 
     public PositionService(PositionRepository positionRepository,
                            UserRepository userRepository,
                            CartService cartService,
-                           ProductService productService) {
+                           ProductService productService,
+                           TokenService tokenService) {
         this.positionRepository = positionRepository;
         this.userRepository = userRepository;
         this.cartService = cartService;
         this.productService = productService;
+        this.tokenService = tokenService;
     }
 
     /////
@@ -41,7 +46,10 @@ public class PositionService {
         return positionRepository.findById(id);
     }
 
-    public Position save(Position position, Long userId, Long productId) {
+    public Position save(Position position, Long productId, String token) {
+
+        Long userId = tokenService.getUserIdFromToken(token);
+
         Cart cart = cartService.findByUserId(userId);
 
         if (cart == null) {

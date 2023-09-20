@@ -1,0 +1,66 @@
+/*Products and Files*/
+
+INSERT INTO product(id, active, description, image_url, name, price, quantity, mana_type) VALUES (1,true,'Add 3 mana to your mana to your mana pool.','1','Dark Ritual','245.00','10','b');
+
+INSERT INTO file(id, path) VALUES ('1','cst-120-dark-ritual.jpg');
+
+INSERT INTO product(id, active, description, image_url, name, price, quantity, mana_type) VALUES (2,true,'Flash, When Snapcaster Mage enters the battelfield, target instant or sorcery card in your graveyard gains flashback until end of trun. The flashback cost is equal to its mana cost.','2','Snapcaster Mage','11.00','50','u');
+
+INSERT INTO file(id, path) VALUES ('2','isd-78-snapcaster-mage.jpg');
+
+INSERT INTO product(id, active, description, image_url, name, price, quantity, mana_type) VALUES (3,true,'Add 1 Mana to your mana pool.','3','Llanowar Elves','0.30','15','g');
+
+INSERT INTO file(id, path) VALUES ('3','m10-189-llanowar-elves.jpg');
+
+INSERT INTO product(id, active, description, image_url, name, price, quantity, mana_type) VALUES (4,true,'Lightning Bolt deals 3 damage to target creature or player.','4','Lightning Bolt','2.00','25','r');
+
+INSERT INTO file(id, path) VALUES ('4','m10-146-lightning-bolt.jpg');
+
+INSERT INTO product(id, active, description, image_url, name, price, quantity, mana_type) VALUES (5,true,'Remove target creature from the game. Its controller may search his or her library for a basic land card, put that card into play tapped, then shuffle his or her library.','5','Path to Exile','4.00','12','w');
+
+INSERT INTO file(id, path) VALUES ('5','con-15-path-to-exile.jpg');
+
+INSERT INTO product(id, active, description, image_url, name, price, quantity, mana_type) VALUES (6,true,'Whenever Hans Eriksson attacks, reveal the top card of your library. If it`s a creature card, put it onto the battelfield tapped and attacking defending player or a planeswalker they control. Otherwise, put that card into your hand. When you put a creature card into your hand. When you put a creature card onto the battlefield this way, it fights Hans Eriksson.','6','Hans Eriksson','0.18','45','rg');
+
+INSERT INTO file(id, path) VALUES ('6','cmr-279-hans-eriksson.jpg');
+
+INSERT INTO product(id, active, description, image_url, name, price, quantity, mana_type) VALUES (7,true,'Flying! Whenerver Rith, the Awakener deals combat damage to a player, you may pay 2 Green Mana. If you do, choose a color, then put a 1/1 green Saproling creature token onto the battlefield for each permanent of that color.','7','Rith, the Awakener','0.11','9','wrg');
+
+INSERT INTO file(id, path) VALUES ('7','dde-48-rith-the-awakener.jpg');
+
+INSERT INTO product(id, active, description, image_url, name, price, quantity, mana_type) VALUES (8,true,'Deathtouch, lifelink! When Wurmcoil Engine dies, create a 3/3 colorless Wurm artifact creature token with deathtouch and a 3/3 colorless Wurm artifact creature token with lifelink.','8','Wurmcoil Engine','11.44','15','');
+
+INSERT INTO file(id, path) VALUES ('8','2xm-308-wurmcoil-engine.jpg');
+
+INSERT INTO product(id, active, description, image_url, name, price, quantity, mana_type) VALUES (9,true,'Adds 3 mana of a single color of your choice to your mana pool, then is discarded. Tapping this artifact can be played as an interrupt','9','Black Lotus','7899.00','1','');
+
+INSERT INTO file(id, path) VALUES ('9','lea-232-black-lotus.jpg');
+
+INSERT INTO product(id, active, description, image_url, name, price, quantity, mana_type) VALUES (10,true,'Flying, first strike, lifelink protection from Demons and From Dragons! Some angels protect the meek and innocent. Others seek out and smite evil wherever it lurks.','10','Baneslayer Angel','1.86','9','w');
+
+INSERT INTO file(id, path) VALUES ('10','m10-4-baneslayer-angel.jpg');
+
+INSERT INTO product(id, active, description, image_url, name, price, quantity, mana_type) VALUES (11,true,'Enchant creature! Enchanted creature gets +2/+0 and has trample. When Rancor is put into a graveyard from the battlefield, return Rancor to its owner`s hand.','11','Rancor','0.79','22','g');
+
+INSERT INTO file(id, path) VALUES ('11','m13-185-rancor.jpg');
+
+INSERT INTO product(id, active, description, image_url, name, price, quantity, mana_type) VALUES (12,true,'Legendary Creature - Monkey Pirate! Whenever Ragavan, Nimble Pilferer deals combat damage to a player, create a Treasure token and exile the top card of that player`s library. Until end of turn, you may cast that card.','12','Ragavan, Nimble Pilferer','48.80','7','r');
+
+INSERT INTO file(id, path) VALUES ('12','mh2-138-ragavan-nimble-pilferer.jpg');
+
+INSERT INTO product(id, active, description, image_url, name, price, quantity, mana_type) VALUES (13,true,'Creature - Human Wizard! At the beginning of your upkeep reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost.','13','Dark Confidant','16.00','19','b');
+
+INSERT INTO file(id, path) VALUES ('13','rav-81-dark-confidant.jpg');
+
+INSERT INTO product(id, active, description, image_url, name, price, quantity, mana_type) VALUES (14,true,'Instant! Counter target spell.','14','Counterspell','16.00','19','u');
+
+INSERT INTO file(id, path) VALUES ('14','sld-175-counterspell.jpg');
+
+
+/*User*/
+
+INSERT INTO user(id, admin, password, username, email, active) VALUES (1,true,'$2y$10$KmwQwJx87vyoLe9RVcKW2etbaZYwYN7nhKIvVvBVyXc1mOQqdCEie','admin','admin@magicfrog.at',true);
+
+INSERT INTO user(id, admin, password, username, email, active) VALUES (2,false,'$2a$10$j7XbO5U9ycA7I3s46tQjz.2m7I268aRUDe3tiYSdRWdWuigoZNCfq','david','david@magicfrog.at',true);
+
+INSERT INTO user(id, admin, password, username, email, active) VALUES (3,false,'$2a$10$UfgV4a30WaQom3kvwHrOXuePiMkFWL.bnyGvUzhim0fSm9FbvsW56 ','emil','emil@magicfrog.at',true);
