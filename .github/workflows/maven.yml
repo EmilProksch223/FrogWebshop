@@ -21,7 +21,7 @@ jobs:
         cache: maven
     - run: pwd & ls -al
 
-    - run: mvn -B package --file backend/pom.xml
+    - run: mvn -B package --file pom.xml
 
     - run: mkdir download & cp backend/target/*jar download
 
