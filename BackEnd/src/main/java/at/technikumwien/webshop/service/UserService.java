@@ -3,6 +3,7 @@ package at.technikumwien.webshop.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -13,15 +14,17 @@ import at.technikumwien.webshop.repository.UserRepository;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /////
-    //Methods
+    // Methods
     /////
-    
+
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -35,6 +38,8 @@ public class UserService {
     }
 
     public User createUser(@RequestBody User user) {
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashedPassword);
         return userRepository.save(user);
     }
 
@@ -43,8 +48,8 @@ public class UserService {
     }
 
     public boolean existsByUsername(String username) {
-    // Implementiere den Code, um zu überprüfen, ob der Benutzername existiert
-    // Rückgabe true, wenn der Benutzername existiert, ansonsten false
-    return userRepository.existsByUsername(username);
-}
+        // Implementiere den Code, um zu überprüfen, ob der Benutzername existiert
+        // Rückgabe true, wenn der Benutzername existiert, ansonsten false
+        return userRepository.existsByUsername(username);
+    }
 }
