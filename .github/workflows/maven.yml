@@ -21,9 +21,9 @@ jobs:
         cache: maven
     - run: pwd & ls -al
 
-    - run: mvn -B package --file TheToolBox/pom.xml
+    - run: mvn -B package --file backend/pom.xml
 
-    - run: mkdir download & cp TheToolBox/target/*jar download
+    - run: mkdir download & cp backend/target/*jar download
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v3.1.2
