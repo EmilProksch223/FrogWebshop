@@ -21,8 +21,9 @@ jobs:
         cache: maven
     - run: pwd & ls -al
 
-        - cd /home/runner/work/FrogWebshop/
-    - run: mvn -B package --file backend/pom.xml
+        
+    - run:  cd /home/runner/work/FrogWebshop/
+            mvn -B package --file backend/pom.xml
 
     - run: mkdir download & cp backend/target/*jar download
 
