@@ -24,7 +24,7 @@ jobs:
         
     - run: mvn -B package --file BackEnd/pom.xml
 
-    - run: mkdir download & cp backend/target/*jar download
+    - run: mkdir download & cp target/*jar download
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v3.1.2
