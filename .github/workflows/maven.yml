@@ -22,7 +22,7 @@ jobs:
     - run: pwd & ls -al
 
         
-    - run: mvn -B package -DskipTests --file BackEnd/pom.xml
+    - run: mvn -B package --file BackEnd/pom.xml
 
     - run: mkdir download & cp backend/target/*jar download
 
