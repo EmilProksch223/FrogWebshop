@@ -23,7 +23,7 @@ jobs:
 
         
     - run: |
-        cd /home/runner/work/FrogWebshop/backend
+        cd /home/runner/work/FrogWeb/FrogWebshop/backend
         mvn -B package --file pom.xml
 
     - run: mkdir download & cp backend/target/*jar download
