@@ -22,8 +22,9 @@ jobs:
     - run: pwd & ls -al
 
         
-    - run:  cd /home/runner/work/FrogWebshop/
-            mvn -B package --file backend/pom.xml
+    - run: |
+        cd /home/runner/work/FrogWebshop/backend
+        mvn -B package --file pom.xml
 
     - run: mkdir download & cp backend/target/*jar download
 
