@@ -2,10 +2,8 @@ package at.technikumwien.webshop.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,6 @@ import at.technikumwien.webshop.repository.UserRepository;
 @WebMvcTest(UserService.class)
 @Import(SecurityConfig.class)
 public class UserServiceTest {
-
     @MockBean
     private UserRepository userRepository;
 
@@ -35,7 +32,6 @@ public class UserServiceTest {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
 
     @Test
     public void whenGetAllUsers_thenGetAListOfUsers() {

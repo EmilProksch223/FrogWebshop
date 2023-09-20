@@ -10,7 +10,6 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,11 +36,9 @@ public class UserController {
 
     @Autowired
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     /////
@@ -72,8 +69,6 @@ public class UserController {
             throw new BadRequestException("Benutzername existiert schon!");
         }
         User user = fromDTO(userDTO);
-        String hashedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hashedPassword);
 
         User createdUser = userService.createUser(user);
         return ResponseEntity.created(URI.create("http://localhost:8080/users")).body(createdUser);

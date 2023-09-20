@@ -9,18 +9,19 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StorageService {
 
     private final Path storageDirectory;// The directory where files will be stored
-    private final FileRepository fileRepository;
+    private FileRepository fileRepository;
 
     public StorageService(FileRepository fileRepository) {
         this.fileRepository = fileRepository;
@@ -37,7 +38,7 @@ public class StorageService {
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
         File fileEntity = new File();
-        fileEntity.setPath("img/Produkte_img/" + filename);
+        fileEntity.setPath(filename);
 
         return fileEntity;
     }
@@ -67,7 +68,64 @@ public class StorageService {
         return timestamp + "_" + originalFilename;
     }
 
-    public List<File> getAllFiles() {
-        return (List<File>) fileRepository.findAll();
+    public void deleteFile(Long fileId) {
+        // Zuerst das File-Objekt aus der Datenbank abrufen
+        Optional<File> optionalFile = fileRepository.findById(fileId);
+
+        if (optionalFile.isPresent()) {
+            File fileEntity = optionalFile.get();
+            String filename = fileEntity.getPath();
+            Path filePath = storageDirectory.resolve(filename);
+
+            // Zuerst aus der Datenbank löschen
+            fileRepository.deleteById(fileId);
+
+            // Dann aus dem Dateisystem löschen
+            try {
+                Files.deleteIfExists(filePath);
+            } catch (IOException e) {
+                // Hier kannst du eine entsprechende Fehlerbehandlung hinzufügen, wenn das
+                // Löschen fehlschlägt.
+                e.printStackTrace();
+            }
+        } else {
+            // Datei nicht gefunden oder bereits gelöscht
+            // Hier kannst du eine Fehlerbehandlung hinzufügen oder einfach nichts tun.
+        }
     }
+
+    public File updateFile(MultipartFile file, Long fileId) throws IOException {
+        Optional<File> optionalFile = fileRepository.findById(fileId);
+
+        if (optionalFile.isPresent()) {
+            File fileEntity = optionalFile.get();
+            String oldFilename = fileEntity.getPath();
+            String newFilename = file.getOriginalFilename();
+            Path filePath = storageDirectory.resolve(oldFilename);
+            System.out.println(filePath);
+            
+
+            if (!oldFilename.equals(newFilename)) {
+                // Dateiname hat sich geändert, lösche das alte File
+                try {
+                    Files.deleteIfExists(filePath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                // Speichere das neue File
+                File savedFile = store(file);
+                fileEntity.setPath(savedFile.getPath());
+                fileRepository.save(fileEntity);
+
+                return savedFile;
+            } else {
+
+                return null;
+            }
+        } else {
+            throw new FileNotFoundException("File not found with ID: " + fileId);
+        }
+    }
+
 }
