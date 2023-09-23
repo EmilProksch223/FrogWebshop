@@ -67,18 +67,18 @@
 			<artifactId>imgscalr-lib</artifactId>
 			<version>4.2</version>
 		</dependency>
-		<!--        mocking in-memory-database-for-unit-tests-->
+		<!--mocking in-memory-database-for-unit-tests-->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--        H2 in memory db-->
+		<!--H2 in memory db-->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 		</dependency>
-		<!--        Test n Mocks-->
+		<!--Test n Mocks-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -109,13 +109,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-		<configuration>
-			<useSystemClassLoader>false</useSystemClassLoader>
-		</configuration>
             </plugin>
         </plugins>
     </build>
