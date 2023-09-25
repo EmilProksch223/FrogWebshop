@@ -24,6 +24,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//TODO: Test funktioniert nicht pls Help
 @SpringBootTest
 @AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
@@ -44,20 +45,25 @@ public class UserControllerTest {
     }
 
     @Test
-@WithMockUser(roles = "ADMIN") // Simulate a user with the ADMIN role
-public void testGetAllUserWithAdminRole() throws Exception {
-    // Mock the userService method
-    when(userService.getAllUsers()).thenReturn(new ArrayList<>());
+    @WithMockUser(roles = "ADMIN") // Simulate a user with the ADMIN role
+    public void testGetAllUserWithAdminRole() throws Exception {
+        // Create dummy user data for the mock
+        List<User> dummyUsers = new ArrayList<>();
+        dummyUsers.add(new User());
+        dummyUsers.add(new User());
 
-    // Execute the HTTP GET request
-    MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders
-            .get("/users"))
-            .andExpect(status().isOk())  // Here, the expected HTTP status code check is performed
-            .andReturn();
+        // Mock the userService method
+        when(userService.getAllUsers()).thenReturn(dummyUsers);
 
-    assertEquals("application/json", mvcResult.getResponse().getContentType());
+        // Execute the HTTP GET request
+        MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders
+                .get("/users"))
+                .andExpect(status().isOk())  // Here, the expected HTTP status code check is performed
+                .andReturn();
 
-    // Verify if the userService method was called
-    verify(userService, times(1)).getAllUsers();
-}
+        assertEquals("application/json", mvcResult.getResponse().getContentType());
+
+        // Verify if the userService method was called
+        verify(userService, times(1)).getAllUsers();
+    }
 }
