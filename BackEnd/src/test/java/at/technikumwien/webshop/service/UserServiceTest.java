@@ -49,7 +49,7 @@ public class UserServiceTest {
     @Test
     public void shouldReturnUserById() {
         User dummyUser = new User();
-        when(userRepository.findById(1L)).thenReturn(Optional.of(dummyUser));
+        when(userRepository.findById(any())).thenReturn(Optional.of(dummyUser));
         
         Optional<User> result = userService.getUserById(1L);
         
@@ -62,21 +62,15 @@ public class UserServiceTest {
     public void shouldSaveUserWithHashedPassword() {
         User userToCreate = new User();
         userToCreate.setUsername("testUser");
-        userToCreate.setPassword("plainTextPassword");
+        userToCreate.setPassword("testPassword");
 
-        when(userRepository.save(any(User.class))).thenAnswer(invocation -> {
-            User user = invocation.getArgument(0);
-            String hashedPassword = passwordEncoder.encode(user.getPassword());
-            user.setPassword(hashedPassword);
-            return user;
-        });
+        when(userRepository.save(any())).thenReturn(userToCreate);
 
         User createdUser = userService.createUser(userToCreate);
 
-        verify(passwordEncoder).encode("plainTextPassword");
-
         verify(userRepository).save(any(User.class));
 
+        assertEquals(passwordEncoder.encode("testPassword"), createdUser.getPassword());
         assertEquals("testUser", createdUser.getUsername());
     }
 

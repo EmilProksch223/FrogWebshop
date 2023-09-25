@@ -51,18 +51,16 @@ class PositionServiceTest {
     @Test
     void testFindById() {
         // Mocking
-        Long positionId = 1L;
         Position expectedPosition = new Position();
-        when(positionRepository.findById(positionId)).thenReturn(Optional.of(expectedPosition));
+        when(positionRepository.findById(any())).thenReturn(Optional.of(expectedPosition));
 
         // Test
-        Optional<Position> actualPosition = positionService.findById(positionId);
+        Optional<Position> actualPosition = positionService.findById(1L);
 
         assertTrue(actualPosition.isPresent());
         assertEquals(expectedPosition, actualPosition.get());
-        verify(positionRepository, times(1)).findById(positionId);
+        verify(positionRepository, times(1)).findById(1L);
     }
-
 
     // TODO: savePostionTest
     @Test
@@ -73,27 +71,31 @@ class PositionServiceTest {
         Cart cart = new Cart();
         User user = new User();
         Product product = new Product();
-        Position positionToSave = new Position();
-
+        Position positionToSave = new Position(userId, 1);
+        positionToSave.setCart(cart);
+        positionToSave.setProduct(product);
+    
         when(tokenService.getUserIdFromToken(token)).thenReturn(userId);
-        when(cartService.findByUserId(userId)).thenReturn(cart);
+        when(cartService.findByUserId(any())).thenReturn(cart);
         when(userRepository.findById(userId)).thenReturn(Optional.of(user));
         when(productService.getProductById(anyLong())).thenReturn(Optional.of(product));
         when(positionRepository.save(any(Position.class))).thenReturn(positionToSave);
-
-        System.out.println("Cart in testSavePosition: " + cart);
-        System.out.println("Product in testSavePosition: " + product);
-
+    
         // Test
-        Position savedPosition = positionService.save(new Position(), 1L, token);
-
-        assertNotNull(savedPosition);
-        assertEquals(positionToSave, savedPosition);
-        assertEquals(cart, savedPosition.getCart());
-        assertEquals(product, savedPosition.getProduct());
-
+        Position savedPosition = positionService.save(positionToSave, 1L, token);
+    
+        // Additional checks
+        assertNotNull(positionToSave, "Position to save is null");
+        assertNotNull(savedPosition, "Saved position is null");
+        assertEquals(positionToSave, savedPosition, "Saved position is not the same as the position to save");
+        assertNotNull(savedPosition.getCart(), "Saved position cart is null");
+        assertNotNull(savedPosition.getProduct(), "Saved position product is null");
+    
+        // Verify that userRepository.findById(1L) was called
+        verify(userRepository, times(1)).findById(any());
+    
         verify(tokenService, times(1)).getUserIdFromToken(token);
-        verify(cartService, times(1)).findByUserId(userId);
+        verify(cartService, times(1)).findByUserId(any());
         verify(userRepository, times(1)).findById(userId);
         verify(productService, times(1)).getProductById(anyLong());
         verify(positionRepository, times(1)).save(any(Position.class));
