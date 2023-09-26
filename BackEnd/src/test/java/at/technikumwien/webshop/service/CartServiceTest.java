@@ -33,7 +33,7 @@ class CartServiceTest {
     }
 
     @Test
-    void testSaveCart() {
+    void shouldSaveCart() {
         Cart cart = new Cart();
         when(cartRepository.save(cart)).thenReturn(cart);
 
@@ -45,7 +45,7 @@ class CartServiceTest {
     }
 
     @Test
-    void testFindByUserId() {
+    void shouldReturnCartByUserId() {
         Long userId = 1L;
         Cart cart = new Cart();
         when(cartRepository.findByUserId(userId)).thenReturn(cart);
@@ -58,7 +58,7 @@ class CartServiceTest {
     }
 
     @Test
-    void testGetPositionsInCart() {
+    void shouldReturnPositionsInCart() {
         Long userId = 1L;
         String token = "validToken";
 
@@ -83,7 +83,7 @@ class CartServiceTest {
     }
 
     @Test
-    void testGetPositionsInCartWithInvalidToken() {
+    void shouldNotReutrnPostionsInCartWithInvalidToken() {
         String invalidToken = "invalidToken";
 
         when(tokenService.getUserIdFromToken(invalidToken)).thenReturn(null);

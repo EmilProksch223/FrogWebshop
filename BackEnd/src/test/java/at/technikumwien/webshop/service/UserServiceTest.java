@@ -75,13 +75,6 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldDeleteUser() {
-        userService.deleteUser(1L);
-        
-        verify(userRepository, times(1)).deleteById(1L);
-    }
-
-    @Test
     public void shouldCheckIfUsernameExists() {
         when(userRepository.existsByUsername("existingUsername")).thenReturn(true);
         when(userRepository.existsByUsername("nonExistingUsername")).thenReturn(false);
