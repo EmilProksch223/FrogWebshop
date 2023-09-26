@@ -26,7 +26,7 @@ public class AuthenticationContoller {
     /////
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO, HttpServletResponse response) {
+    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
         String token = authenticationService.login(loginDTO.getUsername(), loginDTO.getPassword());
         return ResponseEntity.ok("Bearer " + token);
     }

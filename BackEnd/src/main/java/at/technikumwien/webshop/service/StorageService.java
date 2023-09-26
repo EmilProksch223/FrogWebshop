@@ -20,17 +20,16 @@ import java.util.Optional;
 @Service
 public class StorageService {
 
-    private final Path storageDirectory;// The directory where files will be stored
+    private final Path storageDirectory;
     private FileRepository fileRepository;
 
     public StorageService(FileRepository fileRepository) {
         this.fileRepository = fileRepository;
         // Set the storage directory
-        storageDirectory = Path.of("frontend/img/Produkte_img/"); // Replace with your desired directory path
+        storageDirectory = Path.of("frontend/img/Produkte_img/");
     }
 
     public File store(MultipartFile file) throws IOException {
-        // Generate a unique filename
         String filename = generateUniqueFileName(file.getOriginalFilename());
 
         // Store the file in the storage directory
@@ -61,9 +60,8 @@ public class StorageService {
     }
 
     private String generateUniqueFileName(String originalFilename) {
-        // Generate a unique filename based on your requirements
-        // You can use a combination of timestamp, UUID, or any other strategy
-        // Here, we append a timestamp to the original filename
+        // Generate a unique filename
+        // append a timestamp to the original filename
         long timestamp = System.currentTimeMillis();
         return timestamp + "_" + originalFilename;
     }
@@ -84,13 +82,9 @@ public class StorageService {
             try {
                 Files.deleteIfExists(filePath);
             } catch (IOException e) {
-                // Hier kannst du eine entsprechende Fehlerbehandlung hinzufügen, wenn das
-                // Löschen fehlschlägt.
                 e.printStackTrace();
             }
         } else {
-            // Datei nicht gefunden oder bereits gelöscht
-            // Hier kannst du eine Fehlerbehandlung hinzufügen oder einfach nichts tun.
         }
     }
 
@@ -106,14 +100,12 @@ public class StorageService {
             
 
             if (!oldFilename.equals(newFilename)) {
-                // Dateiname hat sich geändert, lösche das alte File
                 try {
                     Files.deleteIfExists(filePath);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                // Speichere das neue File
                 File savedFile = store(file);
                 fileEntity.setPath(savedFile.getPath());
                 fileRepository.save(fileEntity);
