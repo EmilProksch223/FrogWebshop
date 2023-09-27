@@ -46,11 +46,10 @@ class PositionServiceTest {
 
     @Test
     void shouldReturnPositionById() {
-        // Mocking
         Position expectedPosition = new Position();
+        
         when(positionRepository.findById(any())).thenReturn(Optional.of(expectedPosition));
 
-        // Test
         Optional<Position> actualPosition = positionService.findById(1L);
 
         assertTrue(actualPosition.isPresent());

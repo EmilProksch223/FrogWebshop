@@ -2,7 +2,6 @@ package at.technikumwien.webshop.controller;
 
 import at.technikumwien.webshop.dto.LoginDTO;
 import at.technikumwien.webshop.service.AuthenticationService;
-import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

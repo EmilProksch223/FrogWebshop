@@ -28,15 +28,12 @@ public class StorageServiceTest {
 
     @Test
     void shouldDeleteFile() {
-        // Mocks
         File fileEntity = new File();
         fileEntity.setPath("test.jpg");
         when(fileRepository.findById(any())).thenReturn(Optional.of(fileEntity));
 
-        // Test
         storageService.deleteFile(1L);
 
-        // Assertions
         verify(fileRepository, times(1)).deleteById(any());
     }
 }
