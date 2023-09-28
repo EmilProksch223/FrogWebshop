@@ -95,7 +95,7 @@ public class ProductControllerIntegrationTest {
 
         @Test
         @WithMockUser(roles = "ADMIN")
-        public void testCreateProductAsAdmin() throws Exception {
+        public void shloudCreateProductAsAdmin() throws Exception {
                 ProductDTO productDTO = new ProductDTO();
                 productDTO.setActive(false);
                 productDTO.setName("testName");
