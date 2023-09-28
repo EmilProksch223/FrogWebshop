@@ -19,4 +19,4 @@ jobs:
         cache: maven
     - run: pwd & ls -al
 
-    - run: mvn -B package --file BackEnd/pom.xml
+    - run: mvn -B test --file BackEnd/pom.xml
