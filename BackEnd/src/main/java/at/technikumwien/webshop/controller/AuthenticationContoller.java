@@ -2,7 +2,6 @@ package at.technikumwien.webshop.controller;
 
 import at.technikumwien.webshop.dto.LoginDTO;
 import at.technikumwien.webshop.service.AuthenticationService;
-import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +25,7 @@ public class AuthenticationContoller {
     /////
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO, HttpServletResponse response) {
+    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
         String token = authenticationService.login(loginDTO.getUsername(), loginDTO.getPassword());
         return ResponseEntity.ok("Bearer " + token);
     }
