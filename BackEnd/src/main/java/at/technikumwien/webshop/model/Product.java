@@ -32,6 +32,9 @@ public class Product {
     @Column(name = "manaType")
     private String manaType;
 
+    @Column(name = "manaCost")
+    private Long manaCost;
+
     @Column(name = "active")
     private boolean active;
 
@@ -39,13 +42,14 @@ public class Product {
     //Init
     /////
 
-    public Product(String name, String description, String imageUrl, double price, int quantity, String manaType, Boolean active) {
+    public Product(String name, String description, String imageUrl, double price, int quantity, String manaType, Long manaCost, Boolean active) {
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
         this.price = price;
         this.quantity = quantity;
         this.manaType = manaType;
+        this.manaCost = manaCost;
         this.active = active;
     }
 
@@ -107,6 +111,14 @@ public class Product {
     public void setManaType(String manaType) {
         this.manaType = manaType;
     }
+
+    public Long getManaCost() {
+        return manaCost;
+    }
+
+    public void setManaCost(Long manaCost) {
+        this.manaCost = manaCost;
+    } 
 
     public boolean isActive() {
         return active;

@@ -39,15 +39,15 @@ public class ProductService {
         return filteredProducts;
     }
 
-    public List<Product> getActiveFilteredProducts(String searchterm, String manaSymbolsString) {
+    public List<Product> getActiveFilteredProducts(String searchterm, String manaSymbolsString, Long manaCost) {
         List<Product> activeProducts = new ArrayList<>();
-        List<Product> allProducts = productRepository.findByActive(true);
+        List<Product> allActiveProducts = productRepository.findByActive(true);
         
         if (manaSymbolsString == null && searchterm == null) {
-            return allProducts;
+            return allActiveProducts;
         }
         
-        for (Product product : allProducts) {
+        for (Product product : allActiveProducts) {
             if (searchterm != null && !product.getName().toLowerCase().contains(searchterm.toLowerCase())) {
                 continue;
             }
