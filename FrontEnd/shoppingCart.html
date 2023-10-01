@@ -24,41 +24,27 @@
   <script src="/frontend/components/navbar/loadOverlay.js" defer></script>
   <script src="/frontend/scripts/login.js" defer></script>
   <script src="/frontend/scripts/shoppingCart.js" defer></script>
+  <script src="/frontend/components/productCard/productPositionCard/productPositionCard.js" defer></script>
 
 </head>
 
 <body class="bg-dark">
   <overlay></overlay>
+
+  
   
 
   <h1 class="p-3 text-center text-white">Warenkorb</h1>
-
-  <div class="container mt-5 bg-light text-dark">
-    <div class="row">
-      <div class="col-2">
-        <img id="positionImage" src="" alt="" class="img-fluid border border-light">
-      </div>
-      <div class="col-8">
-        <h3 id="positionName"></h3>
-        <p id="positionDescription"></p>
-        <div class="d-flex justify-content-between align-items-center">
-          <p class="card-text" id="positionPrice"></p>
-          <p class="card-text" id="positionQuantity"></p>
-        </div>
-      </div>
-      <div class="col-1">
-        <button type="button" class="btn btn-light d-flex positionDelete" id="positionDelete"
-          style="width: 1.5rem; height: 1.5rem; padding: 0;" role="button" data-toggle="tooltip" data-placement="top"
-          title="Produkt aus dem Warenkorb entfernen">
-          <p style="pointer-events: none;">&#10060;</p>
-        </button>
-      </div>
-
+  <div class="container">
+    <div id="positionsContainer">
     </div>
   </div>
-  <footer>
 
-  </footer>
+
+
+    <footer>
+
+    </footer>
 
 </body>
 

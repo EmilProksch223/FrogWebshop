@@ -21,6 +21,7 @@ function login() {
 
 $(document).on('shown.bs.modal', '#navbarModal', function() {
   document.getElementById("loginButton").addEventListener("click", login);
+    $('#usernameInput').focus();
 });
 
 

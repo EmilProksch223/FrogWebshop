@@ -29,7 +29,7 @@ function loadProductCard(product) {
     const colId = "productCol" + product.id;
     const productCol = document.getElementById(colId);
 
-    fetch('/frontend/components/productCard/productCard.html')
+    fetch('/frontend/components/productCard/productShopCard/productShopCard.html')
         .then(response => response.text())
         .then(html => {
             productCol.innerHTML = html;
