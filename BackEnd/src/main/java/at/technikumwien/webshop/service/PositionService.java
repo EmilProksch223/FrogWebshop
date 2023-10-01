@@ -27,10 +27,10 @@ public class PositionService {
     // /////////////////////////////////////////////////////////////////////////
 
     public PositionService(PositionRepository positionRepository,
-                           UserRepository userRepository,
-                           CartService cartService,
-                           ProductService productService,
-                           TokenService tokenService) {
+            UserRepository userRepository,
+            CartService cartService,
+            ProductService productService,
+            TokenService tokenService) {
         this.positionRepository = positionRepository;
         this.userRepository = userRepository;
         this.cartService = cartService;
@@ -39,7 +39,7 @@ public class PositionService {
     }
 
     /////
-    //Methods
+    // Methods
     /////
 
     public Optional<Position> findById(Long id) {
@@ -68,9 +68,21 @@ public class PositionService {
             throw new RuntimeException("Product does not exist");
         }
 
-        position.setCart(cart);
-        position.setProduct(product.get());
+        Position existingPosition = positionRepository.findByCartAndProduct(cart, product.get());
 
-        return positionRepository.save(position);
+        if (existingPosition != null) {
+            existingPosition.setQuantity(existingPosition.getQuantity() + 1);
+            return positionRepository.save(existingPosition);
+        } else {
+            position.setCart(cart);
+            position.setProduct(product.get());
+            return positionRepository.save(position);
+        }
+    }
+
+    public void deletePosition(Long id, String token) {
+        Long userId = tokenService.getUserIdFromToken(token);
+        Long cartId = cartService.findByUserId(userId).getId();
+        positionRepository.deleteByIdAndCartId(id, cartId);
     }
 }
