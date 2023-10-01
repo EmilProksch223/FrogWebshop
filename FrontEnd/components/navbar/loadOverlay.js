@@ -109,6 +109,10 @@ function replaceButtons(loginButton, logoutButton) {
   }
 }
 
+$('#navbarModal').on('shown.bs.modal', function () {
+  console.log("test")
+  $('#usernameInput').focus();
+});
 
 document.addEventListener('keydown', function(event) {
   if (event.key === "Enter") {
