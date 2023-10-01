@@ -54,7 +54,7 @@ function addProductsToList(products) {
   divPages.show();
   divPages.find("p").text(currentPage);
 
-  const productsPerPage = 6;
+  const productsPerPage = 7;
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const productsToShow = products.slice(startIndex, endIndex);
@@ -98,6 +98,11 @@ function editProduct(product) {
   productListContainer.style.display = "none";
   productEditContainer.style.display = "block";
 
+  const sliderEl = document.querySelector("#editProductManaCost");
+  const sliderValue = document.querySelector(".rangeValueEdit")
+
+  rangeSlider(sliderEl, sliderValue);
+
   const container = $("#productEditContainer");
   container.find("h2").text(`Produkt ID: ${product.id}`);
 
@@ -108,6 +113,8 @@ function editProduct(product) {
   $("#editProductQuantity").val(product.quantity);
   $("#showProductImage").attr("href", "http://localhost:8080/files/" + product.imageUrl);
   $("#editProductDescription").val(product.description);
+  $("#editProductManaCost").val(product.manaCost);
+
 
   loadManaSymbols2(product.manaType);
 
@@ -118,12 +125,7 @@ function editProduct(product) {
 }
 
 $(document).on('click', '#cancelEditProduct', function () {
-  let productListContainer = document.getElementById("productListContainer");
-  let productEditContainer = document.getElementById("productEditContainer");
-
-  productListContainer.style.display = "block";
-  productEditContainer.style.display = "none";
-
+  displayProductEditOrList("block", "none");
 });
 
 
@@ -185,6 +187,7 @@ function saveProduct(product) {
     price: parseFloat($("#editProductPrice").val()) || product.price,
     quantity: parseInt($("#editProductQuantity").val()) || product.quantity,
     manaType: manaSymbols,
+    manaCost: $("#editProductManaCost").val() || product.manaCost,
     imageUrl: product.imageUrl,
     description: $("#editProductDescription").val().trim() || product.description,
     active: $("#editProductActive").val() === "true"
@@ -238,7 +241,7 @@ $(document).on('click', '#previousPage', function () {
 });
 
 $(document).on('click', '#nextPage', function () {
-  const totalPages = Math.ceil(allProducts.length / 6);
+  const totalPages = Math.ceil(allProducts.length / 7);
   if (currentPage < totalPages) {
     currentPage++;
     addProductsToList(allProducts);
@@ -248,7 +251,7 @@ $(document).on('click', '#nextPage', function () {
 });
 
 function updatePageButtons() {
-  const totalPages = Math.ceil(allProducts.length / 6);
+  const totalPages = Math.ceil(allProducts.length / 7);
   $('#previousPage').prop('disabled', currentPage === 1);
   $('#nextPage').prop('disabled', currentPage === totalPages);
 }
