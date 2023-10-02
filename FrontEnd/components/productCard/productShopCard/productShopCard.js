@@ -90,11 +90,15 @@ function setupProduct(product) {
 
     const manaSymbols = product.manaType.split('');
 
+    const manaCost = product.manaCost;
+
+    const allSymbols = [manaCost, ...manaSymbols];
+
     showModalName.innerHTML = product.name;
     //ManaBilder im Modal erstellen
     manaSymbolImagesContainer.innerHTML = '';
 
-    manaSymbols.forEach(symbol => {
+    allSymbols.forEach(symbol => {
         const manaSymbolImage = document.createElement('img');
         manaSymbolImage.src = `/frontend/components/manaSymbols/img/${symbol}.svg`;
         manaSymbolImage.alt = symbol;
