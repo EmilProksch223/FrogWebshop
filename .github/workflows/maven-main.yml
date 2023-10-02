@@ -24,9 +24,4 @@ jobs:
         
     - run: mvn -B -DskipTests --file BackEnd/pom.xml
 
-    - run: mkdir download & cp BackEnd/target/*jar download
 
-    - name: Upload build artifact
-      uses: actions/upload-artifact@v3.1.2
-      with:
-        path: download
