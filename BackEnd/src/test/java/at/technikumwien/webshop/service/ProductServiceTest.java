@@ -61,7 +61,7 @@ public class ProductServiceTest {
 
         when(productRepository.findByActive(true)).thenReturn(dummyProducts);
 
-        List<Product> result = productService.getAllFilteredProdcuts("d", true);
+        List<Product> result = productService.getActiveFilteredProducts("d", "w");
             
         assertEquals(dummyProducts, result);
 
