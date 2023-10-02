@@ -32,6 +32,45 @@ body {
     border-color: rgb(177, 177, 177);
     border-radius: 50%;
   }
+
+
+  /* Stil für den Manakosten-Schieberegler */
+  .range {
+    position: relative;
+}
+
+.rangeValue,
+.rangeValueEdit {
+    left: 50%;
+    color: #000;
+    font-weight: bold;
+}
+
+.form-range::-webkit-slider-thumb {
+    background-color: #000;
+}
+
+.form-range::-moz-range-thumb {
+    background-color: #000;
+}
+
+.form-range::-webkit-slider-runnable-track {
+    background-color: #ccc;
+}
+
+.form-range::-moz-range-track {
+    background-color: #ccc;
+}
+
+/* CSS für Werte größer oder gleich 9 */
+.form-range[value="9"]::-webkit-slider-thumb::before,
+.form-range[value="9"]::-moz-range-thumb::before {
+    content: "+9";
+    color: green; /* Ändern Sie die Farbe nach Ihren Wünschen */
+    font-weight: bold;
+}
+
+
   
 
 

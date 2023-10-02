@@ -39,30 +39,45 @@ public class ProductService {
         return filteredProducts;
     }
 
-    public List<Product> getActiveFilteredProducts(String searchterm, String manaSymbolsString) {
+    public List<Product> getActiveFilteredProducts(String searchterm, String manaSymbolsString, Long manaCost) {
         List<Product> activeProducts = new ArrayList<>();
-        List<Product> allProducts = productRepository.findByActive(true);
-
+        List<Product> allActiveProducts = productRepository.findByActive(true);
+        
         if (manaSymbolsString == null && searchterm == null) {
-            return allProducts;
+            return allActiveProducts;
         }
-        for (Product product : allProducts) {
-            if (manaSymbolsString != null
-                    && !product.getManaType().toLowerCase().contains(manaSymbolsString.toLowerCase())) {
-                continue;
-            }
+        
+        for (Product product : allActiveProducts) {
             if (searchterm != null && !product.getName().toLowerCase().contains(searchterm.toLowerCase())) {
                 continue;
             }
+        
+            if (manaSymbolsString != null) {
+                String manaType = product.getManaType().toLowerCase();
+                boolean allSymbolsContained = true;
+        
+                for (char symbol : manaSymbolsString.toCharArray()) {
+                    if (manaType.indexOf(Character.toLowerCase(symbol)) == -1) {
+                        allSymbolsContained = false;
+                        break;
+                    }
+                }
+        
+                if (!allSymbolsContained) {
+                    continue;
+                }
+            }
+        
             activeProducts.add(product);
         }
+        
         return activeProducts;
     }
 
     public Optional<Product> getProductById(Long productId) {
         return productRepository.findById(productId);
     }
-    
+
     public Product createProduct(Product product) {
         return productRepository.save(product);
     }
@@ -85,7 +100,6 @@ public class ProductService {
     
             productRepository.delete(product);
         } else {
-            
         }
     }
 }

@@ -75,6 +75,16 @@
             <div class="row justify-content-between mb-3">
               <manaSymbols></manaSymbols>
             </div>
+            <div class="row mb-3">
+              <div class='col col-sm-3 p-0 text-center'>
+                <label for="inputProductManaCost" class="form-label">Manakosten</label>
+                <div class="range">
+                  <div class="rangeValue" id="inputProductManaCostValue">0</div>
+                  <input type="range" class="form-range" value="0" min="0" max="6" step="1" id="inputProductManaCost">
+                </div>
+              </div>
+            </div>
+
             <div class="row justify-content-center">
               <button class="btn btn-success mt-3" type="submit" id="createProduct">&#x2795; Produkt erstellen</button>
             </div>
@@ -85,7 +95,7 @@
         <div class="container">
           <div class="row">
             <div class="col-12">
-              
+
               <!--Product List-->
               <div class="container" id="productListContainer">
                 <h2 class="text-center mb-0">Produktliste</h2>
@@ -185,6 +195,15 @@
                     <manaSymbols2></manaSymbols2>
                   </div>
                 </div>
+                <div class="row mb-3">
+                  <div class='col col-sm-3 p-0 text-center'>
+                    <label for="editProductManaCost" class="form-label">Manakosten</label>
+                    <div class="range">
+                      <div class="rangeValueEdit" id="rangeValueEdit">0</div>
+                      <input type="range" class="form-range" value="0" min="0" max="6" step="1" id="editProductManaCost">
+                    </div>
+                  </div>
+                  </div>
                 <div class='row mt-4'>
                   <div class='col text-end' id="saveEditCol">
                     <button class='btn btn-success mx-1' id="saveEditProduct">&#x1F4BE; Speichern</button>

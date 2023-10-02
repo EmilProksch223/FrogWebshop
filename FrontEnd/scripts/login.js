@@ -15,7 +15,11 @@ function login() {
       location.href = "index.html";
       console.log("Eingeloggt");
     },
-    error: console.error
+    error: function() {
+      console.error
+      alert("Falscher Benutzername oder Passwort!")
+    }
+
   });
 }
 
@@ -66,4 +70,22 @@ function checkAdminStatus() {
     return false;
   }
 }
+
+$('#navbarModal').on('shown.bs.modal', function () {
+  $('#usernameInput').focus();
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === "Enter") {
+    const usernameInput = document.getElementById("usernameInput");
+    const passwordInput = document.getElementById("passwordInput");
+    const activeElement = document.activeElement;
+
+    if ((activeElement === usernameInput || activeElement === passwordInput) && activeElement.tagName === "INPUT") {
+      event.preventDefault();
+      document.getElementById("loginButton").click();
+    }
+  }
+});
+
 

@@ -35,6 +35,9 @@ public class ProductDTO {
     private String manaType;
 
     @NotNull
+    private Long manaCost;
+
+    @NotNull
     private boolean active;
 
     /////
@@ -95,6 +98,14 @@ public class ProductDTO {
 
     public void setManaType(String manaType) {
         this.manaType = manaType;
+    }
+
+    public Long getManaCost() {
+        return manaCost;
+    }
+
+    public void setManaCost(Long manaCost) {
+        this.manaCost = manaCost;
     }
 
     public boolean isActive() {
