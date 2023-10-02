@@ -114,6 +114,7 @@ function editProduct(product) {
   $("#showProductImage").attr("href", "http://localhost:8080/files/" + product.imageUrl);
   $("#editProductDescription").val(product.description);
   $("#editProductManaCost").val(product.manaCost);
+  $("#rangeValueEdit").text(product.manaCost);
 
 
   loadManaSymbols2(product.manaType);
@@ -179,6 +180,8 @@ function saveProduct(product) {
 
   // Mana-Symbole sammeln
   const manaSymbols = [...document.querySelectorAll('input[name="ManaSymbol[]"]:checked')].map(input => input.value).join("");
+
+  const manaCost = $("#editProductManaCostValue").text(product.manaCost);
 
   // Aktualisierte Produktinformationen
   const updatedProduct = {

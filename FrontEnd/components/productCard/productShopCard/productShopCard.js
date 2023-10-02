@@ -65,7 +65,7 @@ function loadProductCard(product) {
                 }
             });
 
-            
+
 
         })
         .catch(error => {
@@ -78,13 +78,34 @@ function setupProduct(product) {
     const productDetailsModalButton = document.getElementById("productDetailsModalButton");
     const addToCartButtonCard = document.getElementById("addToCartButton");
     const addToCartButtonCardModal = document.getElementById("addToCartButtonModal");
+    const manaSymbolImagesContainer = document.getElementById('manaSymbolImagesContainer');
 
     productDetailsModal.id = "productDetailsModal" + product.id;
     productDetailsModalButton.id = "productDetailsModalButton" + product.id;
     productDetailsModalButton.setAttribute("data-bs-target", "#productDetailsModal" + product.id);
+    manaSymbolImagesContainer.id = "manaSymbolImagesContainer" + product.id;
+
+    const showModalName = document.getElementById('showModalName');
+
+
+    const manaSymbols = product.manaType.split('');
+
+    showModalName.innerHTML = product.name;
+    //ManaBilder im Modal erstellen
+    manaSymbolImagesContainer.innerHTML = '';
+
+    manaSymbols.forEach(symbol => {
+        const manaSymbolImage = document.createElement('img');
+        manaSymbolImage.src = `/frontend/components/manaSymbols/img/${symbol}.svg`;
+        manaSymbolImage.alt = symbol;
+        manaSymbolImage.style.width = '40px';
+        manaSymbolImage.style.height = '40px';
+        manaSymbolImage.classList.add('me-1');
+        manaSymbolImagesContainer.appendChild(manaSymbolImage);
+    });
+
     addToCartButtonCard.id = "addToCartButton" + product.id;
     addToCartButtonCardModal.id = "addToCartButtonModal" + product.id;
-
     const addToCartButton = document.getElementById(`addToCartButton${product.id}`);
     const addToCartButtonModal = document.getElementById(`addToCartButtonModal${product.id}`);
 

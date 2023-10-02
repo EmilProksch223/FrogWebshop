@@ -30,8 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const productDescription = descriptionInput.value;
 
     const manaSymbolsString = manaSymbols.join("");
-    const manaCost = document.getElementById('inputProductManaCostValue').innerText;
-    console.log(manaCost);
+    const manaCost = document.getElementById('inputProductManaCost').value;
 
     const fileInput = document.getElementById("inputProductImg");
     const file = fileInput.files[0];
@@ -97,10 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function rangeSlider(sliderEl, sliderValue) {
   sliderEl.addEventListener("input", (event) => {
     const tempSliderValue = event.target.value;
-    if (tempSliderValue >= 9) {
-      sliderValue.textContent = `${tempSliderValue}+`;
-  } else {
+
       sliderValue.textContent = tempSliderValue;
-  }
   })
-}
+};
