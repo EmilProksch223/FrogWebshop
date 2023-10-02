@@ -39,7 +39,7 @@ public class ProductService {
         return filteredProducts;
     }
 
-    public List<Product> getActiveFilteredProducts(String searchterm, String manaSymbolsString, Long manaCost) {
+    public List<Product> getActiveFilteredProducts(String searchterm, String manaSymbolsString) {
         List<Product> activeProducts = new ArrayList<>();
         List<Product> allActiveProducts = productRepository.findByActive(true);
         
