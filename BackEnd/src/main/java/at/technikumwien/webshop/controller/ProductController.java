@@ -53,9 +53,8 @@ public class ProductController {
     @GetMapping("/active")
     public List<Product> getActiveProducts(
             @RequestParam(name = "searchterm", required = false) String searchterm,
-            @RequestParam(name = "manasymbols", required = false) String manaSymbolsString,
-            @RequestParam(name = "manaCost", required = false) Long manaCost) {
-        List<Product> activeProducts = productService.getActiveFilteredProducts(searchterm, manaSymbolsString, manaCost);
+            @RequestParam(name = "manasymbols", required = false) String manaSymbolsString){
+        List<Product> activeProducts = productService.getActiveFilteredProducts(searchterm, manaSymbolsString);
         return activeProducts;
     }
 

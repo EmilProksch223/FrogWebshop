@@ -55,14 +55,14 @@ public class ProductServiceTest {
     public void shouldActiveFilteredProducts() {
         List<Product> dummyProducts = new ArrayList<>();
         dummyProducts.add(
-                new Product("Dark Ritual", "Add 3 mana to your mana to your mana pool.", "1", 245.00, 10, "w", true));
+                new Product("Dark Ritual", "Add 3 mana to your mana to your mana pool.", "1", 245.00, 10, "w", 3L, true));
         dummyProducts.add(
-                new Product("Llanoward Elves", "Add 1 Mana to your mana pool.", "3", 0.30, 15, "w", true));
+                new Product("Llanoward Elves", "Add 1 Mana to your mana pool.", "3", 0.30, 15, "w", 3L, true));
 
         when(productRepository.findByActive(true)).thenReturn(dummyProducts);
 
         List<Product> result = productService.getActiveFilteredProducts("d", "w");
-
+            
         assertEquals(dummyProducts, result);
 
         verify(productRepository, times(1)).findByActive(true);
