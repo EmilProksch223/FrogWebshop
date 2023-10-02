@@ -65,12 +65,7 @@ public class ProductController {
         Product product = productService.save(fromDTO(productDTO));
         return ResponseEntity.created(URI.create("http://localhost:8080/products")).body(product);
     }
-/* 
-    @PutMapping("/setActive/{id}")
-    public Product setActive(@PathVariable Long id) {
-        return service.setActive(id);
-    }
-*/
+    
     @PutMapping("/update")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Product> updateProduct(@RequestBody @Valid ProductDTO productDTO) {

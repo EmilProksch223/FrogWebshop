@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const productDescription = descriptionInput.value;
 
     const manaSymbolsString = manaSymbols.join("");
-    const manaCost = document.getElementById('inputProductManaCost').value;
+    const manaCost = document.getElementById('inputProductManaCostValue').innerText;
+    console.log(manaCost);
 
     const fileInput = document.getElementById("inputProductImg");
     const file = fileInput.files[0];
@@ -67,6 +68,8 @@ document.addEventListener('DOMContentLoaded', function () {
           active: false,
         };
 
+        console.log(product);
+
         $.ajax({
           url: 'http://localhost:8080/products',
           type: 'POST',
@@ -84,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       },
       error: function (xhr, status, error) {
-        console.error('Fehler beim Senden des Bildes:', error);
+        console.error('Fehler beim Senden des Productes:', error);
       }
     });
   });

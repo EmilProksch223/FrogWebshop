@@ -34,7 +34,7 @@ public class ProductDTO {
     @NotBlank
     private String manaType;
 
-    @NotBlank
+    @NotNull
     private Long manaCost;
 
     @NotNull

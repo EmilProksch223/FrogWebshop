@@ -53,8 +53,8 @@ public class ProductControllerIntegrationTest {
                 List<Product> dummyProducts = new ArrayList<>();
                 dummyProducts.add(
                                 new Product("Dark Ritual", "Add 3 mana to your mana to your mana pool.", "1", 245.00,
-                                                10, "w", true));
-                dummyProducts.add(new Product("Llanoward Elves", "Add 1 Mana to your mana pool.", "3", 0.30, 15, "w",
+                                                10, "w", 3L, true));
+                dummyProducts.add(new Product("Llanoward Elves", "Add 1 Mana to your mana pool.", "3", 0.30, 15, "w", 1L,
                                 true));
                 Gson gson = new Gson();
 
@@ -80,9 +80,9 @@ public class ProductControllerIntegrationTest {
                 List<Product> dummyProducts = new ArrayList<>();
                 dummyProducts.add(
                                 new Product("Dark Ritual", "Add 3 mana to your mana to your mana pool.", "1", 245.00,
-                                                10, "w", true));
+                                10, "w", 3L, true));
                 dummyProducts.add(new Product("Llanoward Elves", "Add 1 Mana to your mana pool.", "3", 0.30, 15, "w",
-                                true));
+                                3L, true));
                 Gson gson = new Gson();
 
                 when(productRepository.findByActive(true)).thenReturn(dummyProducts);
@@ -102,6 +102,7 @@ public class ProductControllerIntegrationTest {
                 productDTO.setDescription("testDescription");
                 productDTO.setImageUrl("1");
                 productDTO.setManaType("w");
+                productDTO.setManaCost(1L);
                 productDTO.setPrice(1);
                 productDTO.setQuantity(1);
 
