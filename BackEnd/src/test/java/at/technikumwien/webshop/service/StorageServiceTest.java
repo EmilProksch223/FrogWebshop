@@ -22,7 +22,7 @@ public class StorageServiceTest {
     private FileRepository fileRepository;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         storageService = new StorageService(fileRepository);
     }
 
