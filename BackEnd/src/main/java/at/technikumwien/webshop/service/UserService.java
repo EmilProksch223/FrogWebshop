@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import at.technikumwien.webshop.model.Cart;
 import at.technikumwien.webshop.model.User;
 import at.technikumwien.webshop.repository.UserRepository;
 
@@ -14,11 +15,13 @@ import at.technikumwien.webshop.repository.UserRepository;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final CartService cartService;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, CartService cartService, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.cartService = cartService;
     }
 
     /////
@@ -44,6 +47,10 @@ public class UserService {
     }
 
     public void deleteUser(long id) {
+        Cart test = cartService.findByUserId(id);
+        if(test != null) {
+            cartService.deleteCart(test.getId());
+        }
         userRepository.deleteById(id);
     }
 

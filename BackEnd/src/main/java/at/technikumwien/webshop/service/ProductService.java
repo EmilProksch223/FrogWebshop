@@ -99,7 +99,6 @@ public class ProductService {
             storageService.deleteFile(imageId);
     
             productRepository.delete(product);
-        } else {
         }
     }
 }

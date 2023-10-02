@@ -39,9 +39,15 @@ public class CartService {
 
         if (cartOptional.isPresent()) {
             Cart cart = cartOptional.get();
-            return cart.getPositions(); // Hiermit werden alle Positionen für den angegebenen Warenkorb zurückgegeben
+            return cart.getPositions();
         } else {
             throw new EntityNotFoundException();
         }
     }
+
+    public void deleteCart(long id) {
+        cartRepository.deleteById(id);
+    }
+
+
 }
