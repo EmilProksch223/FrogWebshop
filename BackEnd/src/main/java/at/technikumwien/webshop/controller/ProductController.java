@@ -53,8 +53,9 @@ public class ProductController {
     @GetMapping("/active")
     public List<Product> getActiveProducts(
             @RequestParam(name = "searchterm", required = false) String searchterm,
-            @RequestParam(name = "manasymbols", required = false) String manaSymbolsString) {
-        List<Product> activeProducts = productService.getActiveFilteredProducts(searchterm, manaSymbolsString);
+            @RequestParam(name = "manasymbols", required = false) String manaSymbolsString,
+            @RequestParam(name = "manaCost", required = false) Long manaCost) {
+        List<Product> activeProducts = productService.getActiveFilteredProducts(searchterm, manaSymbolsString, manaCost);
         return activeProducts;
     }
 
@@ -64,12 +65,7 @@ public class ProductController {
         Product product = productService.save(fromDTO(productDTO));
         return ResponseEntity.created(URI.create("http://localhost:8080/products")).body(product);
     }
-/* 
-    @PutMapping("/setActive/{id}")
-    public Product setActive(@PathVariable Long id) {
-        return service.setActive(id);
-    }
-*/
+    
     @PutMapping("/update")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Product> updateProduct(@RequestBody @Valid ProductDTO productDTO) {
@@ -82,6 +78,7 @@ public class ProductController {
             existingProduct.setPrice(productDTO.getPrice());
             existingProduct.setQuantity(productDTO.getQuantity());
             existingProduct.setManaType(productDTO.getManaType());
+            existingProduct.setManaCost(productDTO.getManaCost());
             existingProduct.setActive(productDTO.isActive());
             Product updatedProduct = productService.updateProduct(existingProduct);
             return ResponseEntity.ok(updatedProduct);
@@ -113,6 +110,7 @@ public class ProductController {
                 productDTO.getPrice(),
                 productDTO.getQuantity(),
                 productDTO.getManaType(),
+                productDTO.getManaCost(),
                 productDTO.isActive());
     }
 }

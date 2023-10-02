@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', function () {
   const formCreateProduct = document.getElementById('formCreateProduct');
   const descriptionInput = document.getElementById('description');
 
+  // Range Slider
+  const sliderEl = document.querySelector("#inputProductManaCost");
+  const sliderValue = document.querySelector(".rangeValue")
+
+  rangeSlider(sliderEl, sliderValue);
+
+
   formCreateProduct.addEventListener('submit', function (event) {
     event.preventDefault();
 
@@ -23,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const productDescription = descriptionInput.value;
 
     const manaSymbolsString = manaSymbols.join("");
+    const manaCost = document.getElementById('inputProductManaCost').value;
 
     const fileInput = document.getElementById("inputProductImg");
     const file = fileInput.files[0];
@@ -55,8 +63,11 @@ document.addEventListener('DOMContentLoaded', function () {
           quantity: productQuantity,
           imageUrl: imageUrl,
           manaType: manaSymbolsString,
+          manaCost: manaCost,
           active: false,
         };
+
+        console.log(product);
 
         $.ajax({
           url: 'http://localhost:8080/products',
@@ -75,8 +86,17 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       },
       error: function (xhr, status, error) {
-        console.error('Fehler beim Senden des Bildes:', error);
+        console.error('Fehler beim Senden des Productes:', error);
       }
     });
   });
+
 });
+
+function rangeSlider(sliderEl, sliderValue) {
+  sliderEl.addEventListener("input", (event) => {
+    const tempSliderValue = event.target.value;
+
+      sliderValue.textContent = tempSliderValue;
+  })
+};
