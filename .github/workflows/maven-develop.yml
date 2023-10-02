@@ -19,5 +19,5 @@ jobs:
         cache: maven
     - run: pwd & ls -al
     
-    - run: mvn -B -DskipTests --file BackEnd/pom.xml
+    - run: mvn -B test --file BackEnd/pom.xml
 
