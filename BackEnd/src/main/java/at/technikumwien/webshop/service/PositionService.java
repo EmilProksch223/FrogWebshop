@@ -1,5 +1,6 @@
 package at.technikumwien.webshop.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import at.technikumwien.webshop.model.Cart;
@@ -46,6 +47,10 @@ public class PositionService {
         return positionRepository.findById(id);
     }
 
+    public List<Position> findByCartId(Long id) {
+        return positionRepository.findByCartId(id);
+    }
+
     public Position save(Position position, Long productId, String token) {
 
         Long userId = tokenService.getUserIdFromToken(token);
@@ -84,5 +89,9 @@ public class PositionService {
         Long userId = tokenService.getUserIdFromToken(token);
         Long cartId = cartService.findByUserId(userId).getId();
         positionRepository.deleteByIdAndCartId(id, cartId);
+    }
+
+    public void deletePositionWithCardId(Long id) {
+        positionRepository.deleteByCartId(id);
     }
 }

@@ -31,11 +31,14 @@ public class UserServiceTest {
     private CartService cartService;
 
     @Mock
+    private PositionService positionService;
+
+    @Mock
     private PasswordEncoder passwordEncoder;
 
     @BeforeEach
     public void setUp() {
-        userService = new UserService(userRepository, cartService, passwordEncoder);
+        userService = new UserService(userRepository, cartService, positionService, passwordEncoder);
     }
 
     @Test
