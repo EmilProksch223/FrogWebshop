@@ -18,6 +18,8 @@ import at.technikumwien.webshop.config.SecurityConfig;
 import at.technikumwien.webshop.dto.UserDTO;
 import at.technikumwien.webshop.model.User;
 import at.technikumwien.webshop.repository.UserRepository;
+import at.technikumwien.webshop.service.CartService;
+import at.technikumwien.webshop.service.PositionService;
 import at.technikumwien.webshop.service.TokenService;
 import at.technikumwien.webshop.service.UserService;
 
@@ -38,6 +40,12 @@ public class UserControllerIntegrationTest {
 
     @MockBean
     private UserRepository userRepository;
+    
+    @MockBean
+    private  CartService cartService;
+
+    @MockBean
+    private PositionService positionService;
 
     @MockBean
     private TokenService tokenService;
