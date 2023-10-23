@@ -27,12 +27,18 @@ public class UserServiceTest {
     @Mock
     private UserRepository userRepository;
 
+    @Mock 
+    private CartService cartService;
+
+    @Mock
+    private PositionService positionService;
+
     @Mock
     private PasswordEncoder passwordEncoder;
 
     @BeforeEach
     public void setUp() {
-        userService = new UserService(userRepository, passwordEncoder);
+        userService = new UserService(userRepository, cartService, positionService, passwordEncoder);
     }
 
     @Test
